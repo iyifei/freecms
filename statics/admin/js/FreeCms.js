@@ -38,6 +38,56 @@ FreeCms.doEditSubmit=function () {
     }
 };
 
+//批量更新
+FreeCms.batchSave = function (key) {
+    var list = [];
+    $("."+key).each(function () {
+        var id = $(this).attr("did");
+        var val = $(this).val();
+        var item = {
+            id:id,
+            key:key,
+            val:val
+        };
+        list.push(item);
+    });
+    var json = JSON.stringify(list);
+    var data = {
+        list:json,
+        method:'batch'
+    };
+    var saveUrl = $("#saveUrl").val();
+    $.post(saveUrl,data,function (result) {
+        if(result.status==0){
+            if(typeof successCallback === 'function'){
+                successCallback();
+            }
+        }else{
+            FreeCms.error(result.errmsg);
+        }
+    });
+};
+
+//单个字段更新
+FreeCms.oneSave = function (id,key,val) {
+    var data = {
+        id:id,
+        method:'edit',
+        key:key,
+        val:val
+    };
+    var saveUrl = $("#saveUrl").val();
+    $.post(saveUrl,data,function (result) {
+        if(result.status==0){
+            if(typeof successCallback === 'function'){
+                successCallback();
+            }
+        }else{
+            FreeCms.error(result.errmsg);
+        }
+    })
+};
+
 //处理form表单数据
 FreeCms.serializeObject = function (form) {
     var o = {};

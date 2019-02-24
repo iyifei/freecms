@@ -28,7 +28,7 @@
         <div class="row">
             <!-- begin col-12 -->
             <div class="col-lg-12">
-                <form>
+                <form autocomplete="off">
                     <input type="hidden" name="id" value="<{$data.id}>">
                     <input type="hidden" name="method" value="<{$method}>" />
                     <div class="form-group row m-b-15">
@@ -89,7 +89,7 @@
         }
 
         function callbackSaveSuccess() {
-            window.parent.doCloseModelAndRefresh();
+            window.parent.successCallback();
         }
     </script>
 </body>

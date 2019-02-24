@@ -30,6 +30,16 @@
             <!-- begin panel-body -->
             <div class="panel-body">
                 <div class="table-responsive">
+                <div class="dt-buttons btn-group p-b-15">
+                    <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons" href="javascript:FreeCms.batchSave('sortrank');"><span>更新排序</span></a>
+                    <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons"
+                       data-href="<{$myf_path}>/admin/system/menu/edit?method=add"
+                       href="javascript:openModel('btnAddTopMenu')"
+                       data-title="添加菜单"
+                       id="btnAddTopMenu"
+                    ><span>添加顶级菜单</span></a>
+                </div>
+
                 <table id="data-table-buttons" class="table table-condensed table-hover myf-table-bordered myf-table-td-vm">
                     <thead>
                         <tr>
@@ -41,10 +51,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <{foreach from=$datas item=vo}>
+                    <{foreach from=$datas key=k item=vo}>
                         <tr class="treegrid-<{$vo.id}> <{if $vo.pid neq 0}>treegrid-parent-<{$vo.pid}><{/if}>">
                             <td width="1%" class="f-s-600 text-inverse">
                                 <input class="left mr10 fm-text sortrank"
+                                       tabindex="<{$k+50}>"
+                                       autocomplete="off"
                                        style="margin-top: 0;width:30px;text-align: center"  onkeyup="if (isNaN(value)) execCommand('undo')"
                                        onafterpaste="if(isNaN(value))execCommand('undo')"
                                        name="sortrank_<{$vo.id}>" did="<{$vo.id}>" type="text"  value="<{$vo.sortrank}>">
@@ -61,7 +73,10 @@
                                 <{/if}>
                             </td>
                             <td class="tacenter">
-                                <a href="#" class="btn btn-primary btn-icon btn-circle btn-sm">
+                                <a data-href="<{$myf_path}>/admin/system/menu/edit?method=add&pid=<{$vo.id}>"
+                                   href="javascript:openModel('btnAddChild_<{$vo.id}>')"
+                                   data-title="添加菜单"
+                                   id="btnAddChild_<{$vo.id}>" class="btn btn-primary btn-icon btn-circle btn-sm">
                                     <i class="fas fa-plus"></i>
                                 </a>
                                 <a data-href="<{$myf_path}>/admin/system/menu/edit?method=update&id=<{$vo.id}>"
@@ -88,6 +103,7 @@
     <!-- end col-10 -->
 </div>
 <!-- end row -->
+<input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/system/menu/save">
 
 <div class="modal fade" id="myModal"  tabindex="-1" style="display: none">
     <div class="modal-dialog modal-lg">
@@ -107,7 +123,9 @@
     </div>
 </div>
 <script type="text/javascript">
+    var modelState = false;
     function openModel(id) {
+        modelState = true;
         var src = $("#"+id).attr('data-href');
         var title = $("#"+id).data("title");
         $('#myModal .modal-title').html(title);
@@ -124,11 +142,15 @@
     }
     
     //关闭
-    function doCloseModelAndRefresh() {
+    function successCallback() {
         FreeCms.success('更新成功');
-        $('#myModal').modal('hide').on('hidden.bs.modal', function (e) {
+        if(modelState){
+            $('#myModal').modal('hide').on('hidden.bs.modal', function (e) {
+                window.location.hash='#!system/menu?'+Date.parse(new Date());
+            })
+        }else{
             window.location.hash='#!system/menu?'+Date.parse(new Date());
-        })
+        }
     }
     
 </script>
