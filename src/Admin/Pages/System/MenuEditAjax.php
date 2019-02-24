@@ -24,8 +24,12 @@ class MenuEditAjax extends BaseAdminPage
     function execute($vars = [])
     {
         $model = new CmsMenuModel();
-        $method = post('method');
-        if($method==EditType::Edit){
+        $method = request('method');
+        if($method==EditType::Delete){
+            //删除
+            $id = getInteger('id');
+            $model->deleteById($id);
+        }elseif($method==EditType::Edit){
             //更新个别字段
             $key = post('key');
             $val = post('val');

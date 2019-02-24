@@ -73,22 +73,31 @@
                                 <{/if}>
                             </td>
                             <td class="tacenter">
-                                <a data-href="<{$myf_path}>/admin/system/menu/edit?method=add&pid=<{$vo.id}>"
+                                <a title="添加子菜单" data-toggle="tooltip"
+                                   data-href="<{$myf_path}>/admin/system/menu/edit?method=add&pid=<{$vo.id}>"
                                    href="javascript:openModel('btnAddChild_<{$vo.id}>')"
                                    data-title="添加菜单"
                                    id="btnAddChild_<{$vo.id}>" class="btn btn-primary btn-icon btn-circle btn-sm">
                                     <i class="fas fa-plus"></i>
                                 </a>
-                                <a data-href="<{$myf_path}>/admin/system/menu/edit?method=update&id=<{$vo.id}>"
+                                <a title="编辑菜单"  data-toggle="tooltip"
+                                   data-href="<{$myf_path}>/admin/system/menu/edit?method=update&id=<{$vo.id}>"
                                    href="javascript:openModel('btnEdit_<{$vo.id}>')"
                                    data-title="编辑菜单"
                                    id="btnEdit_<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="#!" id="btnShow" data-url="<{$myf_path}>/admin/site/arctype/edit?method=update&id=<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
+                                <a title="显示/隐藏"  data-toggle="tooltip"
+                                   href="javascript:FreeCms.oneSave(<{$vo.id}>,'ishide',<{if $vo.ishide eq 1}>0<{else}>1<{/if}>)" id="btnShow" class="btn btn-warning btn-icon btn-circle btn-sm">
+                                    <{if $vo.ishide eq 1}>
+                                    <i class="fas fa-eye-slash"></i>
+                                    <{else}>
                                     <i class="fas fa-eye"></i>
+                                    <{/if}>
                                 </a>
-                                <a href="javascript:;" title="删除" class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
+                                <a href="javascript:FreeCms.deleteRow(<{$vo.id}>);" title="删除"  data-toggle="tooltip"
+                                   class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
+
                             </td>
                         </tr>
                     <{/foreach}>
@@ -104,6 +113,7 @@
 </div>
 <!-- end row -->
 <input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/system/menu/save">
+<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/system/menu/delete">
 
 <div class="modal fade" id="myModal"  tabindex="-1" style="display: none">
     <div class="modal-dialog modal-lg">
@@ -152,6 +162,9 @@
             window.location.hash='#!system/menu?'+Date.parse(new Date());
         }
     }
-    
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 

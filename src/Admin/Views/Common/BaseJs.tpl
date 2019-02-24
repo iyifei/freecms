@@ -15,6 +15,7 @@
 
 <script src="<{$myf_path}>/statics/admin/plugins/gritter/js/jquery.gritter.min.js"></script>
 <script src="<{$myf_path}>/statics/admin/plugins/jquery-toast/jquery.toast.min.js"></script>
+<script src="<{$myf_path}>/statics/admin/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 <script src="<{$myf_path}>/statics/admin/js/Router.js"></script>
 <script src="<{$myf_path}>/statics/admin/js/FreeCms.js"></script>
 

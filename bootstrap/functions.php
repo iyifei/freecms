@@ -5,8 +5,8 @@
  * Date: 2018/5/23
  */
 
-use Common\Exception\MyfErrorCode;
-use Common\Exception\MyfException;
+use FreeCMS\Common\Exception\ErrorCode;
+use FreeCMS\Common\Exception\FreeCmsException;
 
 /**
  * 获取目录下的文件名称
@@ -291,8 +291,8 @@ function requestEmail($name)
     if (checkEmail($email)) {
         return $email;
     } else {
-        MyfException::throwExp(
-            MyfErrorCode::PARAM_ERROR, $name . " is not a email"
+        FreeCmsException::throwExp(
+            ErrorCode::PARAM_ERROR, $name . " is not a email"
         );
     }
 }
@@ -310,8 +310,8 @@ function requestNotEmpty($name)
         $value = $_REQUEST[$name];
         return $value;
     } else {
-        MyfException::throwExp(
-            MyfErrorCode::PARAM_ERROR, $name . " is not empty"
+        FreeCmsException::throwExp(
+            ErrorCode::PARAM_ERROR, $name . " is not empty"
         );
     }
 }

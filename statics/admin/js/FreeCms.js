@@ -88,6 +88,57 @@ FreeCms.oneSave = function (id,key,val) {
     })
 };
 
+//删除记录
+FreeCms.deleteRow = function (id) {
+    //询问框
+    FreeCms.confirm('确定删除?删除后无法恢复？', function(){
+        var data = {
+            id:id
+        };
+        var url = $("#deleteUrl").val()+"?method=delete";
+        $.post(url,data,function (result) {
+            if(result.status==0){
+                if(typeof successCallback === 'function'){
+                    successCallback();
+                }
+            }else{
+                FreeCms.error(result.errmsg);
+            }
+        });
+    });
+};
+
+//批量删除
+FreeCms.batchDeleteRows = function () {
+    var ids = [];
+    $(".chkid").each(function () {
+        var checked = $(this).is(':checked');
+        if(checked){
+            ids.push($(this).val());
+        }
+    });
+    if(ids.length>0){
+        //询问框
+        FreeCms.confirm('确定删除?删除后无法恢复？', function(){
+            var data = {
+                ids:ids.join(',')
+            };
+            var url = $("#deleteUrl").val()+"?method=batch_delete";
+            $.post(url,data,function (result) {
+                if(result.status==0){
+                    if(typeof successCallback === 'function'){
+                        successCallback();
+                    }
+                }else{
+                    FreeCms.error(result.errmsg);
+                }
+            });
+        });
+    }else{
+        FreeCms.info('请选择需要删除的内容');
+    }
+};
+
 //处理form表单数据
 FreeCms.serializeObject = function (form) {
     var o = {};
@@ -164,3 +215,32 @@ FreeCms.info = function (msg,afterFun) {
         }
     })
 };
+
+//确认框
+FreeCms.confirm = function (msg,succFun) {
+    swal({
+        title: '确认操作?',
+        text: msg,
+        icon: 'info',
+        buttons: {
+            cancel: {
+                text: '取消',
+                value: null,
+                visible: true,
+                className: 'btn btn-default',
+                closeModal: true,
+            },
+            confirm: {
+                text: '确认',
+                value: true,
+                visible: true,
+                className: 'btn btn-primary',
+                closeModal: true
+            }
+        }
+    }).then((value) => {
+        if(value && typeof succFun ==='function'){
+            succFun();
+        }
+    });
+}
