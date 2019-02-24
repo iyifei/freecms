@@ -27,7 +27,7 @@
                 </select>
             </div>
         </div>
-        <div class="row m-t-10">
+        <div class="row m-t-10" style="display: none">
             <div class="col-md-6 control-label text-inverse f-w-600">顶部</div>
             <div class="col-md-6">
                 <select name="header-fixed" class="form-control form-control-sm">

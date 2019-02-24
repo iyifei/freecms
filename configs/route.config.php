@@ -22,6 +22,17 @@ return [
             ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Admin\Pages\Index\HomePage::class],
             //内容管理
             ['method' => 'GET', 'route' => '/content','handler' => \FreeCMS\Admin\Pages\Content\ContentMain::class],
+
+            //栏目管理
+            ['method' => 'GET', 'route' => '/site/arctype', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypePage::class],
+            ['method' => 'GET', 'route' => '/site/arctype/edit', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditPage::class],
+            ['method' => 'POST', 'route' => '/site/arctype/save', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditAjax::class],
+
+            //菜单管理
+            ['method' => 'GET', 'route' => '/system/menu', 'handler' => \FreeCMS\Admin\Pages\System\MenuPage::class],
+            ['method' => 'GET', 'route' => '/system/menu/edit', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditPage::class],
+            ['method' => 'POST', 'route' => '/system/menu/save', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
+            ['method' => 'POST', 'route' => '/system/menu/delete', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
         ]
     ]
 ];

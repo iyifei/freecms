@@ -96,6 +96,23 @@ abstract class MysqlModel extends MysqlDatabase
     }
 
     /**
+     * Function:deleteByIds
+     * 批量删除
+     *
+     * @param array $ids
+     *
+     * @return int 影响行数
+     */
+    public function deleteByIds($ids){
+        if(is_array($ids)){
+            $ids = join(',',$ids);
+        }
+        $where = sprintf("id in(%s)",$ids);
+        return $this->where($where)->delete();
+    }
+
+
+    /**
      * Function:updateById
      * 根据主键更新内容
      *

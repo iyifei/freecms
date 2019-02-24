@@ -11,14 +11,10 @@
 <script src="<{$myf_path}>/statics/admin/plugins/js-cookie/js.cookie.js"></script>
 <script src="<{$myf_path}>/statics/admin/js/theme/default.min.js"></script>
 <script src="<{$myf_path}>/statics/admin/js/apps.min.js"></script>
+<!-- ================== END BASE JS ================== -->
 
 <script src="<{$myf_path}>/statics/admin/plugins/gritter/js/jquery.gritter.min.js"></script>
-<!-- ================== END BASE JS ================== -->
-<script>
-    function loadPage(id) {
-        var url = $('#'+id).data('url');
-        $("#content").load(url);
-        $("#sidebar .nav li").removeClass('active');
-        $('#'+id).parents('li').addClass('active');
-    }
-</script>
+<script src="<{$myf_path}>/statics/admin/plugins/jquery-toast/jquery.toast.min.js"></script>
+<script src="<{$myf_path}>/statics/admin/js/Router.js"></script>
+<script src="<{$myf_path}>/statics/admin/js/FreeCms.js"></script>
+

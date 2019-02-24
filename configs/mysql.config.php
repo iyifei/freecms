@@ -15,9 +15,8 @@ return [
             'port' => $port,
             'user' => $user,
             'password' => $pwd,
-            'database' => 'freecms',
+            'dbname' => 'freecms',
             'charset' => 'utf8',
-            'prefix' => ''
         ),
     ),
     'default'=>'freecms',

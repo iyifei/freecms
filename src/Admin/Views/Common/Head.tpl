@@ -13,7 +13,28 @@
 <link href="<{$myf_path}>/statics/admin/css/default/theme/default.css" rel="stylesheet" id="theme" />
 
 <link href="<{$myf_path}>/statics/admin/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
+<link href="<{$myf_path}>/statics/admin/plugins/jquery-toast/jquery.toast.min.css" rel="stylesheet" />
 <!-- ================== END BASE CSS STYLE ================== -->
+
 <!-- ================== BEGIN BASE JS ================== -->
 <script src="<{$myf_path}>/statics/admin/plugins/pace/pace.min.js"></script>
 <!-- ================== END BASE JS ================== -->
+<style>
+    .tacenter{
+        text-align: center;
+    }
+    .myf-table-bordered{
+        border: 1px solid #e2e7eb;
+    }
+    .fm-text {
+        margin: -3px 0 0;
+        padding: 4px;
+        line-height: 16px;
+        border: 1px solid #CCC;
+        border-radius: 3px;
+        vertical-align: middle;
+    }
+    .myf-table-td-vm td{
+        vertical-align: middle;
+    }
+</style>

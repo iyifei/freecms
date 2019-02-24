@@ -5,9 +5,6 @@
 <!--<![endif]-->
 <head>
     <{include file="../Common/Head.tpl"}>
-    <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-
-    <!-- ================== END PAGE LEVEL STYLE ================== -->
 </head>
 <body>
 <!-- begin #page-loader -->
@@ -38,8 +35,7 @@
 <script>
     $(document).ready(function() {
         App.init();
-
-        loadHomePage();
+        //loadHomePage();
     });
 
     //加载后台主页
@@ -60,6 +56,32 @@
         }, 1000);
     };
 
+    function loadPage(id,menuId) {
+        if(menuId==undefined){
+            menuId = id;
+        }
+        var url = $('#'+id).data('url');
+        console.log('loadUrl:'+url);
+        $("#content").load(url);
+        $("#sidebar .nav li").removeClass('active');
+        $('#'+menuId).parents('li').addClass('active');
+    }
+
+    var router;
+    $(document).ready(function () {
+        router = new Router();
+        router.add('home', function(info) {
+            console.log(info);
+            loadPage('sidebarHomeMenu');
+        });
+        router.add('content', function() {
+            loadPage('sidebarContentMenu');
+        });
+        router.add('system/menu', function() {
+            loadPage('sidebarSystemMenu');
+        });
+        router.start();
+    })
 </script>
 </body>
 </html>
