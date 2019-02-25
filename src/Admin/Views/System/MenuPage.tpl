@@ -40,19 +40,19 @@
                     ><span>添加顶级菜单</span></a>
                 </div>
 
-                <table id="data-table-buttons" class="table table-condensed table-hover myf-table-bordered myf-table-td-vm">
+                <table id="data-table-buttons" class="table table-condensed table-hover myf-table-bordered myf-table-td-center">
                     <thead>
                         <tr>
                             <th width="2%">排序</th>
                             <th width="2%" data-orderable="false">ID</th>
-                            <th class="text-nowrap tacenter">菜单名称</th>
-                            <th width="15%" class="text-nowrap tacenter">是否隐藏</th>
-                            <th width="20%" class="text-nowrap tacenter">操作</th>
+                            <th class="text-nowrap ">菜单名称</th>
+                            <th width="15%" class="text-nowrap ">是否隐藏</th>
+                            <th width="20%" class="text-nowrap ">操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     <{foreach from=$datas key=k item=vo}>
-                        <tr class="treegrid-<{$vo.id}> <{if $vo.pid neq 0}>treegrid-parent-<{$vo.pid}><{/if}>">
+                        <tr>
                             <td width="1%" class="f-s-600 text-inverse">
                                 <input class="left mr10 fm-text sortrank"
                                        tabindex="<{$k+50}>"
@@ -62,17 +62,17 @@
                                        name="sortrank_<{$vo.id}>" did="<{$vo.id}>" type="text"  value="<{$vo.sortrank}>">
                             </td>
                             <td width="1%"><{$vo.id}></td>
-                            <td>
+                            <td class="myf-td-left">
                                 <{$vo.spacer}><{$vo.name|escape:'html'}>(<{$vo.url|escape:'html'}>)
                             </td>
-                            <td class="tacenter">
+                            <td class="">
                                 <{if $vo.ishide eq 1}>
                                     <span class="text-red">隐藏</span>
                                 <{else}>
                                     <span class="text-green">显示</span>
                                 <{/if}>
                             </td>
-                            <td class="tacenter">
+                            <td class="">
                                 <a title="添加子菜单" data-toggle="tooltip"
                                    data-href="<{$myf_path}>/admin/system/menu/edit?method=add&pid=<{$vo.id}>"
                                    href="javascript:openModel('btnAddChild_<{$vo.id}>')"
@@ -116,7 +116,7 @@
 </div>
 <!-- end row -->
 <input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/system/menu/save">
-<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/system/menu/delete">
+<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/system/menu/save">
 
 <div class="modal fade" id="myModal"  tabindex="-1" style="display: none">
     <div class="modal-dialog modal-lg">

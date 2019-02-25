@@ -34,7 +34,11 @@
         border-radius: 3px;
         vertical-align: middle;
     }
-    .myf-table-td-vm td{
+    table td.myf-td-left{
+        text-align: left;
+    }
+    .myf-table-td-center td,.myf-table-td-center th{
         vertical-align: middle;
+        text-align: center;
     }
 </style>

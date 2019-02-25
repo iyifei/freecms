@@ -29,13 +29,16 @@ return [
             ['method' => 'GET', 'route' => '/site/arctype', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypePage::class],
             ['method' => 'GET', 'route' => '/site/arctype/edit', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditPage::class],
             ['method' => 'POST', 'route' => '/site/arctype/save', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditAjax::class],
-            ['method' => 'POST', 'route' => '/site/arctype/delete', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditAjax::class],
 
             //菜单管理
             ['method' => 'GET', 'route' => '/system/menu', 'handler' => \FreeCMS\Admin\Pages\System\MenuPage::class],
             ['method' => 'GET', 'route' => '/system/menu/edit', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditPage::class],
             ['method' => 'POST', 'route' => '/system/menu/save', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
-            ['method' => 'POST', 'route' => '/system/menu/delete', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
+
+            //单页管理
+            ['method' => 'GET', 'route' => '/site/page', 'handler' => \FreeCMS\Admin\Pages\Site\SinglePage::class],
+            ['method' => 'GET', 'route' => '/site/page/edit', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditPage::class],
+            ['method' => 'POST', 'route' => '/site/page/save', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditAjax::class],
         ]
     ]
 ];

@@ -130,7 +130,6 @@
                         <label class="col-sm-3 col-form-label text-right">栏目描述</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" rows="5" name="description"><{$data.description}></textarea>
-                            <small class="f-s-12 text-grey-darker">多个关键字用逗号隔开</small>
                         </div>
                     </div>
                 </form>
