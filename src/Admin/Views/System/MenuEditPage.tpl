@@ -21,7 +21,7 @@
         }
     </style>
 </head>
-<body>
+<body style="background: none">
     <!-- begin #content -->
     <div class="content-full-width">
         <!-- begin row -->

@@ -14,12 +14,15 @@
     /**
      * 添加路由,如果路由已经存在则会覆盖
      * @param addr: 地址
+     * @param param: 参数
      * @param callback: 回调函数，调用回调函数的时候同时也会传入相应参数
      */
-    Router.prototype.add = function(addr, callback) {
+    Router.prototype.add = function(addr, param,callback) {
         var self = this;
-
-        self.hashList[addr] = callback;
+        self.hashList[addr] = {
+            param:param,
+            callback:callback
+        };
     };
 
     /**
@@ -28,7 +31,6 @@
      */
     Router.prototype.remove = function(addr) {
         var self = this;
-
         delete self.hashList[addr];
     };
 
@@ -38,7 +40,6 @@
      */
     Router.prototype.setIndex = function(index) {
         var self = this;
-
         self.index = index;
     };
 
@@ -48,7 +49,6 @@
      */
     Router.prototype.go = function(addr) {
         var self = this;
-
         window.location.hash = '#' + self.key + addr;
     };
 
@@ -63,9 +63,11 @@
         var addr = hash.split('?')[0];
         var cb = getCb(addr, self.hashList);
         if(cb != false) {
+            var callback = cb.callback;
             var params = [];
             params.push(hash);
-            cb.apply(self, params);
+            params.push(cb.param);
+            callback.call(self, hash,cb.param);
         } else {
             self.index && self.go(self.index);
         }

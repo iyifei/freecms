@@ -35,12 +35,12 @@
 <script>
     $(document).ready(function() {
         App.init();
-        //loadHomePage();
+        loadHomePage();
     });
 
     //加载后台主页
     function loadHomePage() {
-        loadPage('sidebarHomeMenu');
+        window.location.hash = '#!home';
     }
 
     var handleDashboardGritterNotification = function() {
@@ -56,31 +56,30 @@
         }, 1000);
     };
 
-    function loadPage(id,menuId) {
-        if(menuId==undefined){
-            menuId = id;
-        }
-        var url = $('#'+id).data('url');
+    function loadPage(hash,menuId) {
+        var url = "<{$myf_path}>/admin/"+hash;
         console.log('loadUrl:'+url);
         $("#content").load(url);
         $("#sidebar .nav li").removeClass('active');
-        $('#'+menuId).parents('li').addClass('active');
+        $('#sidebar-menu-'+menuId).parents('li').addClass('active');
     }
 
-    var router;
+    //网站路由
+    var freeCmsRouter;
     $(document).ready(function () {
-        router = new Router();
-        router.add('home', function(info) {
-            console.log(info);
-            loadPage('sidebarHomeMenu');
+        var menus = eval('(' + $("#sidebar-json-data").val() + ')');
+        console.log(menus);
+        freeCmsRouter = new Router();
+        freeCmsRouter.add('home', '0',function(hash,id) {
+            loadPage(hash,id);
         });
-        router.add('content', function() {
-            loadPage('sidebarContentMenu');
-        });
-        router.add('system/menu', function() {
-            loadPage('sidebarSystemMenu');
-        });
-        router.start();
+        for(var i=0;i<menus.length;i++){
+            var menu = menus[i];
+            freeCmsRouter.add(menu['url'], menu['id'],function(hash,id) {
+                loadPage(hash,id);
+            });
+        }
+        freeCmsRouter.start();
     })
 </script>
 </body>

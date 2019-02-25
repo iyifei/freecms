@@ -95,8 +95,11 @@
                                     <i class="fas fa-eye"></i>
                                     <{/if}>
                                 </a>
+                                <{if $vo.id > 55}>
                                 <a href="javascript:FreeCms.deleteRow(<{$vo.id}>);" title="删除"  data-toggle="tooltip"
-                                   class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
+                                   class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i>
+                                </a>
+                                <{/if}>
 
                             </td>
                         </tr>
@@ -139,8 +142,12 @@
         var src = $("#"+id).attr('data-href');
         var title = $("#"+id).data("title");
         $('#myModal .modal-title').html(title);
-        $('#myModal').modal('show');
+        $('#myModal').modal('show').on('hidden.bs.modal',function () {
+            modelState = false;
+        });
         $('#myModal iframe').attr('src', src);
+
+
     }
 
     //提交数据
@@ -155,6 +162,7 @@
     function successCallback() {
         FreeCms.success('更新成功');
         if(modelState){
+            modelState = false;
             $('#myModal').modal('hide').on('hidden.bs.modal', function (e) {
                 window.location.hash='#!system/menu?'+Date.parse(new Date());
             })

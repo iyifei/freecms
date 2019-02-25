@@ -2,6 +2,8 @@
 namespace FreeCMS\Admin;
 
 use FreeCMS\Common\Libs\Page;
+use FreeCMS\Common\Libs\Tree;
+use FreeCMS\Common\Model\CmsMenuModel;
 
 /**
  * Class [BaseAdminPage]
@@ -53,6 +55,12 @@ abstract class BaseAdminPage extends Page
             //jumpUrl(getBaseURL().'/');
         }
 
+        //获取系统菜单信息
+        $m = new CmsMenuModel();
+        $menus  = $m->findAllMenu();
+        $menuTree = easyuitree($menus);
+        $this->assign('menuTree',$menuTree);
+        $this->assign('menuJson',json_encode($menus));
     }
 
     //获取路由
