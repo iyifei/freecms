@@ -194,7 +194,7 @@
             </div>
             <!-- end panel-heading -->
             <!-- begin panel-body -->
-            <div class="panel-body">
+            <div class="panel-body" <{if empty($data.extinfo)}>style="display:none"<{/if}>>
                 <form autocomplete="off">
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label text-right">扩展属性</label>
@@ -298,8 +298,7 @@
     });
 
     function callbackSaveSuccess() {
-        FreeCms.success('更新成功');
-        window.history.back(-1);
+        FreeCms.callbackEditSaveSuccess();
     }
 </script>
 

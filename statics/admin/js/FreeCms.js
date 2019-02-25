@@ -236,9 +236,20 @@ FreeCms.confirm = function (msg,succFun) {
                 closeModal: true
             }
         }
-    }).then((value) => {
+    }).then(function (value) {
         if(value && typeof succFun ==='function'){
             succFun();
         }
     });
+}
+
+//保存成功
+FreeCms.callbackEditSaveSuccess = function() {
+    FreeCms.success('操作执行成功');
+    setTimeout(function () {
+        var hash  = window.location.hash;
+        var addrs = hash.split('?')[0].split('/');
+        var addr = addrs[0]+'/'+addrs[1];
+        window.location.hash = addr;
+    },800);
 }

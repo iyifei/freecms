@@ -118,59 +118,7 @@
 <input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/system/menu/save">
 <input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/system/menu/save">
 
-<div class="modal fade" id="myModal"  tabindex="-1" style="display: none">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Modal Dialog</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            </div>
-            <div class="modal-body p-30">
-                <iframe id="modelIframe" type="text/html" width="100%" height="460" src="" frameborder="0" allowfullscreen=""></iframe>
-            </div>
-            <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-white" data-dismiss="modal">关闭</a>
-                <a href="javascript:doSubmit();" class="btn btn-success">保存</a>
-            </div>
-        </div>
-    </div>
-</div>
 <script type="text/javascript">
-    var modelState = false;
-    function openModel(id) {
-        modelState = true;
-        var src = $("#"+id).attr('data-href');
-        var title = $("#"+id).data("title");
-        $('#myModal .modal-title').html(title);
-        $('#myModal').modal('show').on('hidden.bs.modal',function () {
-            modelState = false;
-        });
-        $('#myModal iframe').attr('src', src);
-
-
-    }
-
-    //提交数据
-    function doSubmit() {
-        var subWin = window.frames['modelIframe'].contentWindow;
-        if(typeof(subWin.submitForm)==='function'){
-            subWin.submitForm();
-        }
-    }
-    
-    //关闭
-    function successCallback() {
-        FreeCms.success('操作执行成功');
-        if(modelState){
-            modelState = false;
-            $('#myModal').modal('hide').on('hidden.bs.modal', function (e) {
-                window.location.hash='#!system/menu?'+Date.parse(new Date());
-            })
-        }else{
-            window.location.hash='#!system/menu?'+Date.parse(new Date());
-        }
-    }
-
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

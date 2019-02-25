@@ -53,6 +53,7 @@
                         <tr>
                             <td width="1%" class="f-s-600 text-inverse">
                                 <input class="left mr10 fm-text sortrank"
+                                       autocomplete="off"
                                        style="margin-top: 0;width:30px;text-align: center"  onkeyup="if (isNaN(value)) execCommand('undo')"
                                        onafterpaste="if(isNaN(value))execCommand('undo')"
                                        name="sortrank_<{$vo.id}>" did="<{$vo.id}>" type="text"  value="<{$vo.sortrank}>">
@@ -112,11 +113,6 @@
 <input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/site/arctype/save">
 <input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/site/arctype/save">
 <script type="text/javascript">
-    function successCallback() {
-        FreeCms.success('操作执行成功');
-        window.location.hash='#!site/arctype?'+Date.parse(new Date());
-    }
-
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

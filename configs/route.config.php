@@ -39,6 +39,11 @@ return [
             ['method' => 'GET', 'route' => '/site/page', 'handler' => \FreeCMS\Admin\Pages\Site\SinglePage::class],
             ['method' => 'GET', 'route' => '/site/page/edit', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditPage::class],
             ['method' => 'POST', 'route' => '/site/page/save', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditAjax::class],
+
+            //友情链接
+            ['method' => 'GET', 'route' => '/site/flink', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkPage::class],
+            ['method' => 'GET', 'route' => '/site/flink/edit', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkEditPage::class],
+            ['method' => 'POST', 'route' => '/site/flink/save', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkEditAjax::class],
         ]
     ]
 ];

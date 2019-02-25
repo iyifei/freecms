@@ -128,6 +128,7 @@
                         <label class="col-sm-3 col-form-label text-right">摘要</label>
                         <div class="col-sm-9">
                             <textarea class="form-control" rows="5" name="description"><{$data.description}></textarea>
+                            <textarea name="body" id="editorBody" style="display: none"></textarea>
                         </div>
                     </div>
                 </form>
@@ -135,9 +136,6 @@
             <!-- end panel-body -->
         </div>
         <!-- end panel -->
-
-
-
     </div>
     <!-- end col-6 -->
 </div>
@@ -157,11 +155,11 @@
             </div>
             <!-- end panel-heading -->
             <!-- begin panel-body -->
-            <div class="panel-body p-30 ">
+            <div class="panel-body">
                 <form autocomplete="off">
                     <div class="form-group row m-b-15">
                         <div class="col-sm-12">
-
+                            <script id="editor" type="text/plain" style="width:100%;height:400px;"><{$data.body}></script>
                         </div>
                     </div>
                 </form>
@@ -186,11 +184,20 @@
 <input type="hidden" id="submitUrl" value="<{$myf_path}>/admin/site/page/save">
 <div style="display: none" id="templatesJson"><{$templatesJson}></div>
 
+<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 
+    var ue = UE.getEditor('editor');
+
     function callbackSaveSuccess() {
-        FreeCms.success('更新成功');
-        window.history.back(-1);
+        FreeCms.callbackEditSaveSuccess();
     }
+
+    function beforeSubmitFun() {
+        $("#editorBody").val(ue.getContent());
+    }
+
 </script>
 

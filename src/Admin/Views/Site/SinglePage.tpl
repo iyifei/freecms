@@ -50,10 +50,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <{foreach from=$datas item=vo}>
+                    <{foreach from=$datas key=k item=vo}>
                         <tr>
                             <td width="1%" class="f-s-600 text-inverse">
                                 <input class="left mr10 fm-text sortrank"
+                                       autocomplete="off"
+                                       tabindex="<{$k+50}>"
                                        style="margin-top: 0;width:30px;text-align: center"  onkeyup="if (isNaN(value)) execCommand('undo')"
                                        onafterpaste="if(isNaN(value))execCommand('undo')"
                                        name="sortrank_<{$vo.id}>" did="<{$vo.id}>" type="text"  value="<{$vo.sortrank}>">
@@ -72,7 +74,7 @@
                                 <{$vo.uptime|date_format:"%Y-%m-%d"}>
                             </td>
                             <td>
-                                <a title="预览" data-toggle="tooltip"  href="#" class="btn btn-green btn-icon btn-circle btn-sm">
+                                <a title="预览" data-toggle="tooltip" target="_blank"  href="<{$myf_path}>/pages/<{$vo.filename|escape:'html'}>.html" class="btn btn-green btn-icon btn-circle btn-sm">
                                     <i class="fab fa-html5"></i>
                                 </a>
                                 <a title="编辑" data-toggle="tooltip"  href="#!site/page/edit?method=update&id=<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
@@ -93,14 +95,9 @@
     <!-- end col-10 -->
 </div>
 <!-- end row -->
-<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/site/page/delete">
+<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/site/page/save">
 <input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/site/page/save">
 <script type="text/javascript">
-    function successCallback() {
-        FreeCms.success('操作执行成功');
-        window.location.hash='#!site/page?'+Date.parse(new Date());
-    }
-
     $(function () {
         $('[data-toggle="tooltip"]').tooltip()
     })

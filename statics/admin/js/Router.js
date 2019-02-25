@@ -60,7 +60,8 @@
 
         var hash = window.location.hash.replace('#' + self.key, '');
         console.log("hash:"+hash);
-        var addr = hash.split('?')[0];
+        var addrs = hash.split('?')[0].split('/');
+        var addr = addrs[0]+'/'+addrs[1];
         var cb = getCb(addr, self.hashList);
         if(cb != false) {
             var callback = cb.callback;
@@ -69,7 +70,7 @@
             params.push(cb.param);
             callback.call(self, hash,cb.param);
         } else {
-            loadNuknownPage(hash);
+            self.index && self.go(self.index);
         }
     };
 
