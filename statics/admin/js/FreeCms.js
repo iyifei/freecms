@@ -26,13 +26,11 @@ FreeCms.doEditSubmit=function () {
         $.post(url, FreeCms.serializeObject($("form")), function (result) {
             //成功
             if (result.status == 0) {
-                setTimeout(function () {
-                    if(typeof callbackSaveSuccess === 'function'){
-                        callbackSaveSuccess();
-                    }
-                }, 300);
+                if(typeof callbackSaveSuccess === 'function'){
+                    callbackSaveSuccess();
+                }
             } else {
-                alert('error');
+                FreeCms.error(result.errmsg);
             }
         }, 'json');
     }

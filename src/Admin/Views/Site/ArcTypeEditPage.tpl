@@ -2,9 +2,7 @@
 <ol class="breadcrumb pull-right">
     <li class="breadcrumb-item">后台</li>
     <li class="breadcrumb-item">站点</li>
-    <li class="breadcrumb-item active">
-        <a href="<{$myf_path}>/admin/">栏目管理</a>
-    </li>
+    <li class="breadcrumb-item">栏目管理</li>
     <li class="breadcrumb-item active">
         编辑栏目
     </li>
@@ -34,7 +32,9 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body p-30 ">
-                <form>
+                <form autocomplete="off">
+                    <input type="hidden" name="id" value="<{$data.id}>">
+                    <input type="hidden" name="method" value="<{$method}>" />
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>父级栏目</label>
                         <div class="col-md-9">
@@ -45,7 +45,6 @@
                                 <{/foreach}>
                             </select>
                             <small class="f-s-12 text-grey-darker">选择上级栏目</small>
-                            <small class="f-s-12 text-grey-darker">不填写时默认是拼音</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -62,7 +61,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>栏目名称</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" placeholder="" />
+                            <input class="form-control" name="typename" type="text" value="<{$data.typename}>" />
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -76,14 +75,14 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">文件保存目录</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" placeholder="" />
+                            <input class="form-control" type="text" value="<{$data.typedir}>" name="typedir" />
                             <small class="f-s-12 text-grey-darker">不填写时默认是拼音</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">排序</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" value="<{if $data}><{$data.sortrank}><{else}>50<{/if}>" />
+                            <input class="form-control" name="sortrank" type="text" value="<{if $data}><{$data.sortrank}><{else}>50<{/if}>" />
                             <small class="f-s-12 text-grey-darker">越小越靠前</small>
                         </div>
                     </div>
@@ -112,7 +111,7 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body p-30 ">
-                <form>
+                <form autocomplete="off">
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">栏目SEO标题</label>
                         <div class="col-sm-9">
@@ -123,7 +122,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">栏目关键字</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="seotitle" value="<{$data.keywords}>" />
+                            <input class="form-control" type="text" name="keywords" value="<{$data.keywords}>" />
                             <small class="f-s-12 text-grey-darker">多个关键字用逗号隔开</small>
                         </div>
                     </div>
@@ -153,7 +152,7 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body p-30 ">
-                <form>
+                <form autocomplete="off">
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">封面模板</label>
                         <div class="col-sm-9">
@@ -197,11 +196,11 @@
             <!-- end panel-heading -->
             <!-- begin panel-body -->
             <div class="panel-body">
-                <form>
+                <form autocomplete="off">
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label text-right">扩展属性</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" rows="10" name="description"><{$data.extinfo}></textarea>
+                            <textarea class="form-control" rows="10" name="extinfo"><{$data.extinfo}></textarea>
                             <small class="f-s-12 text-grey-darker">输入json格式</small>
                         </div>
                     </div>
@@ -219,14 +218,89 @@
     <div class="col-lg-12">
         <div class="panel">
             <div class="panel-body text-right">
-                <button type="button" class="btn btn-primary">确认保存</button>&nbsp;&nbsp;
-                <a href="javascript:;" class="btn btn-default">返回</a>
+                <button type="button" onclick="FreeCms.doEditSubmit();" class="btn btn-primary">确认保存</button>&nbsp;&nbsp;
+                <a href="javascript:window.history.back(-1);" class="btn btn-default">返回</a>
             </div>
         </div>
     </div>
 </div>
 
+<input type="hidden" id="submitUrl" value="<{$myf_path}>/admin/site/arctype/save">
+<div style="display: none" id="templatesJson"><{$templatesJson}></div>
 
 <script type="text/javascript">
+    function changeChannel() {
+        var channel = $("#selChannel").val();
+        if(channel=='blend'){
+            $(".not-blend").hide();
+        }else{
+            $(".not-blend").show();
+            var templates = JSON.parse($("#templatesJson").html());
+            var template = templates[channel];
+            var faces = template['face'];
+            var facesel = document.getElementById("selFace");
+            facesel.options.length = 0;
+            if(faces!=undefined){
+                var selFace = $("#hideSelFace").val();
+                for (var i = 0; i < faces.length; i++) {
+                    var f = faces[i];
+                    var option = new Option(f, f);
+                    if(selFace!=''){
+                        if(selFace==f){
+                            option.selected = true;
+                        }
+                    }else if(f.indexOf("_default.") > 0){
+                        option.selected = true;
+                    }
+                    facesel.options.add(option);
+                }
+            }
+            var lists = template['list'];
+            var listsel = document.getElementById("selList");
+            listsel.options.length = 0;
+            if(lists!=undefined){
+                var selList = $("#hideSelList").val();
+                for (var i = 0; i < lists.length; i++) {
+                    var f = lists[i];
+                    var option = new Option(f, f);
+                    if(selList!=''){
+                        if(selList==f){
+                            option.selected = true;
+                        }
+                    }else if(f.indexOf("_default.") > 0){
+                        option.selected = true;
+                    }
+                    listsel.options.add(option);
+                }
+            }
+            var archives = template['archive'];
+            var archivesel = document.getElementById("selArchive");
+            archivesel.options.length = 0;
+            if(archives!=undefined){
+                var selArchive = $("#hideSelArchive").val();
+                for (var i = 0; i < archives.length; i++) {
+                    var f = archives[i];
+                    var option = new Option(f, f);
+                    if(selArchive!=''){
+                        if(selArchive==f){
+                            option.selected = true;
+                        }
+                    }else if(f.indexOf("_default.") > 0){
+                        option.selected = true;
+                    }
+                    archivesel.options.add(option);
+                }
+            }
+        }
+    }
+    //初始化
+    $(document).ready(function () {
+        changeChannel();
+    });
+
+    function callbackSaveSuccess() {
+        FreeCms.success('更新成功');
+        window.history.back(-1);
+    }
 </script>
 

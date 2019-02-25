@@ -86,7 +86,7 @@ abstract class BaseAdminPage extends Page
      * @return string
      */
     protected function getThemePath(){
-        return SYS_PATH.'/themes/'.config('theme.default');
+        return SYS_PATH.'/themes/'.config('base.theme');
     }
 
 

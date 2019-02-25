@@ -40,7 +40,9 @@
 
     //加载后台主页
     function loadHomePage() {
-        window.location.hash = '#!home';
+        if(window.location.hash==''){
+            window.location.hash = '#!home';
+        }
     }
 
     var handleDashboardGritterNotification = function() {
@@ -56,6 +58,7 @@
         }, 1000);
     };
 
+    //加载页面
     function loadPage(hash,menuId) {
         var url = "<{$myf_path}>/admin/"+hash;
         console.log('loadUrl:'+url);
@@ -64,11 +67,17 @@
         $('#sidebar-menu-'+menuId).parents('li').addClass('active');
     }
 
+    //加载未知页面
+    function loadNuknownPage(hash) {
+        var url = "<{$myf_path}>/admin/"+hash;
+        console.log('load Unknown Url:'+url);
+        $("#content").load(url);
+    }
+
     //网站路由
     var freeCmsRouter;
     $(document).ready(function () {
         var menus = eval('(' + $("#sidebar-json-data").val() + ')');
-        console.log(menus);
         freeCmsRouter = new Router();
         freeCmsRouter.add('home', '0',function(hash,id) {
             loadPage(hash,id);

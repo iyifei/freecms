@@ -52,8 +52,6 @@ class ArcTypeEditAjax extends BaseAdminPage
             $typedir = post('typedir');
             $channel = requestNotEmpty('channel');
             $type = requestNotEmpty('type');
-            $arcnamerule = requestNotEmpty('arcnamerule');
-            $listnamerule = requestNotEmpty('listnamerule');
             $seotitle = post('seotitle');
             $description = post('description');
             $keywords = post('keywords');
@@ -61,6 +59,15 @@ class ArcTypeEditAjax extends BaseAdminPage
             $templist = post('templist');
             $temparchive = post('temparchive');
             $litpic = post('litpic');
+            $extinfo = post('extinfo');
+            if(!empty($extinfo)){
+                $ext = json_decode($extinfo,true);
+                if($ext){
+                    $extinfo = json_encode($ext);
+                }else{
+                    $extinfo = null;
+                }
+            }
             //上级菜单
             $topid = 0;
             //级别
@@ -83,8 +90,6 @@ class ArcTypeEditAjax extends BaseAdminPage
                 'typedir' => $typedir,
                 'channel' => $channel,
                 'type' => $type,
-                'arcnamerule' => $arcnamerule,
-                'listnamerule' => $listnamerule,
                 'seotitle' => $seotitle,
                 'description' => $description,
                 'keywords' => $keywords,
@@ -93,6 +98,7 @@ class ArcTypeEditAjax extends BaseAdminPage
                 'temparchive' => $temparchive,
                 'litpic' => $litpic,
                 'level' => $level,
+                'extinfo'=>$extinfo,
             ];
             switch ($method) {
                 case EditType::Add:

@@ -69,7 +69,7 @@
             params.push(cb.param);
             callback.call(self, hash,cb.param);
         } else {
-            self.index && self.go(self.index);
+            loadNuknownPage(hash);
         }
     };
 

@@ -30,6 +30,13 @@
             <!-- begin panel-body -->
             <div class="panel-body">
                 <div class="table-responsive">
+                    <div class="dt-buttons btn-group p-b-15">
+                        <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons" href="javascript:FreeCms.batchSave('sortrank');"><span>更新排序</span></a>
+                        <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons"
+                           href="#!site/arctype/edit?method=add"
+                        ><span>添加顶级栏目</span></a>
+                    </div>
+
                 <table id="data-table-buttons" class="table table-condensed table-hover myf-table-bordered myf-table-td-vm">
                     <thead>
                         <tr>
@@ -56,38 +63,38 @@
                             </td>
                             <td class="tacenter">
                                 <{if $vo.channel eq 'image'}>
-                                    图集
+                                    <i class="far fa-images"></i>&nbsp;图集
                                 <{elseif $vo.channel eq 'video'}>
-                                    视频
+                                    <i class="fab fa-youtube"></i>&nbsp;视频
                                 <{elseif $vo.channel eq 'audio'}>
-                                    音频
+                                    <i class="fas fa-volume-down"></i>&nbsp;音频
                                 <{else}>
-                                    文章
+                                    <i class="fas fa-file"></i>&nbsp;文章
                                 <{/if}>
                             </td>
                             <td class="tacenter">
                                 <{if $vo.type eq 'list'}>
-                                    最终列表
+                                    <i class="fas fa-list"></i>&nbsp;最终列表
                                 <{elseif $vo.type eq 'face'}>
-                                    封面栏目
+                                    <i class="fas fa-book"></i>&nbsp;封面栏目
                                 <{elseif $vo.type eq 'link'}>
-                                    外部连接
+                                    <i class="fas fa-link"></i>&nbsp;外部连接
                                 <{/if}>
                             </td>
                             <td class="tacenter">
-                                <a href="#" class="btn btn-info btn-icon btn-circle btn-sm">
+                                <a title="栏目下文章" data-toggle="tooltip"  href="#" class="btn btn-info btn-icon btn-circle btn-sm">
                                     <i class="fas fa-th-list"></i>
                                 </a>
-                                <a href="#" class="btn btn-green btn-icon btn-circle btn-sm">
+                                <a title="预览" data-toggle="tooltip"  href="#" class="btn btn-green btn-icon btn-circle btn-sm">
                                     <i class="fab fa-html5"></i>
                                 </a>
-                                <a href="#" class="btn btn-primary btn-icon btn-circle btn-sm">
+                                <a title="添加子栏目" data-toggle="tooltip"  href="#!site/arctype/edit?method=add&pid=<{$vo.id}>"  class="btn btn-primary btn-icon btn-circle btn-sm">
                                     <i class="fas fa-plus"></i>
                                 </a>
-                                <a href="javascript:loadPage('btnEdit','sidebarSiteArcType');" id="btnEdit" data-url="<{$myf_path}>/admin/site/arctype/edit?method=update&id=<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
+                                <a title="编辑" data-toggle="tooltip"  href="#!site/arctype/edit?method=update&id=<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
-                                <a href="javascript:;" title="删除" class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
+                                <a title="删除" data-toggle="tooltip" href="javascript:FreeCms.deleteRow(<{$vo.id}>);" class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
                             </td>
                         </tr>
                     <{/foreach}>
@@ -102,6 +109,16 @@
     <!-- end col-10 -->
 </div>
 <!-- end row -->
+<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/site/arctype/delete">
+<input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/site/arctype/save">
 <script type="text/javascript">
+    function successCallback() {
+        FreeCms.success('操作执行成功');
+        window.location.hash='#!site/arctype?'+Date.parse(new Date());
+    }
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 </script>
 

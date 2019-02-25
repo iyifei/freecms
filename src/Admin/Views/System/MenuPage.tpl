@@ -160,7 +160,7 @@
     
     //关闭
     function successCallback() {
-        FreeCms.success('更新成功');
+        FreeCms.success('操作执行成功');
         if(modelState){
             modelState = false;
             $('#myModal').modal('hide').on('hidden.bs.modal', function (e) {
