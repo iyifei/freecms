@@ -251,5 +251,5 @@ FreeCms.callbackEditSaveSuccess = function() {
         var addrs = hash.split('?')[0].split('/');
         var addr = addrs[0]+'/'+addrs[1];
         window.location.hash = addr;
-    },800);
+    },500);
 }

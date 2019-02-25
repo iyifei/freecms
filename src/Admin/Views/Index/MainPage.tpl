@@ -124,9 +124,11 @@
 
     //刷新页面
     function reloadThisPage() {
-        var hash = window.location.hash;
-        hash = hash.split('?')[0];
-        window.location.hash=hash+'?'+Date.parse(new Date());
+        setTimeout(function () {
+            var hash = window.location.hash;
+            hash = hash.split('?')[0];
+            window.location.hash=hash+'?'+Date.parse(new Date());
+        },500);
     }
 </script>
 </body>

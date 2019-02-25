@@ -44,6 +44,17 @@ return [
             ['method' => 'GET', 'route' => '/site/flink', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkPage::class],
             ['method' => 'GET', 'route' => '/site/flink/edit', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkEditPage::class],
             ['method' => 'POST', 'route' => '/site/flink/save', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkEditAjax::class],
+
+            //文章管理
+            ['method' => 'POST', 'route' => '/content/{channel}/save', 'handler' => \FreeCMS\Admin\Pages\Content\ArchivesEditAjax::class],
+            ['method' => 'GET', 'route' => '/content/article', 'handler' => \FreeCMS\Admin\Pages\Content\ArticlePage::class],
+            ['method' => 'GET', 'route' => '/content/article/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ArticleEditPage::class],
+            ['method' => 'GET', 'route' => '/content/video', 'handler' => \FreeCMS\Admin\Pages\Content\VideoPage::class],
+            ['method' => 'GET', 'route' => '/content/video/edit', 'handler' => \FreeCMS\Admin\Pages\Content\VideoEditPage::class],
+            ['method' => 'GET', 'route' => '/content/audio', 'handler' => \FreeCMS\Admin\Pages\Content\AudioPage::class],
+            ['method' => 'GET', 'route' => '/content/audio/edit', 'handler' => \FreeCMS\Admin\Pages\Content\AudioEditPage::class],
+            ['method' => 'GET', 'route' => '/content/image', 'handler' => \FreeCMS\Admin\Pages\Content\ImagePage::class],
+            ['method' => 'GET', 'route' => '/content/image/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ImageEditPage::class],
         ]
     ]
 ];

@@ -7,8 +7,8 @@
 namespace FreeCMS\Common\Model;
 
 
-use Common\Libs\Tree;
-use Common\Libs\Utils;
+use FreeCMS\Common\Libs\Tree;
+use FreeCMS\Common\Libs\Utils;
 
 class CmsArctypeModel extends Model
 {

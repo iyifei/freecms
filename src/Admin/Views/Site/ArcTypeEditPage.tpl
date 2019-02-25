@@ -4,14 +4,24 @@
     <li class="breadcrumb-item">站点</li>
     <li class="breadcrumb-item">栏目管理</li>
     <li class="breadcrumb-item active">
-        编辑栏目
+        <{if $method eq 'add'}>
+        添加栏目
+        <{else}>
+        修改栏目
+        <{/if}>
     </li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <h1 class="page-header">
     栏目管理
-    <small>编辑栏目</small>
+    <small>
+        <{if $method eq 'add'}>
+        添加栏目
+        <{else}>
+        修改栏目
+        <{/if}>
+    </small>
 </h1>
 
 
