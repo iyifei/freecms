@@ -22,8 +22,8 @@ return [
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Admin\Pages\Index\MainPage::class],
             //主页
             ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Admin\Pages\Index\HomePage::class],
-            //内容管理
-            ['method' => 'GET', 'route' => '/content','handler' => \FreeCMS\Admin\Pages\Content\ContentMain::class],
+            //图标
+            ['method' => 'GET', 'route' => '/system/icon','handler' => \FreeCMS\Admin\Pages\Index\IconPage::class],
 
             //栏目管理
             ['method' => 'GET', 'route' => '/site/arctype', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypePage::class],

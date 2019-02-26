@@ -26,8 +26,8 @@ abstract class Page
 
     protected function initSmarty(){
         $this->smarty = new \Smarty();
-        $this->smarty->left_delimiter = '<{';
-        $this->smarty->right_delimiter = '}>';
+        $this->smarty->left_delimiter = '{';
+        $this->smarty->right_delimiter = '}';
         //smt缓存路径
         $smtDir = SYS_PATH.'/_runtime/smt/tpl_c';
         //模板路径

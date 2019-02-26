@@ -101,56 +101,56 @@
             </div>
             <ul class="registered-users-list clearfix">
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-5.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-5.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Savory Posh
                         <small>Algerian</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-3.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-3.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Ancient Caviar
                         <small>Korean</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-1.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-1.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Marble Lungs
                         <small>Indian</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-8.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-8.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Blank Bloke
                         <small>Japanese</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-2.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-2.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Hip Sculling
                         <small>Cuban</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-6.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-6.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Flat Moon
                         <small>Nepalese</small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-4.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-4.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Packed Puffs
                         <small>Malaysian></small>
                     </h4>
                 </li>
                 <li>
-                    <a href="javascript:;"><img src="<{$myf_path}>/statics/admin/img/user/user-9.jpg" alt="" /></a>
+                    <a href="javascript:;"><img src="{$myf_path}/statics/admin/img/user/user-9.jpg" alt="" /></a>
                     <h4 class="username text-ellipsis">
                         Clay Hike
                         <small>Swedish</small>

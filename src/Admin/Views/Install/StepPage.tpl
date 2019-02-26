@@ -11,21 +11,21 @@
     <meta content="minyifei.cn" name="author" />
 
     <!-- ================== BEGIN BASE CSS STYLE ================== -->
-    <link href="<{$myf_path}>/statics/admin/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/plugins/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/plugins/animate/animate.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/css/default/style.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/css/default/style-responsive.min.css" rel="stylesheet" />
-    <link href="<{$myf_path}>/statics/admin/css/default/theme/default.css" rel="stylesheet" id="theme" />
+    <link href="{$myf_path}/statics/admin/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/plugins/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/plugins/animate/animate.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/css/default/style.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/css/default/style-responsive.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/css/default/theme/default.css" rel="stylesheet" id="theme" />
     <!-- ================== END BASE CSS STYLE ================== -->
 
     <!-- ================== BEGIN PAGE LEVEL STYLE ================== -->
-    <link href="<{$myf_path}>/statics/admin/plugins/jquery-smart-wizard/css/smart_wizard.min.css" rel="stylesheet" />
+    <link href="{$myf_path}/statics/admin/plugins/jquery-smart-wizard/css/smart_wizard.min.css" rel="stylesheet" />
     <!-- ================== END PAGE LEVEL STYLE ================== -->
 
     <!-- ================== BEGIN BASE JS ================== -->
-    <script src="<{$myf_path}>/statics/admin/plugins/pace/pace.min.js"></script>
+    <script src="{$myf_path}/statics/admin/plugins/pace/pace.min.js"></script>
     <!-- ================== END BASE JS ================== -->
 </head>
 <body>
@@ -341,23 +341,23 @@
 <!-- end page container -->
 
 <!-- ================== BEGIN BASE JS ================== -->
-<script src="<{$myf_path}>/statics/admin/plugins/jquery/jquery-3.2.1.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/jquery/jquery-3.2.1.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!--[if lt IE 9]>
-<script src="<{$myf_path}>/statics/admin/crossbrowserjs/html5shiv.js"></script>
-<script src="<{$myf_path}>/statics/admin/crossbrowserjs/respond.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/crossbrowserjs/excanvas.min.js"></script>
+<script src="{$myf_path}/statics/admin/crossbrowserjs/html5shiv.js"></script>
+<script src="{$myf_path}/statics/admin/crossbrowserjs/respond.min.js"></script>
+<script src="{$myf_path}/statics/admin/crossbrowserjs/excanvas.min.js"></script>
 <![endif]-->
-<script src="<{$myf_path}>/statics/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/plugins/js-cookie/js.cookie.js"></script>
-<script src="<{$myf_path}>/statics/admin/js/theme/default.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/js/apps.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/js-cookie/js.cookie.js"></script>
+<script src="{$myf_path}/statics/admin/js/theme/default.min.js"></script>
+<script src="{$myf_path}/statics/admin/js/apps.min.js"></script>
 <!-- ================== END BASE JS ================== -->
 
 <!-- ================== BEGIN PAGE LEVEL JS ================== -->
-<script src="<{$myf_path}>/statics/admin/plugins/parsley/parsley.min.js"></script>
-<script src="<{$myf_path}>/statics/admin/plugins/jquery-smart-wizard/js/jquery.smartWizard.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/parsley/parsley.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/jquery-smart-wizard/js/jquery.smartWizard.min.js"></script>
 <!-- ================== END PAGE LEVEL JS ================== -->
 
 <script>

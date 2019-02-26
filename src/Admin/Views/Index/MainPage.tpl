@@ -4,7 +4,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-    <{include file="../Common/Head.tpl"}>
+    {include file="../Common/Head.tpl"}
 </head>
 <body>
 <!-- begin #page-loader -->
@@ -14,9 +14,9 @@
 <!-- begin #page-container -->
 <div id="page-container" class="fade page-sidebar-fixed page-header-fixed">
 
-    <{include file="../Common/Header.tpl"}>
+    {include file="../Common/Header.tpl"}
 
-    <{include file="../Common/Sidebar.tpl"}>
+    {include file="../Common/Sidebar.tpl"}
 
     <!-- begin #content -->
     <div id="content" class="content">
@@ -24,12 +24,12 @@
     </div>
     <!-- end #content -->
 
-    <{include file="../Common/Theme.tpl"}>
+    {include file="../Common/Theme.tpl"}
 
-    <{include file="../Common/Footer.tpl"}>
+    {include file="../Common/Footer.tpl"}
 </div>
 <!-- end page container -->
-<{include file="../Common/BaseJs.tpl"}>
+{include file="../Common/BaseJs.tpl"}
 
 <div class="modal fade" id="myModal"  tabindex="-1" style="display: none">
     <div class="modal-dialog modal-lg">
@@ -64,7 +64,7 @@
 
     //加载页面
     function loadPage(hash,menuId) {
-        var url = "<{$myf_path}>/admin/"+hash;
+        var url = "{$myf_path}/admin/"+hash;
         console.log('loadUrl:'+url);
         $("#content").load(url);
         $("#sidebar .nav li").removeClass('active');

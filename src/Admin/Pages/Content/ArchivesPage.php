@@ -35,6 +35,7 @@ abstract class ArchivesPage extends BaseAdminPage
         $bind = [
             'channel'=>$channel,
         ];
+        $urlParam = '';
         //查询栏目
         $typeid = getInteger('typeid',0);
         if($typeid>0){
@@ -42,12 +43,14 @@ abstract class ArchivesPage extends BaseAdminPage
             $childIds = (new CmsArctypeModel())->findAllChildIds($typeid);
             $where.=' and typeid in (:typeids)';
             $bind['typeids']=join(',',$childIds);
+            $urlParam.='&typeid='.$typeid;
         }
         //查询标题关键字
         $title = get('title');
         if(!empty($title)){
             $where.=' and title like :title';
             $bind['title']="%{$title}%";
+            $urlParam.='&title='.$title;
         }
         $p = getInteger('p',1);
         if($p<1){
@@ -103,10 +106,11 @@ abstract class ArchivesPage extends BaseAdminPage
             $rows[$key]=$row;
         }
         $total = $model->where($where,$bind)->count();
+        $urlParam.='&p=%d';
         //分页
-        $pager = new Pagination($limit,$total,$p);
+        $pager = new Pagination($limit,$total,$p,getBaseURL()."/admin#!content/{$channel}?".$urlParam);
         $res = [
-            'search'=>[
+            'search'=> [
                 'typeid'=>$typeid,
                 'title'=>$title,
             ],
@@ -154,7 +158,6 @@ abstract class ArchivesPage extends BaseAdminPage
             $archive = $model->findById($id);
             switch ($channel){
                 case ChannelType::Article:
-                case ChannelType::Zph:
                     //读取内容
                     $arcModel = new CmsAddOnArticleModel();
                     $arc = $arcModel->findById($id);

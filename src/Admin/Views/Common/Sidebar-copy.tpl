@@ -8,7 +8,7 @@
                 <a href="javascript:;" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
-                        <img src="<{$myf_path}>/statics/admin/img/user/user-13.jpg" alt="" />
+                        <img src="{$myf_path}/statics/admin/img/user/user-13.jpg" alt="" />
                     </div>
                     <div class="info">
                         <b class="caret pull-right"></b>
@@ -40,7 +40,7 @@
         <ul class="nav">
             <li class="nav-header">导航</li>
             <li>
-                <a id="sidebarHomeMenu" data-url="<{$myf_path}>/admin/home" class="sidebar-menu" href="#!home">
+                <a id="sidebarHomeMenu" data-url="{$myf_path}/admin/home" class="sidebar-menu" href="#!home">
                     <i class="fa fa-home"></i>
                     <span>主页</span>
                 </a>
@@ -52,20 +52,20 @@
                     <span>内容</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a id="sidebarContentMenu" data-url="<{$myf_path}>/admin/content" class="sidebar-menu" href="#!content">文章管理</a></li>
-                    <li><a id="sidebarPictureMenu" data-url="<{$myf_path}>/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarPictureMenu');">图集管理</a></li>
-                    <li><a id="sidebarVideoMenu" data-url="<{$myf_path}>/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarVideoMenu');">视频管理</a></li>
-                    <li><a id="sidebarAudioMenu" data-url="<{$myf_path}>/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarAudioMenu');">音频管理</a></li>
+                    <li><a id="sidebarContentMenu" data-url="{$myf_path}/admin/content" class="sidebar-menu" href="#!content">文章管理</a></li>
+                    <li><a id="sidebarPictureMenu" data-url="{$myf_path}/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarPictureMenu');">图集管理</a></li>
+                    <li><a id="sidebarVideoMenu" data-url="{$myf_path}/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarVideoMenu');">视频管理</a></li>
+                    <li><a id="sidebarAudioMenu" data-url="{$myf_path}/admin/content" class="sidebar-menu" href="javascript:loadPage('sidebarAudioMenu');">音频管理</a></li>
                 </ul>
             </li>
             <li class="has-sub">
                 <a href="javascript:;">
                     <b class="caret"></b>
-                    <i class="fa fa-cubes"></i>
+                    <i class="fa fa-cube"></i>
                     <span>站点</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a id="sidebarSiteArcType" data-url="<{$myf_path}>/admin/site/arctype" class="sidebar-menu" href="javascript:loadPage('sidebarSiteArcType');">栏目管理</a></li>
+                    <li><a id="sidebarSiteArcType" data-url="{$myf_path}/admin/site/arctype" class="sidebar-menu" href="javascript:loadPage('sidebarSiteArcType');">栏目管理</a></li>
                     <li><a href="table_manage_autofill.html">单页管理</a></li>
                     <li><a href="table_manage_autofill.html">评论管理</a></li>
                     <li><a href="table_manage_autofill.html">友情链接</a></li>
@@ -173,7 +173,7 @@
                     <li><a href="gallery.html">系统基本参数</a></li>
                     <li><a href="gallery_v2.html">角色管理</a></li>
                     <li><a href="gallery_v2.html">管理员管理</a></li>
-                    <li><a id="sidebarSystemMenu" data-url="<{$myf_path}>/admin/system/menu" class="sidebar-menu" href="#!system/menu">系统菜单管理</a></li>
+                    <li><a id="sidebarSystemMenu" data-url="{$myf_path}/admin/system/menu" class="sidebar-menu" href="#!system/menu">系统菜单管理</a></li>
                     <li><a href="gallery_v2.html">系统菜单</a></li>
                     <li><a href="gallery_v2.html">系统日志管理</a></li>
                     <li><a href="gallery_v2.html">验证安全设置</a></li>

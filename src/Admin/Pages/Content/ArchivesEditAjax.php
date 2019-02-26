@@ -12,6 +12,7 @@ namespace FreeCMS\Admin\Pages\Content;
 use FreeCMS\Admin\BaseAdminPage;
 use FreeCMS\Common\Enum\ChannelType;
 use FreeCMS\Common\Enum\EditType;
+use FreeCMS\Common\Exception\FreeCmsException;
 use FreeCMS\Common\Model\CmsAddOnArticleModel;
 use FreeCMS\Common\Model\CmsAddOnImagesModel;
 use FreeCMS\Common\Model\CmsAddOnMediaModel;
@@ -79,7 +80,7 @@ class ArchivesEditAjax extends BaseAdminPage
             $typeModel = new CmsArctypeModel();
             $type = $typeModel->findById($typeid);
             if($type['type']!='list'){
-                MyfException::throwParamExp('所属栏目选择错误');
+                FreeCmsException::throwParamExp('所属栏目选择错误');
             }
             $flags = $_POST["flags"];
             if (empty($flags)) {
@@ -101,7 +102,7 @@ class ArchivesEditAjax extends BaseAdminPage
             }
             $keywords = post('keywords');
             $description = post('description');
-            $body = post('body');
+            $body = post('editorValue');
             $pubtime = post('pubtime',getCurrentTime());
 
             $arcData = [

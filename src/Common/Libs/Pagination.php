@@ -66,22 +66,22 @@ class Pagination
             $firstPageUrl = str_replace('p=%d',"p=1",$this->pageLink);
 //            $prePageUrl = sprintf($this->pageLink, ($this->currentPage - 1));
             $prePageUrl = str_replace('p=%d',"p=".($this->currentPage - 1),$this->pageLink);
-            $html .= sprintf("<li class='paginate_button'><a href='%s'>首页</a></li>", $firstPageUrl);
-            $html .= sprintf("<li class='paginate_button'><a href='%s'>上一页</a></li>", $prePageUrl);
+            $html .= sprintf("<li class='page-item'><a href='%s'>首页</a></li>", $firstPageUrl);
+            //$html .= sprintf("<li class='page-item'><a href='%s'>上一页</a></li>", $prePageUrl);
         } else {
-            $html .= "<li class='paginate_button disabled'><a>首页</a></li>";
-            $html .= "<li class='paginate_button disabled'><a>上一页</a></li>";
+            $html .= "<li class='page-item disabled'><a>首页</a></li>";
+            //$html .= "<li class='page-item disabled'><a>上一页</a></li>";
         }
 
         $ca = $this->calculateCurrentPageNum();
         for ($i = 0; $i < count($ca); $i++) {
             $page = $ca[$i];
             if ($page == $this->currentPage) {
-                $html .= sprintf("<li class='paginate_button active'><a>%d</a></li>", $page);
+                $html .= sprintf("<li class='page-item active'><a>%d</a></li>", $page);
             } else {
 //                $url = sprintf($this->pageLink, $page);
                 $url = str_replace('p=%d',"p=".$page,$this->pageLink);
-                $html .= sprintf("<li class='paginate_button'><a href='%s'>%d</a></li>", $url, $page);
+                $html .= sprintf("<li class='page-item'><a href='%s'>%d</a></li>", $url, $page);
             }
         }
 
@@ -90,11 +90,11 @@ class Pagination
 //            $lastPageUrl = sprintf($this->pageLink, $this->totalPageCount);
 //            $nextPageUrl = sprintf($this->pageLink, ($this->currentPage + 1));
             $nextPageUrl = str_replace('p=%d',"p=".($this->currentPage + 1),$this->pageLink);
-            $html .= sprintf("<li class='paginate_button' ><a href='%s'>下一页</a></li>", $nextPageUrl);
-            $html .= sprintf("<li class='paginate_button'><a href='%s'>末页</a></li>", $lastPageUrl);
+            //$html .= sprintf("<li class='page-item' ><a href='%s'>下一页</a></li>", $nextPageUrl);
+            $html .= sprintf("<li class='page-item'><a href='%s'>末页</a></li>", $lastPageUrl);
         } else {
-            $html .= "<li class='paginate_button disabled'><a>下一页</a></li>";
-            $html .= "<li class='paginate_button disabled'><a>末页</a></li>";
+            //$html .= "<li class='page-item disabled'><a>下一页</a></li>";
+            $html .= "<li class='page-item disabled'><a>末页</a></li>";
         }
         return $html;
     }

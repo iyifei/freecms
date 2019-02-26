@@ -4,7 +4,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-    <{include file='../Common/Head.tpl'}>
+    {include file='../Common/Head.tpl'}
 </head>
 <body class="pace-top bg-white">
 <!-- begin #page-loader -->
@@ -17,7 +17,7 @@
     <div class="login login-with-news-feed">
         <!-- begin news-feed -->
         <div class="news-feed">
-            <div class="news-image" style="background-image: url(<{$myf_path}>/statics/admin/img/login-bg/login-bg-11.jpg)"></div>
+            <div class="news-image" style="background-image: url({$myf_path}/statics/admin/img/login-bg/login-bg-11.jpg)"></div>
             <div class="news-caption">
                 <h4 class="caption-title"><b>FreeCMS</b> 内容管理系统</h4>
                 <p>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="col-6 col-sm-6">
                                 <img id="vdimgck" onclick="changeAuthCode()" style="cursor: pointer;border:1px solid #d3d8de" alt="验证码"
-                                     title="看不清？点击更换" src="<{$myf_path}>/captcha?w=120&h=40&s=25" align="absmiddle">
+                                     title="看不清？点击更换" src="{$myf_path}/captcha?w=120&h=40&s=25" align="absmiddle">
                             </div>
                         </div>
                     </div>
@@ -83,11 +83,11 @@
     </div>
     <!-- end login -->
 
-    <{include file="../Common/Theme.tpl"}>
+    {include file="../Common/Theme.tpl"}
 </div>
 <!-- end page container -->
 
-<{include file="../Common/BaseJs.tpl"}>
+{include file="../Common/BaseJs.tpl"}
 
 <script>
     $(document).ready(function() {

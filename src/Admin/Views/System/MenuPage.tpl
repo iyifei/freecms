@@ -33,7 +33,7 @@
                 <div class="dt-buttons btn-group p-b-15">
                     <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons" href="javascript:FreeCms.batchSave('sortrank');"><span>更新排序</span></a>
                     <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons"
-                       data-href="<{$myf_path}>/admin/system/menu/edit?method=add"
+                       data-href="{$myf_path}/admin/system/menu/edit?method=add"
                        href="javascript:openModel('btnAddTopMenu')"
                        data-title="添加菜单"
                        id="btnAddTopMenu"
@@ -51,59 +51,57 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <{foreach from=$datas key=k item=vo}>
+                    {foreach from=$datas key=k item=vo}
                         <tr>
                             <td width="1%" class="f-s-600 text-inverse">
                                 <input class="left mr10 fm-text sortrank"
-                                       tabindex="<{$k+50}>"
+                                       tabindex="{$k+50}"
                                        autocomplete="off"
                                        style="margin-top: 0;width:30px;text-align: center"  onkeyup="if (isNaN(value)) execCommand('undo')"
                                        onafterpaste="if(isNaN(value))execCommand('undo')"
-                                       name="sortrank_<{$vo.id}>" did="<{$vo.id}>" type="text"  value="<{$vo.sortrank}>">
+                                       name="sortrank_{$vo.id}" did="{$vo.id}" type="text"  value="{$vo.sortrank}">
                             </td>
-                            <td width="1%"><{$vo.id}></td>
+                            <td width="1%">{$vo.id}</td>
                             <td class="myf-td-left">
-                                <{$vo.spacer}><{$vo.name|escape:'html'}>(<{$vo.url|escape:'html'}>)
+                                <i class="{$vo.icon}"></i>
+                                {$vo.spacer}{$vo.name|escape:'html'}({$vo.url|escape:'html'})
                             </td>
                             <td class="">
-                                <{if $vo.ishide eq 1}>
+                                {if $vo.ishide eq 1}
                                     <span class="text-red">隐藏</span>
-                                <{else}>
+                                {else}
                                     <span class="text-green">显示</span>
-                                <{/if}>
+                                {/if}
                             </td>
                             <td class="">
                                 <a title="添加子菜单" data-toggle="tooltip"
-                                   data-href="<{$myf_path}>/admin/system/menu/edit?method=add&pid=<{$vo.id}>"
-                                   href="javascript:openModel('btnAddChild_<{$vo.id}>')"
+                                   data-href="{$myf_path}/admin/system/menu/edit?method=add&pid={$vo.id}"
+                                   href="javascript:openModel('btnAddChild_{$vo.id}')"
                                    data-title="添加菜单"
-                                   id="btnAddChild_<{$vo.id}>" class="btn btn-primary btn-icon btn-circle btn-sm">
+                                   id="btnAddChild_{$vo.id}" class="btn btn-primary btn-icon btn-circle btn-sm">
                                     <i class="fas fa-plus"></i>
                                 </a>
                                 <a title="编辑菜单"  data-toggle="tooltip"
-                                   data-href="<{$myf_path}>/admin/system/menu/edit?method=update&id=<{$vo.id}>"
-                                   href="javascript:openModel('btnEdit_<{$vo.id}>')"
+                                   data-href="{$myf_path}/admin/system/menu/edit?method=update&id={$vo.id}"
+                                   href="javascript:openModel('btnEdit_{$vo.id}')"
                                    data-title="编辑菜单"
-                                   id="btnEdit_<{$vo.id}>" class="btn btn-warning btn-icon btn-circle btn-sm">
+                                   id="btnEdit_{$vo.id}" class="btn btn-warning btn-icon btn-circle btn-sm">
                                     <i class="fas fa-pencil-alt"></i>
                                 </a>
                                 <a title="显示/隐藏"  data-toggle="tooltip"
-                                   href="javascript:FreeCms.oneSave(<{$vo.id}>,'ishide',<{if $vo.ishide eq 1}>0<{else}>1<{/if}>)" id="btnShow" class="btn btn-warning btn-icon btn-circle btn-sm">
-                                    <{if $vo.ishide eq 1}>
+                                   href="javascript:FreeCms.oneSave({$vo.id},'ishide',{if $vo.ishide eq 1}0{else}1{/if})" id="btnShow" class="btn btn-warning btn-icon btn-circle btn-sm">
+                                    {if $vo.ishide eq 1}
                                     <i class="fas fa-eye-slash"></i>
-                                    <{else}>
+                                    {else}
                                     <i class="fas fa-eye"></i>
-                                    <{/if}>
+                                    {/if}
                                 </a>
-                                <{if $vo.id > 55}>
-                                <a href="javascript:FreeCms.deleteRow(<{$vo.id}>);" title="删除"  data-toggle="tooltip"
+                                <a href="javascript:FreeCms.deleteRow({$vo.id});" title="删除"  data-toggle="tooltip"
                                    class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i>
                                 </a>
-                                <{/if}>
-
                             </td>
                         </tr>
-                    <{/foreach}>
+                    {/foreach}
                     </tbody>
                 </table>
                 </div>
@@ -115,8 +113,8 @@
     <!-- end col-10 -->
 </div>
 <!-- end row -->
-<input type="hidden" id="saveUrl" value="<{$myf_path}>/admin/system/menu/save">
-<input type="hidden" id="deleteUrl" value="<{$myf_path}>/admin/system/menu/save">
+<input type="hidden" id="saveUrl" value="{$myf_path}/admin/system/menu/save">
+<input type="hidden" id="deleteUrl" value="{$myf_path}/admin/system/menu/save">
 
 <script type="text/javascript">
     $(function () {

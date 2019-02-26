@@ -23,7 +23,7 @@
         </li>
         <li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="<{$myf_path}>/statics/admin/img/user/user-13.jpg" alt="" />
+                <img src="{$myf_path}/statics/admin/img/user/user-13.jpg" alt="" />
                 <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">

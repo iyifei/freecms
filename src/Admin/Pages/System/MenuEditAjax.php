@@ -60,6 +60,8 @@ class MenuEditAjax extends BaseAdminPage
             $sortrank = getInteger('sortrank',50);
             //是否隐藏
             $ishide = getInteger('ishide');
+            //图标
+            $icon = post('icon');
 
             //级别
             $level = 1;
@@ -78,6 +80,7 @@ class MenuEditAjax extends BaseAdminPage
                 'url'=>$url,
                 'sortrank'=>$sortrank,
                 'ishide'=>$ishide,
+                'icon'=>$icon,
             ];
         }
         switch ($method){

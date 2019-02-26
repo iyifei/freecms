@@ -91,4 +91,70 @@ class Utils
         header('Content-Type:application/json; charset=utf-8');
         exit(json_encode($data));
     }
+
+
+    /**
+     * 读取内容的子类
+     * @param $data
+     * @param int $pid
+     * @param string $pname
+     * @return array
+     */
+    public static function childTree($data, $pid = 0, $pname = "pid")
+    {
+        $tree = array();
+        foreach ($data as $value) {
+            if ($value[$pname] == $pid) {
+                $value["childs"] = self::childTree($data, $value["id"],$pname);
+                $tree[] = $value;
+            }
+        }
+        return $tree;
+    }
+
+
+    /**
+     * 把树变为一级数组
+     * @param $tree
+     * @return array
+     */
+    public static function childRows($tree){
+        $rows = [];
+        foreach ($tree as $item){
+            $rows[]=$item;
+            if(!empty($item['childs'])){
+                $rows = array_merge($rows,self::childRows($item['childs']));
+            }
+        }
+        return $rows;
+
+    }
+
+
+    public static  function removeHtmlStyle($str)
+    {
+        $output = preg_replace('/(<[^>]+) style=".*?"/i', '$1', $str);
+        return $output;
+    }
+
+    public static function removeHtmlAllAttr($html){
+        return preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $html);
+    }
+
+    public static function removeComment($content){
+        $content = str_replace('&#13;','',$content);
+        return preg_replace("/<!--[^\!\[]*?(?<!\/\/)-->/","",$content);
+    }
+
+    /**
+     * Function:compressionHtml
+     * 压缩html
+     *
+     * @param $html
+     *
+     * @return Compression
+     */
+    public static function compressionHtml($html){
+        return (new Compression($html))->getHtml();
+    }
 }

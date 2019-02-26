@@ -4,11 +4,11 @@
     <li class="breadcrumb-item">站点</li>
     <li class="breadcrumb-item">栏目管理</li>
     <li class="breadcrumb-item active">
-        <{if $method eq 'add'}>
+        {if $method eq 'add'}
         添加栏目
-        <{else}>
+        {else}
         修改栏目
-        <{/if}>
+        {/if}
     </li>
 </ol>
 <!-- end breadcrumb -->
@@ -16,11 +16,11 @@
 <h1 class="page-header">
     栏目管理
     <small>
-        <{if $method eq 'add'}>
+        {if $method eq 'add'}
         添加栏目
-        <{else}>
+        {else}
         修改栏目
-        <{/if}>
+        {/if}
     </small>
 </h1>
 
@@ -43,16 +43,16 @@
             <!-- begin panel-body -->
             <div class="panel-body p-30 ">
                 <form autocomplete="off">
-                    <input type="hidden" name="id" value="<{$data.id}>">
-                    <input type="hidden" name="method" value="<{$method}>" />
+                    <input type="hidden" name="id" value="{$data.id}">
+                    <input type="hidden" name="method" value="{$method}" />
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>父级栏目</label>
                         <div class="col-md-9">
                             <select class="form-control" name="pid">
                                 <option value="0">顶级栏目</option>
-                                <{foreach from=$arctypes item=vo}>
-                                    <option value="<{$vo.id}>" <{if $vo.id eq $pid}>selected="selected"<{/if}>>&emsp;<{$vo.spacer}><{$vo.typename}>|<{$vo.channel}></option>
-                                <{/foreach}>
+                                {foreach from=$arctypes item=vo}
+                                    <option value="{$vo.id}" {if $vo.id eq $pid}selected="selected"{/if}>&emsp;{$vo.spacer}{$vo.typename}|{$vo.channel}</option>
+                                {/foreach}
                             </select>
                             <small class="f-s-12 text-grey-darker">选择上级栏目</small>
                         </div>
@@ -61,38 +61,36 @@
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>内容模型</label>
                         <div class="col-md-9">
                             <select  class="form-control" name="channel" id="selChannel" onchange="changeChannel()">
-                                <option <{if $channel eq 'article'}>selected="selected"<{/if}> value="article" >普通文章|article</option>
-                                <option <{if $channel eq 'image'}>selected="selected"<{/if}> value="image"  >图片集|image</option>
-                                <option <{if $channel eq 'video'}>selected="selected"<{/if}> value="video"  >视频集|video</option>
-                                <option <{if $channel eq 'audio'}>selected="selected"<{/if}> value="audio"  >音频集|audio</option>
+                                <option {if $channel eq 'article'}selected="selected"{/if} value="article" >普通文章|article</option>
+                                <option {if $channel eq 'image'}selected="selected"{/if} value="image"  >图片集|image</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>栏目名称</label>
                         <div class="col-md-9">
-                            <input class="form-control" name="typename" type="text" value="<{$data.typename}>" />
+                            <input class="form-control" name="typename" type="text" value="{$data.typename}" />
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>栏目属性</label>
                         <div class="col-md-9">
                             <label><input type="radio" name="type"  value="list" checked="checked">&nbsp;最终列表栏目（允许在本栏目发布文档，并生成文档列表）</label><br>
-                            <label><input type="radio" name="type" <{if $data.type eq 'face'}>checked="checked"<{/if}>  value="face">&nbsp;封面栏目（栏目本身不允许发布文档）</label><br/>
-                            <label><input type="radio" name="type"  <{if $data.type eq 'link'}>checked="checked"<{/if}> value="link">&nbsp;跳转连接（填写在"文件保存目录"处，外部链接：填写网址）</label><br/>
+                            <label><input type="radio" name="type" {if $data.type eq 'face'}checked="checked"{/if}  value="face">&nbsp;封面栏目（栏目本身不允许发布文档）</label><br/>
+                            <label><input type="radio" name="type"  {if $data.type eq 'link'}checked="checked"{/if} value="link">&nbsp;跳转连接（填写在"文件保存目录"处，外部链接：填写网址）</label><br/>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">文件保存目录</label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" value="<{$data.typedir}>" name="typedir" />
+                            <input class="form-control" type="text" value="{$data.typedir}" name="typedir" />
                             <small class="f-s-12 text-grey-darker">不填写时默认是拼音</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">排序</label>
                         <div class="col-md-9">
-                            <input class="form-control" name="sortrank" type="text" value="<{if $data}><{$data.sortrank}><{else}>50<{/if}>" />
+                            <input class="form-control" name="sortrank" type="text" value="{if $data}{$data.sortrank}{else}50{/if}" />
                             <small class="f-s-12 text-grey-darker">越小越靠前</small>
                         </div>
                     </div>
@@ -125,21 +123,21 @@
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">栏目SEO标题</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="seotitle" value="<{$data.seotitle}>" />
+                            <input class="form-control" type="text" name="seotitle" value="{$data.seotitle}" />
                             <small class="f-s-12 text-grey-darker">输入栏目SEO标题</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">栏目关键字</label>
                         <div class="col-sm-9">
-                            <input class="form-control" type="text" name="keywords" value="<{$data.keywords}>" />
+                            <input class="form-control" type="text" name="keywords" value="{$data.keywords}" />
                             <small class="f-s-12 text-grey-darker">多个关键字用逗号隔开</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">栏目描述</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" rows="5" name="description"><{$data.description}></textarea>
+                            <textarea class="form-control" rows="5" name="description">{$data.description}</textarea>
                         </div>
                     </div>
                 </form>
@@ -165,7 +163,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">封面模板</label>
                         <div class="col-sm-9">
-                            <input type="hidden" id="hideSelFace" value="<{$data.tempface}>">
+                            <input type="hidden" id="hideSelFace" value="{$data.tempface}">
                             <select name="tempface" id="selFace"  class="form-control">
                             </select>
                         </div>
@@ -173,7 +171,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">列表模板</label>
                         <div class="col-sm-9">
-                            <input type="hidden" id="hideSelList" value="<{$data.templist}>">
+                            <input type="hidden" id="hideSelList" value="{$data.templist}">
                             <select name="templist" id="selList"  class="form-control">
                             </select>
                         </div>
@@ -181,7 +179,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">内容页模板</label>
                         <div class="col-sm-9">
-                            <input type="hidden" id="hideSelArchive" value="<{$data.temparchive}>">
+                            <input type="hidden" id="hideSelArchive" value="{$data.temparchive}">
                             <select name="temparchive" id="selArchive" class="form-control">
                             </select>
                         </div>
@@ -204,12 +202,12 @@
             </div>
             <!-- end panel-heading -->
             <!-- begin panel-body -->
-            <div class="panel-body" <{if empty($data.extinfo)}>style="display:none"<{/if}>>
+            <div class="panel-body" {if empty($data.extinfo)}style="display:none"{/if}>
                 <form autocomplete="off">
                     <div class="row form-group m-b-10">
                         <label class="col-md-3 col-form-label text-right">扩展属性</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" rows="10" name="extinfo"><{$data.extinfo}></textarea>
+                            <textarea class="form-control" rows="10" name="extinfo">{$data.extinfo}</textarea>
                             <small class="f-s-12 text-grey-darker">输入json格式</small>
                         </div>
                     </div>
@@ -234,8 +232,8 @@
     </div>
 </div>
 
-<input type="hidden" id="submitUrl" value="<{$myf_path}>/admin/site/arctype/save">
-<div style="display: none" id="templatesJson"><{$templatesJson}></div>
+<input type="hidden" id="submitUrl" value="{$myf_path}/admin/site/arctype/save">
+<div style="display: none" id="templatesJson">{$templatesJson}</div>
 
 <script type="text/javascript">
     function changeChannel() {

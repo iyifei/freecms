@@ -4,11 +4,11 @@
     <li class="breadcrumb-item">站点</li>
     <li class="breadcrumb-item">单页管理</li>
     <li class="breadcrumb-item active">
-        <{if $method eq 'add'}>
+        {if $method eq 'add'}
             添加单页
-        <{else}>
+        {else}
             修改单页
-        <{/if}>
+        {/if}
     </li>
 </ol>
 <!-- end breadcrumb -->
@@ -16,11 +16,11 @@
 <h1 class="page-header">
     单页管理
     <small>
-        <{if $method eq 'add'}>
+        {if $method eq 'add'}
         添加单页
-        <{else}>
+        {else}
         修改单页
-        <{/if}>
+        {/if}
     </small>
 </h1>
 
@@ -43,12 +43,12 @@
             <!-- begin panel-body -->
             <div class="panel-body p-30 ">
                 <form autocomplete="off">
-                    <input type="hidden" name="id" value="<{$data.id}>">
-                    <input type="hidden" name="method" value="<{$method}>" />
+                    <input type="hidden" name="id" value="{$data.id}">
+                    <input type="hidden" name="method" value="{$method}" />
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>页面标题</label>
                         <div class="col-md-9">
-                            <input class="form-control" required="required" maxlength="60" id="title" name="title" type="text" size="15" value="<{$data.title}>">
+                            <input class="form-control" required="required" maxlength="60" id="title" name="title" type="text" size="15" value="{$data.title}">
                             <small>输入页面标题，最多60字符</small>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>文件名称</label>
                         <div class="col-md-2" style="vertical-align: center">/pages/</div>
                         <div class="col-md-5">
-                            <input class="form-control" required="required"  maxlength="60" title="filename" name="filename" type="text" value="<{if empty($data)}>newfile<{$filename}><{else}><{$data.filename}><{/if}>">
+                            <input class="form-control" required="required"  maxlength="60" title="filename" name="filename" type="text" value="{if empty($data)}newfile{$filename}{else}{$data.filename}{/if}">
                         </div>
                         <div class="col-md-2">.html</div>
                     </div>
@@ -64,9 +64,9 @@
                         <label class="col-form-label col-md-3 text-right"><span class="text-red">*</span>选择模板</label>
                         <div class="col-md-9">
                             <select name="template" id="template" class="form-control">
-                                <{foreach from=$templates item=vo}>
-                                    <option value="<{$vo}>" <{if $vo eq $selTemplate}>selected="selected"<{/if}>><{$vo}></option>
-                                <{/foreach}>
+                                {foreach from=$templates item=vo}
+                                    <option value="{$vo}" {if $vo eq $selTemplate}selected="selected"{/if}>{$vo}</option>
+                                {/foreach}
                             </select>
                         </div>
                     </div>
@@ -100,34 +100,34 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">排序</label>
                         <div class="col-md-9">
-                            <input class="form-control" name="sortrank" type="text" value="<{if $data}><{$data.sortrank}><{else}>50<{/if}>" />
+                            <input class="form-control" name="sortrank" type="text" value="{if $data}{$data.sortrank}{else}50{/if}" />
                             <small class="f-s-12 text-grey-darker">越小越靠前</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">关联标识</label>
                         <div class="col-sm-9">
-                            <input class="form-control" maxlength="50" name="subgroup" type="text" value="<{if empty($data)}>default<{else}><{$data.subgroup}><{/if}>">
+                            <input class="form-control" maxlength="50" name="subgroup" type="text" value="{if empty($data)}default{else}{$data.subgroup}{/if}">
                             <small class="f-s-12 text-grey-darker">通过这个标识来识别类同页面，模板中用{singlelist id='标识'/}调用有相同标识的页面</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">页面缩略图</label>
                         <div class="col-sm-9">
-                            <input type="hidden" id="txtLitpic" name="litpic" value="<{$data.litpic}>" />
+                            <input type="hidden" id="txtLitpic" name="litpic" value="{$data.litpic}" />
                             <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、gif、png、bmp格式，且大小不能超过1M</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">关键字</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" name="keywords" value="<{$data.keywords}>" />
+                            <input type="text" class="form-control" name="keywords" value="{$data.keywords}" />
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-sm-3 col-form-label text-right">摘要</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" rows="5" name="description"><{$data.description}></textarea>
+                            <textarea class="form-control" rows="5" name="description">{$data.description}</textarea>
                             <textarea name="body" id="editorBody" style="display: none"></textarea>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                 <form autocomplete="off">
                     <div class="form-group row m-b-15">
                         <div class="col-sm-12">
-                            <script id="editor" type="text/plain" style="width:100%;height:400px;"><{$data.body}></script>
+                            <script id="editor" type="text/plain" style="width:100%;height:400px;">{$data.body}</script>
                         </div>
                     </div>
                 </form>
@@ -181,11 +181,11 @@
     </div>
 </div>
 
-<input type="hidden" id="submitUrl" value="<{$myf_path}>/admin/site/page/save">
+<input type="hidden" id="submitUrl" value="{$myf_path}/admin/site/page/save">
 
-<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
-<script type="text/javascript" charset="utf-8" src="<{$myf_path}>/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
 
     var ue = UE.getEditor('editor');

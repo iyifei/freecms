@@ -1,8 +1,10 @@
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
-<link href="<{$myf_path}>/statics/admin/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-<link href="<{$myf_path}>/statics/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-<link href="<{$myf_path}>/statics/admin/css/default/style.min.css" rel="stylesheet" />
-<link href="<{$myf_path}>/statics/admin/css/default/style-responsive.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/animate/animate.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/css/default/style.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/css/default/style-responsive.min.css" rel="stylesheet" />
 <style>
     body {
         font-size: 12px;

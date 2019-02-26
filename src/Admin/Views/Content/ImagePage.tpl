@@ -2,12 +2,12 @@
 <ol class="breadcrumb pull-right">
     <li class="breadcrumb-item">后台</li>
     <li class="breadcrumb-item">内容</li>
-    <li class="breadcrumb-item active">文章管理</li>
+    <li class="breadcrumb-item active">图集管理</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <h1 class="page-header">
-    文章管理
+    图集管理
 </h1>
 <!-- end page-header -->
 
@@ -23,7 +23,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                                 class="fa fa-expand"></i></a>
                 </div>
-                <h4 class="panel-title">网站文章列表</h4>
+                <h4 class="panel-title">网站图集列表</h4>
             </div>
             <!-- end panel-heading -->
 
@@ -35,8 +35,8 @@
                         <div class="dt-buttons btn-group p-b-15">
                             <a class="btn btn-default buttons-html5 btn-sm" tabindex="0"
                                aria-controls="data-table-buttons"
-                               href="#!content/article/edit?method=add"
-                            ><span>录入新文章</span></a>
+                               href="#!content/image/edit?method=add"
+                            ><span>录入新图集</span></a>
                             <a class="btn btn-default buttons-html5 btn-sm" tabindex="0"
                                aria-controls="data-table-buttons"
                                href="javascript:FreeCms.batchDeleteRows();"><span>批量删除</span></a>
@@ -58,7 +58,7 @@
                                id="searchTitle"
                                name="title"
                                class="form-control input-sm"
-                               placeholder="文章标题"
+                               placeholder="图集标题"
                                value="{$res.search.title}"
                                aria-controls="data-table-buttons">
                     </div>
@@ -77,6 +77,7 @@
                             <th width="2%" data-orderable="false">
                                 <input type="checkbox" id="chkAll"/>
                             </th>
+                            <th width="10%" class="text-nowrap ">缩略图</th>
                             <th class="text-nowrap ">文章标题</th>
                             <th width="15%" class="text-nowrap ">栏目</th>
                             <th width="15%" class="text-nowrap ">发布时间</th>
@@ -93,6 +94,9 @@
                                 <td>
                                     <input type="checkbox" id="chkId{$vo.id}" class="chkid" name="arcid[]"
                                            value="{$vo.id}">
+                                </td>
+                                <td>
+                                    <img src="{$vo.litpic}" style="max-height: 50px;max-width: 150px;" />
                                 </td>
                                 <td class="myf-td-left">
                                     {$vo.title|escape:'html'} &nbsp; <span class="text-red">{$vo.flagname}</span>
@@ -111,7 +115,7 @@
                                         <i class="fab fa-html5"></i>
                                     </a>
                                     <a title="编辑" data-toggle="tooltip"
-                                       href="#!content/article/edit?method=update&id={$vo.id}"
+                                       href="#!content/image/edit?method=update&id={$vo.id}"
                                        class="btn btn-warning btn-icon btn-circle btn-sm">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
@@ -136,8 +140,8 @@
 </div>
 
 <!-- end row -->
-<input type="hidden" id="deleteUrl" value="{$myf_path}/admin/content/article/save">
-<input type="hidden" id="saveUrl" value="{$myf_path}/admin/content/article/save">
+<input type="hidden" id="deleteUrl" value="{$myf_path}/admin/image/article/save">
+<input type="hidden" id="saveUrl" value="{$myf_path}/admin/image/article/save">
 <script type="text/javascript">
     $(function () {
         $('[data-toggle="tooltip"]').tooltip({
@@ -147,7 +151,7 @@
         $("#search-btn").click(function () {
             var typeid = $("#selTypeid").val();
             var title = $("#searchTitle").val();
-            var hash = '#!content/article?typeid='+typeid+"&title="+title;
+            var hash = '#!content/image?typeid='+typeid+"&title="+title;
             window.location.hash = hash;
         });
 
