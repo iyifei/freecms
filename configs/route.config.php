@@ -61,6 +61,8 @@ return [
             ['method' => 'GET', 'route' => '/system/role', 'handler' => \FreeCMS\Admin\Pages\System\RolePage::class],
             ['method' => 'GET', 'route' => '/system/role/edit', 'handler' => \FreeCMS\Admin\Pages\System\RoleEditPage::class],
             ['method' => 'POST', 'route' => '/system/role/save', 'handler' => \FreeCMS\Admin\Pages\System\RoleEditAjax::class],
+            //登录日志
+            ['method' => 'GET', 'route' => '/system/logs', 'handler' => \FreeCMS\Admin\Pages\System\LoginLogPage::class],
         ]
     ]
 ];

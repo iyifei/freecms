@@ -14,6 +14,9 @@
 
 <link href="{$myf_path}/statics/admin/plugins/gritter/css/jquery.gritter.css" rel="stylesheet" />
 <link href="{$myf_path}/statics/admin/plugins/jquery-toast/jquery.toast.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
 <!-- ================== END BASE CSS STYLE ================== -->
 
 <!-- ================== BEGIN BASE JS ================== -->
