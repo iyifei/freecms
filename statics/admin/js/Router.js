@@ -59,9 +59,11 @@
         var self = this;
 
         var hash = window.location.hash.replace('#' + self.key, '');
-        console.log("hash:"+hash);
         var addrs = hash.split('?')[0].split('/');
-        var addr = addrs[0]+'/'+addrs[1];
+        var addr = addrs[0];
+        if(addrs.length>1){
+            addr+='/'+addrs[1]
+        }
         var cb = getCb(addr, self.hashList);
         if(cb != false) {
             var callback = cb.callback;

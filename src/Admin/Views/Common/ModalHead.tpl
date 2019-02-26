@@ -5,6 +5,7 @@
 <link href="{$myf_path}/statics/admin/plugins/animate/animate.min.css" rel="stylesheet" />
 <link href="{$myf_path}/statics/admin/css/default/style.min.css" rel="stylesheet" />
 <link href="{$myf_path}/statics/admin/css/default/style-responsive.min.css" rel="stylesheet" />
+<link href="{$myf_path}/statics/admin/css/default/theme/default.css" rel="stylesheet" id="theme" />
 <style>
     body {
         font-size: 12px;

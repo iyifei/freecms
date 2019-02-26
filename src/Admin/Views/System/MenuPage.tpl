@@ -117,8 +117,5 @@
 <input type="hidden" id="deleteUrl" value="{$myf_path}/admin/system/menu/save">
 
 <script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
 </script>
 

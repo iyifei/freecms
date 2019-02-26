@@ -140,9 +140,6 @@
 <input type="hidden" id="saveUrl" value="{$myf_path}/admin/content/article/save">
 <script type="text/javascript">
     $(function () {
-        $('[data-toggle="tooltip"]').tooltip({
-            container: '#data-table-buttons'
-        })
 
         $("#search-btn").click(function () {
             var typeid = $("#selTypeid").val();

@@ -113,8 +113,5 @@
 <input type="hidden" id="deleteUrl" value="{$myf_path}/admin/site/arctype/save">
 <input type="hidden" id="saveUrl" value="{$myf_path}/admin/site/arctype/save">
 <script type="text/javascript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
 </script>
 

@@ -49,12 +49,18 @@ return [
             ['method' => 'POST', 'route' => '/content/{channel}/save', 'handler' => \FreeCMS\Admin\Pages\Content\ArchivesEditAjax::class],
             ['method' => 'GET', 'route' => '/content/article', 'handler' => \FreeCMS\Admin\Pages\Content\ArticlePage::class],
             ['method' => 'GET', 'route' => '/content/article/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ArticleEditPage::class],
-            ['method' => 'GET', 'route' => '/content/video', 'handler' => \FreeCMS\Admin\Pages\Content\VideoPage::class],
-            ['method' => 'GET', 'route' => '/content/video/edit', 'handler' => \FreeCMS\Admin\Pages\Content\VideoEditPage::class],
-            ['method' => 'GET', 'route' => '/content/audio', 'handler' => \FreeCMS\Admin\Pages\Content\AudioPage::class],
-            ['method' => 'GET', 'route' => '/content/audio/edit', 'handler' => \FreeCMS\Admin\Pages\Content\AudioEditPage::class],
             ['method' => 'GET', 'route' => '/content/image', 'handler' => \FreeCMS\Admin\Pages\Content\ImagePage::class],
             ['method' => 'GET', 'route' => '/content/image/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ImageEditPage::class],
+
+            //管理员管理
+            ['method' => 'GET', 'route' => '/system/admin', 'handler' => \FreeCMS\Admin\Pages\System\AdminPage::class],
+            ['method' => 'GET', 'route' => '/system/admin/edit', 'handler' => \FreeCMS\Admin\Pages\System\AdminEditPage::class],
+            ['method' => 'POST', 'route' => '/system/admin/save', 'handler' => \FreeCMS\Admin\Pages\System\AdminEditAjax::class],
+
+            //角色管理
+            ['method' => 'GET', 'route' => '/system/role', 'handler' => \FreeCMS\Admin\Pages\System\RolePage::class],
+            ['method' => 'GET', 'route' => '/system/role/edit', 'handler' => \FreeCMS\Admin\Pages\System\RoleEditPage::class],
+            ['method' => 'POST', 'route' => '/system/role/save', 'handler' => \FreeCMS\Admin\Pages\System\RoleEditAjax::class],
         ]
     ]
 ];
