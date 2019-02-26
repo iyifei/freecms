@@ -63,6 +63,11 @@ return [
             ['method' => 'POST', 'route' => '/system/role/save', 'handler' => \FreeCMS\Admin\Pages\System\RoleEditAjax::class],
             //登录日志
             ['method' => 'GET', 'route' => '/system/logs', 'handler' => \FreeCMS\Admin\Pages\System\LoginLogPage::class],
+
+            //模板管理
+            ['method' => 'GET', 'route' => '/template/template', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplatePage::class],
+            ['method' => 'GET', 'route' => '/template/template/edit', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplateEditPage::class],
+            ['method' => 'POST', 'route' => '/template/template/save', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplateEditAjax::class],
         ]
     ]
 ];
