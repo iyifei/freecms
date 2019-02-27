@@ -99,9 +99,10 @@
                         <label class="col-form-label col-md-3 text-right">文章缩略图</label>
                         <div class="col-md-9">
                             <input type="hidden" id="txtLitpic" name="litpic" value="{$data.litpic}" />
-                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="simpleUpload()">
+                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="FreeCms.simpleUpload()">
                             <img src="{if !empty($data.litpic)}{$data.litpic}{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.litpic)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
                             <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($data.litpic)} style="display: none"{/if}>删除图片</a>
+                            <br/>
                             <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、gif、png、bmp格式，且大小不能超过1M</small>
                         </div>
                     </div>
@@ -223,41 +224,28 @@
 </div>
 
 <input type="hidden" id="submitUrl" value="{$myf_path}/admin/content/article/save">
-<script id='Ueditor' style='display:none'></script>
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
     var ue = UE.getEditor('editor');
 
+    FreeCms.initUploadEditor();
+
     function callbackSaveSuccess() {
         FreeCms.callbackEditSaveSuccess();
     }
 
-    //是否上传单张图片
-    var singleImage = false;
-    //图片上传
-    var _editor = UE.getEditor('Ueditor');
-    _editor.ready(function () {
-        //设置编辑器不可用
-        //_editor.setDisabled();  这个地方要注意 一定要屏蔽
-        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
-        _editor.hide();
-        //侦听图片上传
-        _editor.addListener('beforeinsertimage', function (t, arg) {
-            if(singleImage){
-                var src = arg[0].src;
-                $("#txtLitpic").val(src);
-                $("#imgFile").attr('src',src).show();
-                $("#delete_attach").show();
-            }
-        })
-    });
+    function uploadSingleImageCallbackFun(src) {
+        $("#txtLitpic").val(src);
+        $("#imgFile").attr('src',src).show();
+        $("#delete_attach").show();
+    }
 
-    function simpleUpload() {
-        singleImage = true;
-        var myImage = _editor.getDialog("insertimage");
-        myImage.open();
+    function deleteLitpic() {
+        $("#txtLitpic").val('');
+        $("#imgFile").attr('src','').hide();
+        $("#delete_attach").hide();
     }
 </script>
 

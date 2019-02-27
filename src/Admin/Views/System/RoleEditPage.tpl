@@ -4,7 +4,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-   {include file="../Common/ModalHead.tpl"}
+   {include file="../Common/Head.tpl"}
     <link href="{$myf_path}/statics/admin/plugins/jstree/dist/themes/default/style.min.css" rel="stylesheet" />
 </head>
 <body style="background: none">

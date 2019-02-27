@@ -22,4 +22,4 @@
 <script src="{$myf_path}/statics/admin/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
 <script src="{$myf_path}/statics/admin/js/Router.js"></script>
 <script src="{$myf_path}/statics/admin/js/FreeCms.js"></script>
-
+<script id='freeCmsImageEditor' style='display:none'></script>

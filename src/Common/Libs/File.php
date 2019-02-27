@@ -79,7 +79,7 @@ class File
                 if (is_dir($pathdir . '/' . $a) && ($a != '.') && ($a != '..')) {//如果是目录
                     if (!self::isEmptyDir($pathdir . '/' . $a)) {//是否为空
                         //如果不是，调用自身，不过是原来的路径+他下级的目录名
-                        self::deltree($pathdir . '/' . $a);
+                        self::deleteTree($pathdir . '/' . $a);
                     }
                     if (self::isEmptyDir($pathdir . '/' . $a)) {//如果是空就直接删除
                         @rmdir($pathdir . '/' . $a);

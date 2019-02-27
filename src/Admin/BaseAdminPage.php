@@ -89,5 +89,38 @@ abstract class BaseAdminPage extends Page
         return SYS_PATH.'/themes/'.config('base.theme');
     }
 
+    /**
+     * Function:getCurrentTheme
+     * 获取当前模板名称
+     *
+     * @return string
+     */
+    protected function getCurrentTheme(){
+        return config('base.theme');
+    }
+
+
+    /**
+     * 基础模板
+     */
+    protected function defaultTemplates() {
+        $templates = array();
+        $templates[] = array("filename" => "index.tpl", "info" => "首页模板");
+        $templates[] = array("filename" => "top.tpl", "info" => "顶部通用模板");
+        $templates[] = array("filename" => "bottom.tpl", "info" => "底部通用模板");
+
+        $templates[] = array("filename" => "article_face_default.tpl", "info" => "文章封面页模板");
+        $templates[] = array("filename" => "article_list_default.tpl", "info" => "文章列表页模板");
+        $templates[] = array("filename" => "article_archive_default.tpl", "info" => "文章内容页模板");
+
+        $templates[] = array("filename" => "image_list_default.tpl", "info" => "图片列表页模板");
+        $templates[] = array("filename" => "image_archive_default.tpl", "info" => "图片内容页模板");
+        $templates[] = array("filename" => "image_face_default.tpl", "info" => "图片封面页模板");
+
+        $templates[] = array("filename" => "single_default.tpl", "info" => "单页模板");
+        $templates[] = array("filename" => "search_default.tpl", "info" => "搜索模板");
+        return $templates;
+    }
+
 
 }

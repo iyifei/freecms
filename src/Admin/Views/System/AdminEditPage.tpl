@@ -4,7 +4,7 @@
 <html lang="en">
 <!--<![endif]-->
 <head>
-   {include file="../Common/ModalHead.tpl"}
+   {include file="../Common/Head.tpl"}
 </head>
 <body style="background: none">
     <!-- begin #content -->

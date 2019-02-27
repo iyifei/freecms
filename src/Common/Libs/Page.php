@@ -49,6 +49,24 @@ abstract class Page
         $this->smarty->assign($tpl_var,$value,$nocache);
     }
 
+    /**
+     * Function:clearCurrentCache
+     * 清理当前模板缓存
+     *
+     * @param null $template
+     *
+     * @return void
+     */
+    public function clearCurrentCache($template=null){
+        if(!isset($template)){
+            $className = get_class($this);
+            $names = explode('\\',$className);
+            unset($names[0],$names[1],$names[2]);
+            $template = join('/',$names).'.tpl';
+        }
+        $this->smarty->clearCache($template);
+    }
+
 
     /**
      * 渲染模板

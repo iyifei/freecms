@@ -106,10 +106,18 @@
                         <label class="col-form-label col-md-3 text-right">图集缩略图</label>
                         <div class="col-md-9">
                             <input type="hidden" id="txtLitpic" name="litpic" value="{$data.litpic}" />
-                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="simpleUpload()">
+                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="FreeCms.simpleUpload()">
                             <img src="{if !empty($data.litpic)}{$data.litpic}{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.litpic)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
                             <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($data.litpic)} style="display: none"{/if}>删除图片</a>
+                            <br/>
                             <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、gif、png、bmp格式，且大小不能超过1M</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row m-b-15">
+                        <label class="col-form-label col-md-3 text-right">图片集</label>
+                        <div class="col-md-9">
+                            <input type="button" id="myEditorImage" onclick="FreeCms.upImages();" class="btn btn-default" value="批量上传图集">
                         </div>
                     </div>
                 </form>
@@ -196,7 +204,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-warning"
                        data-click="panel-collapse"><i class="fa fa-minus"></i></a>
                 </div>
-                <h4 class="panel-title">上传图集</h4>
+                <h4 class="panel-title">批量上传的图片预览区</h4>
             </div>
             <!-- end panel-heading -->
             <!-- begin panel-body -->
@@ -204,15 +212,7 @@
                 <form autocomplete="off">
 
                     <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 text-right">图片集</label>
-                        <div class="col-md-9">
-                            <input type="button" id="myEditorImage" onclick="upImage();" class="btn btn-default" value="批量上传图集">
-                        </div>
-                    </div>
-
-                    <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 text-right">图片预览区</label>
-                        <div class="col-md-9">
+                        <div class="col-md">
                             <div id="J_imageView" class="myf-image-view clearfix">
                             </div>
                             <textarea id="txtImage" style="display: none" name="images">{$data.addOnImage.images}</textarea>
@@ -271,7 +271,6 @@
     </div>
 </div>
 
-<script id='Ueditor' style='display:none'></script>
 <input type="hidden" id="submitUrl" value="{$myf_path}/admin/content/image/save">
 
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
@@ -280,50 +279,26 @@
 <script type="text/javascript">
     var ue = UE.getEditor('editor');
 
+    FreeCms.initUploadEditor();
+
     function callbackSaveSuccess() {
         FreeCms.callbackEditSaveSuccess();
     }
 
-    //是否上传单张图片
-    var singleImage = false;
-    //图片上传
-    var _editor = UE.getEditor('Ueditor');
-    _editor.ready(function () {
-        //设置编辑器不可用
-        //_editor.setDisabled();  这个地方要注意 一定要屏蔽
-        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
-        _editor.hide();
-        //侦听图片上传
-        _editor.addListener('beforeinsertimage', function (t, arg) {
-            if(singleImage){
-                var src = arg[0].src;
-                $("#txtLitpic").val(src);
-                $("#imgFile").attr('src',src).show();
-                $("#delete_attach").show();
-            }else{
-                for(var a in arg){
-                    var src =arg[a].src;
-                    appendImage(src,src,'');
-                }
-            }
-        })
-
-    });
-    //弹出图片上传的对话框
-    function upImage() {
-        singleImage = false;
-        var myImage = _editor.getDialog("insertimage");
-        myImage.open();
+    function uploadSingleImageCallbackFun(src) {
+        $("#txtLitpic").val(src);
+        $("#imgFile").attr('src',src).show();
+        $("#delete_attach").show();
     }
 
-    function simpleUpload() {
-        singleImage = true;
-        var myImage = _editor.getDialog("insertimage");
-        myImage.open();
+    function uploadImageCallbackFun(picArr) {
+        for(var i=0;i<picArr.length;i++){
+            var src = picArr[i];
+            appendImage(src,src,'');
+        }
     }
 
     var picindex = 1;
-
     /**
      *追加到图片预览区域
      */

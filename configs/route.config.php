@@ -68,6 +68,13 @@ return [
             ['method' => 'GET', 'route' => '/template/template', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplatePage::class],
             ['method' => 'GET', 'route' => '/template/template/edit', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplateEditPage::class],
             ['method' => 'POST', 'route' => '/template/template/save', 'handler' =>  \FreeCMS\Admin\Pages\Template\TemplateEditAjax::class],
+            //主题管理
+            ['method' => 'GET', 'route' => '/template/theme', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemePage::class],
+            ['method' => 'GET', 'route' => '/template/theme/edit', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeEditPage::class],
+            ['method' => 'POST', 'route' => '/template/theme/save', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeEditAjax::class],
+            ['method' => 'POST', 'route' => '/template/theme/operate', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeOperateAjax::class],
+            ['method' => 'GET', 'route' => '/template/theme/export', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeExportPage::class],
+
         ]
     ]
 ];
