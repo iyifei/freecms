@@ -87,6 +87,9 @@
                     Have a meeting with sales team
                     <span class="badge f-w-500 bg-gradient-blue f-s-10">2:45 pm</span>
                 </a>
+                <a href="javascript:;" class="list-group-item d-flex justify-content-between align-items-center text-ellipsis">
+                    {$cloud_token}
+                </a>
             </div>
         </div>
         <!-- end panel -->

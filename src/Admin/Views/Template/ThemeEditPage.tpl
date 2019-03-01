@@ -58,7 +58,7 @@
                         <label class="col-form-label col-md-3"><span class="text-red">*</span>模板缩略图</label>
                         <div class="col-md-9">
                             <input type="hidden" id="txtLitpic" name="litpic" value="{$data.litpic}" />
-                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="FreeCms.simpleUpload()">
+                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片">
                             <img src="{if !empty($data.litpic)}{$data.litpic}{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.litpic)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
                             <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($data.litpic)} style="display: none"{/if}>删除图片</a>
                             <br/>
@@ -79,17 +79,15 @@
     </div>
 
     <input type="hidden" id="submitUrl" value="{$myf_path}/admin/template/theme/save">
+
     <!-- end #content -->
     <!-- end page container -->
     {include file="../Common/BaseJs.tpl"}
 
-    <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
-    <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
-
     <script>
 
-        FreeCms.initUploadEditor();
+        FreeCms.initUploader('uploadFile');
+
 
         function submitForm() {
             FreeCms.doEditSubmit();
@@ -99,8 +97,9 @@
             window.parent.successCallback();
         }
 
-        function uploadSingleImageCallbackFun(src) {
-            $("#txtLitpic").val(src);
+        function uploadCallback(data) {
+            var src = data.url+"?thumbnail=h-90";
+            $("#txtLitpic").val(data.key);
             $("#imgFile").attr('src',src).show();
             $("#delete_attach").show();
         }

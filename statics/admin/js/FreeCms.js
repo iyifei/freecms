@@ -257,51 +257,45 @@ FreeCms.callbackEditSaveSuccess = function() {
     },500);
 }
 
-//上传图片
-FreeCms._imageEditor=null;
-FreeCms._uploadSingleImage = false;
-FreeCms.initUploadEditor = function () {
-    //图片上传
-    FreeCms._imageEditor = UE.getEditor('freeCmsImageEditor');
-    FreeCms._imageEditor.ready(function () {
-        //设置编辑器不可用
-        //_editor.setDisabled();  这个地方要注意 一定要屏蔽
-        //隐藏编辑器，因为不会用到这个编辑器实例，所以要隐藏
-        FreeCms._imageEditor.hide();
-        //侦听图片上传
-        FreeCms._imageEditor.addListener('beforeinsertimage', function (t, arg) {
-            if(FreeCms._uploadSingleImage){
-                var src = arg[0].src;
-                if(typeof uploadSingleImageCallbackFun === 'function'){
-                    uploadSingleImageCallbackFun(src);
+
+FreeCms._uploaders = [];
+FreeCms.initUploader = function(btnId){
+    var uploadUrl = $("#uploadFileUrl").val();
+    FreeCms._uploaders[btnId] = new plupload.Uploader({
+        multi_selection: false,
+        file_data_name:"file",
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: btnId, // you can pass an id...
+        url: uploadUrl,
+        flash_swf_url: '/statics/admin/plugins/plupload/Moxie.swf',
+        silverlight_xap_url: '/statics/admin/plugins/plupload/Moxie.xap',
+        filters: {
+            max_file_size: '2mb'
+        },
+        init: {
+            'FilesAdded':function () {
+                FreeCms._uploaders[btnId].start();
+            },
+            'BeforeUpload': function (up, file) {
+                //重置key
+                var newName = "media/file/" + file.name;
+                var params = up.settings.multipart_params;
+                params.key = newName;
+
+            },
+            'FileUploaded': function (up, file, info) {
+                var res = $.parseJSON(info.response);
+                var data = res.data;
+                //回调
+                if(typeof uploadCallback === 'function'){
+                    uploadCallback(data,btnId);
                 }
-            }else{
-                var list = [];
-                for(var a in arg){
-                    var src =arg[a].src;
-                    list.push(src);
-                }
-                if(typeof uploadImageCallbackFun === 'function'){
-                    uploadImageCallbackFun(list);
-                }
+
+            },
+            'UploadComplete': function () {
             }
-        })
+        }
     });
-}
 
-FreeCms.simpleUpload = function () {
-    FreeCms._uploadSingleImage = true;
-    var myImage = FreeCms._imageEditor.getDialog("insertimage");
-    myImage.open();
-}
-
-FreeCms.upImages = function () {
-    FreeCms._uploadSingleImage = false;
-    var myImage = FreeCms._imageEditor.getDialog("insertimage");
-    myImage.open();
-}
-
-FreeCms.upFile = function () {
-    var myFiles = FreeCms._imageEditor.getDialog("attachment");
-    myFiles.open();
+    FreeCms._uploaders[btnId].init();
 }

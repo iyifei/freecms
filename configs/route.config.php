@@ -74,7 +74,23 @@ return [
             ['method' => 'POST', 'route' => '/template/theme/save', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeEditAjax::class],
             ['method' => 'POST', 'route' => '/template/theme/operate', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeOperateAjax::class],
             ['method' => 'GET', 'route' => '/template/theme/export', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeExportPage::class],
-
+        ],
+        //**********************云存储*********************//
+        'cloud'=>[
+                //上传媒体
+                ['method' => ['POST','OPTIONS'], 'route' => '/upload', 'handler' => \FreeCMS\Storage\Pages\UploadAjax::class],
+                //删除资源
+                ['method' => 'POST', 'route' => '/delete', 'handler' => \FreeCMS\Storage\Pages\DeleteAjax::class],
+                //测试配置
+                ['method' => 'POST', 'route' => '/test', 'handler' => \FreeCMS\Storage\Pages\TestAjax::class],
+                //上传单个文件
+                ['method' => 'GET', 'route' => '/uploadFile', 'handler' => \FreeCMS\Storage\Pages\UploadFilePage::class],
+                //批量上传图片
+                ['method' => 'GET', 'route' => '/uploadFiles', 'handler' => \FreeCMS\Storage\Pages\UploadFilesPage::class],
         ]
+    ],
+    'notFound'=>[
+        //未找到返回的页面
+        'cloud'=>\FreeCMS\Storage\Pages\IndexAjax::class,
     ]
 ];

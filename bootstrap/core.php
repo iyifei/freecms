@@ -117,8 +117,14 @@ if (IS_CLI) {
 
         if ($routeInfo[0] == Dispatcher::NOT_FOUND) {
             if (isset($route['notFound'])) {
-                $handler = $route['notFound'];
-                $vars = $uri;
+                $uris = explode('/',ltrim($uri,'/'));
+                if(isset($uris[0]) && key_exists($uris[0],$route['notFound'])){
+                    $handler = $route['notFound'][$uris[0]];
+                    unset($uris[0]);
+                    $vars = join('/',$uris);
+                }else{
+                    http_response_code(404);
+                }
             } else {
                 if (defined('ERROR_FILE')) {
                     $error = file_get_contents(ERROR_FILE);

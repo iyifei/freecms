@@ -32,6 +32,10 @@
                    data-title="创建新主题"
                    id="btnAddTheme"
                 ><span>创建新主题</span></a>
+                <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons"
+                   id="btnImportTheme"
+                   href="javascript:doUploadFile('image');"
+                ><span>上传导入主题</span></a>
             </div>
 
             <!-- begin result-list -->
@@ -54,7 +58,7 @@
                             <a data-href="{$myf_path}/admin/template/theme/edit?theme={$vo.theme}&method=update"
                                href="javascript:openModel('btnEdit_{$vo.theme}')"
                                data-title="编辑主题"
-                               id="btnEdit_{$vo.id}"
+                               id="btnEdit_{$vo.theme}"
                                title="编辑主题" data-container="body"><i class="fas fa-pencil-alt"></i></a>
                             <a href="{$vo.web|escape:'html'}" target="_blank" title="官方网站" data-toggle="tooltip" data-container="body" data-title="Analytics"><i class="fas fa-home"></i></a>
                             <a href="https://bbs.freecms.com.cn" target="_blank" title="论坛交流" data-toggle="tooltip" data-container="body" data-title="Tasks"><i class="fas fa-comments"></i></a>
@@ -84,10 +88,10 @@
 </div>
 <!-- end row -->
 
-<div style="display: none">{$currTime}</div>
 <input type="hidden" id="operateUrl" value="{$myf_path}/admin/template/theme/operate">
 
 <script type="text/javascript">
+
     function operateTheme(theme,type) {
         var url = $("#operateUrl").val();
         var data =  {
@@ -106,6 +110,11 @@
                 }
             }, 'json');
         })
+    }
+
+    function uploadCallback(data) {
+        console.log(data);
+        successCallback();
     }
 
 </script>

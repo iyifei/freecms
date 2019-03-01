@@ -99,8 +99,8 @@
                         <label class="col-form-label col-md-3 text-right">文章缩略图</label>
                         <div class="col-md-9">
                             <input type="hidden" id="txtLitpic" name="litpic" value="{$data.litpic}" />
-                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片" onclick="FreeCms.simpleUpload()">
-                            <img src="{if !empty($data.litpic)}{$data.litpic}{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.litpic)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
+                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片">
+                            <img src="{if !empty($data.litpic)}{$myf_path}/cloud/{$data.litpic}?thumbnail=h-90{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.litpic)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
                             <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($data.litpic)} style="display: none"{/if}>删除图片</a>
                             <br/>
                             <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、gif、png、bmp格式，且大小不能超过1M</small>
@@ -222,24 +222,36 @@
         </div>
     </div>
 </div>
-
 <input type="hidden" id="submitUrl" value="{$myf_path}/admin/content/article/save">
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.js"> </script>
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
-    var ue = UE.getEditor('editor');
 
-    FreeCms.initUploadEditor();
+    var ue = UE.getEditor('editor');
+    var insertImageBtnId ;
+    ue.ready(function () {
+        insertImageBtnId = $(".edui-for-insertfreecmsimage").attr("id");
+        FreeCms.initUploader(insertImageBtnId);
+    });
+
+    FreeCms.initUploader('uploadFile');
+
 
     function callbackSaveSuccess() {
         FreeCms.callbackEditSaveSuccess();
     }
 
-    function uploadSingleImageCallbackFun(src) {
-        $("#txtLitpic").val(src);
-        $("#imgFile").attr('src',src).show();
-        $("#delete_attach").show();
+    function uploadCallback(data,btnId) {
+        if(btnId == insertImageBtnId){
+            var img = "<img src='"+ data.url +"' />";
+            ue.setContent(img,true);
+        }else{
+            var src = data.url+"?thumbnail=h-90";
+            $("#txtLitpic").val(data.key);
+            $("#imgFile").attr('src',src).show();
+            $("#delete_attach").show();
+        }
     }
 
     function deleteLitpic() {

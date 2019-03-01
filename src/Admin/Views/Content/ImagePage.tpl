@@ -96,7 +96,7 @@
                                            value="{$vo.id}">
                                 </td>
                                 <td>
-                                    <img src="{$vo.litpic}" style="max-height: 50px;max-width: 150px;" />
+                                    <img src="{$myf_path}/cloud/{$vo.litpic}?thumbnail=h-90" style="max-height: 50px;max-width: 150px;" />
                                 </td>
                                 <td class="myf-td-left">
                                     {$vo.title|escape:'html'} &nbsp; <span class="text-red">{$vo.flagname}</span>

@@ -365,7 +365,7 @@ function checkEmail($email)
 function getHeader($name, $headers = null)
 {
     if (!isset($headers)) {
-        $headers = getAllHeaders();
+        $headers = getFreeCmcAllHeaders();
     }
     if (isset($headers[$name])) {
         return $headers[$name];
@@ -379,7 +379,7 @@ function getHeader($name, $headers = null)
  *
  * @return array
  */
-function getAllHeaders()
+function getFreeCmcAllHeaders()
 {
     $headers = [];
     foreach ($_SERVER as $name => $value) {
@@ -693,4 +693,37 @@ function fun_adm_each(&$array){
         $res = false;
     }
     return $res;
+}
+
+
+//获取本机oss访问域名地址
+function getLocalOssDomain(){
+    $url = getCurrentDomain().'/cloud';
+    return $url;
+}
+
+//获取当前域名地址
+function getCurrentDomain(){
+    $current_url = 'http://';
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') {
+        $current_url = 'https://';
+    }
+    if ($_SERVER['SERVER_PORT'] != '80') {
+        $current_url .= $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'];
+    } else {
+        $current_url .= $_SERVER['SERVER_NAME'];
+    }
+    return $current_url;
+}
+
+//替换一次
+function str_replace_once($needle, $replace, $haystack) {
+    // Looks for the first occurence of $needle in $haystack
+    // and replaces it with $replace.
+    $pos = strpos($haystack, $needle);
+    if ($pos === false) {
+        // Nothing found
+        return $haystack;
+    }
+    return substr_replace($haystack, $replace, $pos, strlen($needle));
 }

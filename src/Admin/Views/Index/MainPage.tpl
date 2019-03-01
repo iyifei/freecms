@@ -49,6 +49,24 @@
     </div>
 </div>
 
+<div class="modal fade" id="uploadModel"  tabindex="-1" style="display: none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">上传文件</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <iframe id="uploadModelFrame" type="text/html" width="100%" height="180" src="" frameborder="0" allowfullscreen=""></iframe>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:;" class="btn btn-white" data-dismiss="modal">关闭</a>
+                <a href="javascript:doUploadSubmit();" class="btn btn-primary">确定上传</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     $(document).ready(function() {
         App.init();
@@ -129,6 +147,20 @@
             hash = hash.split('?')[0];
             window.location.hash=hash+'?'+Date.parse(new Date());
         },500);
+    }
+
+
+    function doUploadFile(type) {
+        var src = '{$myf_path}/cloud/uploadFile?type='+type;
+        $('#uploadModel').modal('show');
+        $('#uploadModel iframe').attr('src', src);
+    }
+
+    function doUploadSubmit() {
+        var subWin = window.frames['uploadModelFrame'].contentWindow;
+        if(typeof(subWin.doUploadFile)==='function'){
+            subWin.doUploadFile();
+        }
     }
 </script>
 </body>

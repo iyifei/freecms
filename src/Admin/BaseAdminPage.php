@@ -3,6 +3,7 @@ namespace FreeCMS\Admin;
 
 use FreeCMS\Common\Libs\Page;
 use FreeCMS\Common\Libs\Tree;
+use FreeCMS\Common\Libs\Utils;
 use FreeCMS\Common\Model\CmsMenuModel;
 
 /**
@@ -13,6 +14,9 @@ use FreeCMS\Common\Model\CmsMenuModel;
  */
 abstract class BaseAdminPage extends Page
 {
+
+
+    const CLOUD_TOKEN_KEY = 'FreeCMS_Cloud_Token';
 
     public function __construct()
     {
@@ -31,6 +35,13 @@ abstract class BaseAdminPage extends Page
     protected function declarations(){
         $route = $this->getRoute();
         $this->assign('route',$route);
+
+        $token = session(self::CLOUD_TOKEN_KEY);
+        if(empty($token)){
+            $token = Utils::getUUID();
+            session(self::CLOUD_TOKEN_KEY,$token);
+        }
+        $this->assign('uploadFileUrl',getLocalOssDomain().'/upload?token='.$token);
     }
 
     //执行前处理

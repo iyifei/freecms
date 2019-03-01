@@ -73,7 +73,7 @@ class Logger
      * @return array
      */
     public static function getLogHeaders(){
-        $httpHeaders = getAllHeaders();
+        $httpHeaders = getFreeCmcAllHeaders();
         //需要过滤的header信息
         $hideKeys = [
             'connection','content-length','origin','content-type','accept','accept-encoding','accept-language'

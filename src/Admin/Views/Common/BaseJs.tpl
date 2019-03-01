@@ -20,6 +20,11 @@
 <script src="{$myf_path}/statics/admin/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js" charset="UTF-8"></script>
 <script src="{$myf_path}/statics/admin/plugins/bootstrap-daterangepicker/moment.js"></script>
 <script src="{$myf_path}/statics/admin/plugins/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+<script type="text/javascript" src="{$myf_path}/statics/admin/plugins/plupload/plupload.full.min.js"></script>
+
 <script src="{$myf_path}/statics/admin/js/Router.js"></script>
 <script src="{$myf_path}/statics/admin/js/FreeCms.js"></script>
+<input type="hidden" id="uploadFileUrl" value="{$uploadFileUrl}">
 <script id='freeCmsImageEditor' style='display:none'></script>
+

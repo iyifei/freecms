@@ -10,6 +10,7 @@ namespace FreeCMS\Admin\Pages\Index;
 
 
 use FreeCMS\Admin\BaseAdminPage;
+use FreeCMS\Common\Libs\Utils;
 
 class HomePage extends BaseAdminPage
 {
@@ -21,6 +22,9 @@ class HomePage extends BaseAdminPage
      */
     function execute($vars = [])
     {
+        $token = Utils::getUUID();
+        session('FreeCMS_Cloud_Token',$token);
+        $this->assign('cloud_token',$token);
         $this->display();
     }
 }
