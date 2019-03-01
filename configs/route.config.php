@@ -13,6 +13,8 @@ return [
             ['method' => 'GET', 'route' => '/install','handler' => \FreeCMS\Admin\Pages\Install\StepPage::class],
             //验证码
             ['method' => 'GET', 'route' => '/captcha','handler' => \FreeCMS\Www\Pages\Index\CaptchaPage::class],
+            //首页
+            ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Www\Pages\Index\IndexPage::class],
         ],
         //**********************管理后台*********************//
         'admin'=>[

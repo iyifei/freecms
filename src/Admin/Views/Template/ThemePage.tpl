@@ -34,7 +34,7 @@
                 ><span>创建新主题</span></a>
                 <a class="btn btn-default buttons-html5 btn-sm" tabindex="0" aria-controls="data-table-buttons"
                    id="btnImportTheme"
-                   href="javascript:doUploadFile('image');"
+                   href="javascript:doUploadFile('zip');"
                 ><span>上传导入主题</span></a>
             </div>
 

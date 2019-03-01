@@ -2,7 +2,7 @@
 <div id="header" class="header navbar-default">
     <!-- begin navbar-header -->
     <div class="navbar-header">
-        <a href="index.html" class="navbar-brand"><span class="navbar-logo"></span> <b>FreeCMS</b>内容管理系统</a>
+        <a href="{$myf_path}/admin#!home" class="navbar-brand"><span class="navbar-logo"></span> <b>FreeCMS</b>内容管理系统</a>
         <button type="button" class="navbar-toggle" data-click="sidebar-toggled">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>

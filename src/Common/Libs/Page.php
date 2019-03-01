@@ -25,7 +25,7 @@ abstract class Page
     }
 
     protected function initSmarty(){
-        $this->smarty = new \Smarty();
+        $this->smarty = new FreeCmsSmarty();
         $this->smarty->left_delimiter = '{';
         $this->smarty->right_delimiter = '}';
         //smt缓存路径
