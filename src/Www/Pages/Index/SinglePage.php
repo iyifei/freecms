@@ -26,13 +26,14 @@ class SinglePage extends BaseWwwPage
         if(!empty($name)){
             $model = new CmsPageModel();
             $row = $model->where('filename=:filename',['filename'=>$name])->findFirst();
-            $row['pageurl']=sprintf("pages/%s.html",$row['filename']);
+            $row['pageurl']=sprintf("/pages/%s.html",$row['filename']);
+            $row['fullurl']=getCurrentDomain().$row['pageurl'];
             //缩略图
             if (!empty($row['litpic'])) {
                 $ossDomain = getLocalOssDomain();
                 $thumbnail = getDefaultThumbnailConfig();
-                $item['thumbnail']=sprintf("%s/%s?thumbnail=w-%d/h-%d",$ossDomain,$row['litpic'],$thumbnail['width'],$thumbnail['height']);
-                $item['imgurl'] = sprintf("%s/%s", $ossDomain, $item['litpic']);
+                $row['thumbnail']=sprintf("%s/%s?thumbnail=w-%d/h-%d",$ossDomain,$row['litpic'],$thumbnail['width'],$thumbnail['height']);
+                $row['imgurl'] = sprintf("%s/%s", $ossDomain, $row['litpic']);
             }
             $title = $row['title'];
             $this->assign('title',$title);

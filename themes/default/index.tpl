@@ -30,5 +30,24 @@
     {/channel}
 </ul>
 
+<h3>单页</h3>
+{single id='page'}
+    <li><a target="_blank" href="{$page.pageurl}">{$page.title}</a> </li>
+{/single}
+
+<h3>搜索</h3>
+<form>
+    <input type="text" name="keyword" autocomplete="off" id="txtSearchKey"> <input type="button" id="btnSearch" value="搜索">
+</form>
+<script type="text/javascript" src="{$cms_theme_path}/public/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+    $("#btnSearch").click(function () {
+        var keyword = $("#txtSearchKey").val();
+        if(keyword!=''){
+            var url  = "{$myf_path}/search?keyword="+keyword;
+            window.location.href = url;
+        }
+    })
+</script>
 </body>
 </html>

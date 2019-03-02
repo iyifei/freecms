@@ -15,6 +15,8 @@ return [
             ['method' => 'GET', 'route' => '/captcha','handler' => \FreeCMS\Www\Pages\Index\CaptchaPage::class],
             //首页
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Www\Pages\Index\IndexPage::class],
+            //搜索
+            ['method' => 'GET', 'route' => '/search', 'handler' => \FreeCMS\Www\Pages\Index\SearchPage::class],
             //单页详情
             ['method' => 'GET', 'route' => '/pages/{name}.html', 'handler' => \FreeCMS\Www\Pages\Index\SinglePage::class],
             //文档详情页

@@ -22,14 +22,11 @@ class SearchPage extends BaseWwwPage
      */
     function execute($vars = [])
     {
-        $keyword = $vars['keyword'];
-        if(empty($keyword)){
-            $keyword = get('keyword');
-        }
+        $keyword = get('keyword');
         if(!empty($keyword)){
-            $keyword =strip_tags($vars['keyword']);
+            $keyword =strip_tags($keyword);
+            $typedir = strip_tags(get('typedir'));
             $typeid = 0;
-            $typedir = strip_tags($vars['typedir']);
             if(!empty($typedir)){
                 $typeModel = new CmsArctypeModel();
                 $type = $typeModel->field('id')->where('typedir=:typedir',['typedir'=>$typedir])->findFirst();
