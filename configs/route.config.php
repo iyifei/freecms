@@ -15,6 +15,14 @@ return [
             ['method' => 'GET', 'route' => '/captcha','handler' => \FreeCMS\Www\Pages\Index\CaptchaPage::class],
             //首页
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Www\Pages\Index\IndexPage::class],
+            //单页详情
+            ['method' => 'GET', 'route' => '/pages/{name}.html', 'handler' => \FreeCMS\Www\Pages\Index\SinglePage::class],
+            //文档详情页
+            ['method' => 'GET', 'route' => '/archives/{hash}.html', 'handler' => \FreeCMS\Www\Pages\Index\ArchivesPage::class],
+            //文档属性获取
+            ['method' => 'GET', 'route' => '/archives/{type}/{hash}', 'handler' => \FreeCMS\Www\Pages\Index\ArchiveAjax::class],
+            //列表页
+            ['method' => 'GET', 'route' => '/{channel:list|image|video|article}/{typedir}', 'handler' => \FreeCMS\Www\Pages\Index\ListPage::class],
         ],
         //**********************管理后台*********************//
         'admin'=>[

@@ -26,6 +26,12 @@ abstract class BaseWwwPage extends Page
         parent::beforeExecute();
 
         $this->smarty->addPluginsDir(APP_PATH.'/SmartyPlugins');
+        $theme = config('base.theme');
+        $this->smarty->assign('cms_theme_path',getBaseURL().'/themes/'.$theme);
+        //模板路径
+        $tplDir = SYS_PATH.'/themes/'.$theme.'/';
+        $this->smarty->setTemplateDir($tplDir);
+        $this->assign('freecms_year',date("Y"));
     }
 
 }

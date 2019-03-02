@@ -1,15 +1,5 @@
 <?php
 
-
-/**
- * 参考：https://blog.csdn.net/the_victory/article/details/51044444
- * Class [${NAME}]
- * 文章读取标签
- * author minyifei
- * date 2019/3/1
- */
-
-
 /**
  * Function:smarty_block_arclist
  * 描述
@@ -19,13 +9,13 @@
  * @param \FreeCMS\Common\Libs\FreeCmsSmarty $smarty
  * @param $repeat
  *
- * @return void
+ * @return voidx
  */
-function smarty_block_arclist($params,$content,&$smarty,&$repeat){
+function smarty_block_x($params,$content,&$smarty,&$repeat){
     $dataIndex = md5(__FUNCTION__ . md5(serialize($params)));
     $data = $smarty->getBlockData($dataIndex);
     if(!isset($data)){
-        $rows = (new \FreeCMS\Common\Model\CmsArchivesModel())->findAll();
+        $rows =[]; //(new \FreeCMS\Common\Model\CmsArchivesModel())->limit(1,5)->findAll();
         $smarty->setBlockData($dataIndex,$rows);
         $data = $rows;
     }
@@ -41,6 +31,7 @@ function smarty_block_arclist($params,$content,&$smarty,&$repeat){
         }
         $repeat = true;
     }else{
+        $smarty->setBlockData($dataIndex,null);
         $repeat = false;
     }
     echo $content;

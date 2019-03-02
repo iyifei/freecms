@@ -21,6 +21,7 @@ class IndexPage extends BaseWwwPage
      */
     function execute($vars = [])
     {
-        $this->display();
+        $filename = 'index.tpl';
+        $this->display($filename);
     }
 }

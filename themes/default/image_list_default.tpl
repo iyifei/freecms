@@ -1,49 +1,37 @@
-        {include file="top.html"}
-            <div class="clearfix">
-            	<div class="cleft">
-            		<div class="pnews">
-            			<h3>
-            				{$myfcms.typename}
-            			</h3>
-            			<ul class="clearfix">
-            				{list pagesize="20" id="arc" key="k"}
-							<li><a href="{$arc.arcurl}" title="{$arc.title}" target="_blank"><i style="width: 150px; height: 110px; overflow: hidden;"><img src="{$arc.litpic|default:"$myf_theme_path/public/images/nopic.jpg"}" alt="{$arc.title}" width="150" height="110"></i><b>{$arc.title}</b></a></li>
-							{/list}
-		       		    </ul>
-            		</div>
-        			<div id="pager" class="clearfix">
-						{pagelist pagesize="20"} 
-        			</div>
-            		<div class="sectioncenter">
-            		</div>
-            	</div>
-            	<div class="cright">
-            		<div class="ritem">
-            			<h3 class="title">
-            				最新资讯
-            			</h3>
-            			<ul class="t clearfix">
-            				{arclist id="arc" limit="2" flag="p"}
-							<li><a href="{$arc.arcurl}" target="_blank" title="{$arc.title}"><i style="width: 124px; height: 92px; overflow: hidden;"><img src="{$arc.litpic|default:"$myf_theme_path/public/images/nopic.jpg"}"  width="124" height="92" alt="{$arc.title}"></i><b>{$arc.title}</b></a></li>
-							{/arclist}
-			            </ul>
-			            <ul class="b">
-			            	{arclist id="arc" limit="5" index="1"}
-							<li><a href="{$arc.arcurl}" target="_blank" title="{$arc.title}">{$arc.title}</a></li>
-							{/arclist}
-			            </ul>
-            		</div>
-            		<div class="ritem">
-            			<h3 class="title">
-            				热点新闻
-            			</h3>
-            			<ul class="hnews">
-            				{arclist id="arc" limit="10" order="click desc"}
-							<li><a href="{$arc.arcurl}" target="_blank" title="{$arc.title}">{$arc.title}</a></li>
-							{/arclist}
-            			</ul>
-            		</div>
-            	</div>
-            </div>
-        </div>
-       {include file="bottom.html"}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<title>{$freecms.title}</title>
+	<meta name="description" content="{$freecms.description}"/>
+	<meta name="keywords" content="{$freecms.keywords}"/>
+</head>
+
+<body>
+<h1>图片栏目：{$freecms.title}</h1>
+<ul class="viewlist clearfix">
+    {list pagesize="2" id="vo" key="k"}
+		<li>
+			<div class="viewpostviews">
+				<img src="{if !empty($vo.thumbnail)}{$vo.thumbnail}{else}{$cms_theme_path}/public/images/nopic.jpg{/if}"/>
+			</div>
+			<div class="postentry">
+				<div class="listtitle"><h3><a target="_blank" title="{$vo.title}" href="{$vo.arcurl}">{$vo.title}</a>
+					</h3></div>
+				<p class="infor">{$vo.description}</p>
+				<p class="meta">
+					<span class="cmts">分类：<a href="{$vo.typeurl}">{$vo.typename}</a></span>
+					<span class="cmts">标签：{$vo.keywords}</span>
+					<span>时间：{$vo.pubtime}</span>
+					<span>来源: {$vo.source}</span>
+				</p>
+			</div>
+		</li>
+    {/list}
+</ul>
+<div id="pager" class="clearfix">
+    {pagination pagesize="2"}
+</div>
+</body>
+</html>

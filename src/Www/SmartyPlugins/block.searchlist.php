@@ -1,32 +1,41 @@
 <?php
 
-
 /**
- * 参考：https://blog.csdn.net/the_victory/article/details/51044444
- * Class [${NAME}]
- * 文章读取标签
- * author minyifei
- * date 2019/3/1
- */
-
-
-/**
- * Function:smarty_block_arclist
- * 文章读取标签
+ * Function:smarty_block_searchlist
+ * 搜索文章列表
  *
  * @param array $params 参数
  * @param $content
  * @param \FreeCMS\Common\Libs\FreeCmsSmarty $smarty
  * @param $repeat
  *
- * @return void
+ * @return voidx
  */
-function smarty_block_arclist($params,$content,&$smarty,&$repeat){
-    //循环id
-    $params['id'] = getParamsValue($params, 'id', 'arc');
+function smarty_block_searchlist($params,$content,&$smarty,&$repeat){
+    //获取列表页当前栏目信息
+    @$type = get_object_vars($smarty->tpl_vars["freecms"]);
+    $freecms = $type["value"];
 
+    $wheres = [];
+    $bind = [];
+    //循环id
+    $params['id'] = getParamsValue($params,'id','arc');
+    //每页返回记录数
+    $params['pagesize']=intval(getParamsValue($params,'pagesize',20));
+    $params["page"] = intval($freecms["page"]);
+    $params['keyword']=$freecms['keyword'];
+    //栏目id
+    $params['typeid']=intval($freecms['typeid'],0);
+    if($params['typeid']>0){
+        $wheres[]='typeid=:typeid';
+        $bind['typeid']=$params['typeid'];
+    }
+    if(!empty($params['keyword'])){
+        $wheres[]="title like :keyword";
+        $bind['keyword']="%{$params['keyword']}%";
+    }
     //index
-    $keyIndex = getParamsValue($params, 'key', 'k');
+    $keyIndex = getParamsValue($params,'key','k');
 
     //排序字段
     $orderBy = getParamsValue($params, 'orderby', 'id');
@@ -39,91 +48,35 @@ function smarty_block_arclist($params,$content,&$smarty,&$repeat){
         $orderWay = 'desc';
     }
 
-    //模型
-    $channel = getParamsValue($params, 'channel', 'article');
-    if (!in_array($channel, ['article', 'image'])) {
-        $channel = 'article';
-    }
-
     //标题长度
     $titleLength = intval(getParamsValue($params, 'titlelen', 0));
     //描述长度
     $infoLength = intval(getParamsValue($params, 'infolen', 0));
     //缩略图宽度
-    $imgWidth = intval(getParamsValue($params, 'imgwidth', 120));
+    $imgWidth = intval(getParamsValue($params,'imgwidth',120));
     //缩略图高度
-    $imgHeight = intval(getParamsValue($params, 'imgheight', 90));
-
-    //查询条件
-    $where = 'channel=:channel';
-    $bind = ['channel' => $channel];
-
-    //栏目
-    $typeid = getParamsValue($params, 'typeid');
-    //顶部栏目
-    $topid = getParamsValue($params,'topid');
-
-    //文章属性
-    $flag = getParamsValue($params, 'flag');
-    if (isset($flag)) {
-        $where .= ' AND FIND_IN_SET(:flag,flag)';
-        $bind['flag'] = $flag;
-    }
-
-    //读取多少条数据,默认读取十条数据，用法:limit="10,20"或者limit="10"
-    $limit = getParamsValue($params, 'limit');
-    if (empty($limit)) {
-        $limit = 10;
-    }
-
-
+    $imgHeight = intval(getParamsValue($params,'imgheight',90));
     $dataIndex = md5(__FUNCTION__ . md5(serialize($params)));
     $data = $smarty->getBlockData($dataIndex);
     if(!isset($data)){
-        //栏目id
-        if (isset($typeid) && !empty($typeid)) {
-            $typeids = explode(',', $typeid);
-            $typeIdArr = [];
-            foreach ($typeids as $tid) {
-                if (intval($tid) > 0) {
-                    $typeIdArr[] = intval($tid);
-                }
-            }
-            $getallDefault = 0;
-            if(isset($topid)){
-                $typeIdArr[]=intval($topid);
-                $getallDefault = 1;
-            }
-            if (!empty($typeIdArr)) {
-                $typeIdArr = array_unique($typeIdArr);
-                //查询所有下级栏目
-                $getall = getParamsValue($params, 'getall', $getallDefault);
-                if ($getall == 1) {
-                    $typeModel = new \FreeCMS\Common\Model\CmsArctypeModel();
-                    $typeIdArr = $typeModel->findChildIds($typeIdArr);
-                }
-                $where .= ' AND typeid in(:typeids)';
-                $bind['typeids'] = join(',', $typeIdArr);
-            }
+        //读取第几页
+        $page = $params["page"];
+        if ($page <= 1) {
+            $page = 1;
         }
-        //读取文章记录
+        $start = ($page - 1) * $params['pagesize'];
         $arcModel = new \FreeCMS\Common\Model\CmsArchivesModel();
-        if (isset($limit)) {
-            if (is_numeric($limit)) {
-                $arcModel = $arcModel->limit(intval($limit));
-            } else {
-                $limits = explode(',', $limit);
-                if (count($limits) == 2) {
-                    $arcModel = $arcModel->limit(
-                        intval($limits[0]), intval($limits[1])
-                    );
-                }
-            }
+
+        $arcModel = $arcModel->link('arctype')
+                             ->orderBy(sprintf("%s %s", $orderBy, $orderWay))
+                             ->limit($start,$params['pagesize']);
+        if(!empty($wheres)){
+            $where = join(' AND ',$wheres);
+            $arcModel = $arcModel->where($where,$bind);
+            $rows = $arcModel->findAll();
+        }else{
+            $rows=[];
         }
-        $rows = $arcModel->link('arctype')
-                         ->where($where, $bind)
-                         ->orderBy(sprintf("%s %s", $orderBy, $orderWay))
-                         ->findAll();
         if(!empty($rows)){
             $smarty->setBlockData($dataIndex,$rows);
             $data = $rows;
@@ -146,7 +99,7 @@ function smarty_block_arclist($params,$content,&$smarty,&$repeat){
         $typeurl = sprintf('%s/list/%s', getBaseURL(), $typedir);
         if($arctype['channel']=='blend'){
             //混合模式
-            $typeurl = sprintf("%s/%s/%s",getBaseURL(),$channel,$typedir);
+            $typeurl = sprintf("%s/%s/%s",getBaseURL(),$item['channel'],$typedir);
         }
         //文章访问路径
         $arcurl = sprintf("%s/archives/%s.html",getBaseURL(),\FreeCMS\Common\Libs\IdHash::encode($aid));
@@ -182,8 +135,9 @@ function smarty_block_arclist($params,$content,&$smarty,&$repeat){
         }
         if (!empty($item['extinfo'])) {
             $extInfo = json_decode($item['extinfo'], true);
-            $item['extinfo'] = $extInfo;
+            $item['ext'] = $extInfo;
         }
+
         $smarty->assign($params['id'],$item);
         if(count($data)==0){
             $smarty->setBlockData($dataIndex,false);
@@ -192,8 +146,8 @@ function smarty_block_arclist($params,$content,&$smarty,&$repeat){
         }
         $repeat = true;
     }else{
-        $repeat = false;
         $smarty->setBlockData($dataIndex,null);
+        $repeat = false;
     }
     echo $content;
 }

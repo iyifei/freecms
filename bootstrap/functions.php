@@ -702,6 +702,11 @@ function getLocalOssDomain(){
     return $url;
 }
 
+//获取默认缩略图配置
+function getDefaultThumbnailConfig(){
+    return config('base.thumbnail');
+}
+
 //获取当前域名地址
 function getCurrentDomain(){
     $current_url = 'http://';
