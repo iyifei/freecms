@@ -51,6 +51,10 @@ return [
             ['method' => 'GET', 'route' => '/system/menu', 'handler' => \FreeCMS\Admin\Pages\System\MenuPage::class],
             ['method' => 'GET', 'route' => '/system/menu/edit', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditPage::class],
             ['method' => 'POST', 'route' => '/system/menu/save', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
+            //配置
+            ['method' => 'GET', 'route' => '/system/config', 'handler' => \FreeCMS\Admin\Pages\System\ConfigPage::class],
+            ['method' => 'GET', 'route' => '/system/config/edit', 'handler' => \FreeCMS\Admin\Pages\System\ConfigEditPage::class],
+            ['method' => 'POST', 'route' => '/system/config/save', 'handler' => \FreeCMS\Admin\Pages\System\ConfigEditAjax::class],
 
             //单页管理
             ['method' => 'GET', 'route' => '/site/page', 'handler' => \FreeCMS\Admin\Pages\Site\SinglePage::class],

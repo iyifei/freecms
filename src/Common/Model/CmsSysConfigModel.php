@@ -32,4 +32,12 @@ class CmsSysConfigModel extends Model
         return $data;
     }
 
+    //更新缓存
+    public function updateCacheConfigs(){
+        $name = 'sys_config';
+        $rows = $this->findAll();
+        $data = array_column($rows,null,'varname');
+        File::writeArrayCache($name,$data);
+    }
+
 }
