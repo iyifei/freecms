@@ -732,3 +732,16 @@ function str_replace_once($needle, $replace, $haystack) {
     }
     return substr_replace($haystack, $replace, $pos, strlen($needle));
 }
+
+/**
+ * Function:half_replace
+ * 中间几位字符替换为*
+ *
+ * @param $str
+ *
+ * @return mixed
+ */
+function half_replace($str){
+    $len = strlen($str)/2;
+    return substr_replace($str,str_repeat('*',$len),ceil(($len)/2),$len);
+}

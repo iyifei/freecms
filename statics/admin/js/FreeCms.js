@@ -31,6 +31,9 @@ FreeCms.doEditSubmit=function () {
                 }
             } else {
                 FreeCms.error(result.errmsg);
+                if(typeof  callbackSaveFail === 'function'){
+                    callbackSaveFail();
+                }
             }
         }, 'json');
     }
@@ -257,7 +260,17 @@ FreeCms.callbackEditSaveSuccess = function() {
     },500);
 }
 
+//检测邮箱格式
+FreeCms.checkEmail = function (email) {
+    var reg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+    if(!reg.test(email)){
+        return false;
+    }else{
+        return true;
+    }
+}
 
+//上传
 FreeCms._uploaders = [];
 FreeCms.initUploader = function(btnId){
     var uploadUrl = $("#uploadFileUrl").val();

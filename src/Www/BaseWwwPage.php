@@ -32,6 +32,10 @@ abstract class BaseWwwPage extends Page
         $tplDir = SYS_PATH.'/themes/'.$theme.'/';
         $this->smarty->setTemplateDir($tplDir);
         $this->assign('freecms_year',date("Y"));
+
+        //会员
+        $member = session('current_member');
+        $this->assign('CurrentMember',$member);
     }
 
 }

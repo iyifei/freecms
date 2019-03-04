@@ -23,6 +23,8 @@ return [
             ['method' => 'GET', 'route' => '/archives/{hash}.html', 'handler' => \FreeCMS\Www\Pages\Index\ArchivesPage::class],
             //文档属性获取
             ['method' => 'GET', 'route' => '/archives/{type}/{hash}', 'handler' => \FreeCMS\Www\Pages\Index\ArchiveAjax::class],
+            //发布评论
+            ['method' => 'POST', 'route' => '/archives/feedback/{arcid}','handler' => \FreeCMS\Www\Pages\Index\FeedbackAjax::class],
             //列表页
             ['method' => 'GET', 'route' => '/{channel:list|image|video|article}/{typedir}', 'handler' => \FreeCMS\Www\Pages\Index\ListPage::class],
         ],
@@ -99,7 +101,20 @@ return [
                 ['method' => 'GET', 'route' => '/uploadFile', 'handler' => \FreeCMS\Storage\Pages\UploadFilePage::class],
                 //批量上传图片
                 ['method' => 'GET', 'route' => '/uploadFiles', 'handler' => \FreeCMS\Storage\Pages\UploadFilesPage::class],
-        ]
+        ],
+        //**********************会员中心*********************//
+        'member'=>[
+            //登录
+            ['method' => 'GET', 'route' => '/login','handler' => \FreeCMS\Member\Pages\Index\LoginPage::class],
+            ['method' => 'POST', 'route' => '/login','handler' => \FreeCMS\Member\Pages\Index\LoginAjax::class],
+            //注册
+            ['method' => 'GET', 'route' => '/register','handler' => \FreeCMS\Member\Pages\Index\RegisterPage::class],
+            ['method' => 'POST', 'route' => '/register','handler' => \FreeCMS\Member\Pages\Index\RegisterAjax::class],
+            //框架主页
+            ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Member\Pages\Index\MainPage::class],
+            //主页
+            ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Member\Pages\Index\HomePage::class],
+        ],
     ],
     'notFound'=>[
         //未找到返回的页面

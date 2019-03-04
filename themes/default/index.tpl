@@ -10,6 +10,8 @@
 </head>
 
 <body>
+{include file='top.tpl'}
+
 <h1>首页</h1>
 <ul>
     {channel id="arctype"}

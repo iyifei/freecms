@@ -9,6 +9,7 @@
 </head>
 
 <body>
+{include file='top.tpl'}
 <h1>{$freecms.title}</h1>
 <div class="clearfix">
     <div class="cleft">
@@ -43,5 +44,69 @@
         </div>
     </div>
 </div>
+
+<h3>评论</h3>
+<div>
+<ul>
+    {feedback id='fd' pagesize='2'}
+        <li>
+            <p>昵称：{$fd.uname|escape:'html'}</p>
+            <p>时间：{$fd.dtime}</p>
+            <p>内容:{$fd.content|escape:'html'}</p>
+        </li>
+    {/feedback}
+</ul>
+    <div id="pager" class="clearfix">
+        {feedbackpagination pagesize="2"}
+    </div>
+</div>
+<div>
+    <form id="feedbackForm" autocomplete="off">
+        <input type="hidden" id="feedbackUrl" value="{$myf_path}/archives/feedback/{$freecms.enId}">
+        <p><textarea style="width:300px;" name="feedback" rows="5" id="txtFeedback"></textarea></p>
+        <p>
+                <input type="text" name="vcode" id="txtVcode" maxlength="4" class="form-control form-control-lg" placeholder="验证码" required />
+                <img id="vdimgck" onclick="changeAuthCode()" style="cursor: pointer;border:1px solid #d3d8de" alt="验证码"
+                     title="看不清？点击更换" src="{$myf_path}/captcha?w=80&h=30&s=16" align="absmiddle">
+        </p>
+        <input type="button" id="btnFeedback" value="发布评论">
+    </form>
+</div>
+<script type="text/javascript" src="{$cms_theme_path}/public/js/jquery-1.8.1.min.js"></script>
+<script type="text/javascript">
+    $("#btnFeedback").click(function () {
+        var url = $("#feedbackUrl").val();
+        $.post(url, serializeObject($("#feedbackForm")), function (result) {
+            //成功
+            if (result.status == 0) {
+                window.location.reload();
+            } else {
+                alert(result.errmsg);
+            }
+        }, 'json');
+    })
+
+    function serializeObject(form) {
+        var o = {
+        };
+        $.each(form.serializeArray(), function (index) {
+            if (this['value'] != undefined && this['value'].length > 0) {
+                // 如果表单项的值非空，才进行序列化操作
+                if (o[this['name']]) {
+                    o[this['name']] = o[this['name']] + "," + this['value'];
+                } else {
+                    o[this['name']] = this['value'];
+                }
+            }
+        });
+        return o;
+    }
+
+    function changeAuthCode() {
+        var picsrc = $("#vdimgck").attr("src");
+        $("#vdimgck").attr("src", picsrc);
+        $("#txtVcode").val('');
+    }
+</script>
 </body>
 </html>
