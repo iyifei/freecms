@@ -1,13 +1,13 @@
 <!-- begin breadcrumb -->
 <ol class="breadcrumb pull-right">
     <li class="breadcrumb-item">后台</li>
-    <li class="breadcrumb-item">内容</li>
-    <li class="breadcrumb-item active">文章管理</li>
+    <li class="breadcrumb-item">站点</li>
+    <li class="breadcrumb-item active">评论管理</li>
 </ol>
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <h1 class="page-header">
-    文章管理
+    评论管理
 </h1>
 <!-- end page-header -->
 
@@ -23,7 +23,7 @@
                     <a href="javascript:;" class="btn btn-xs btn-icon btn-circle btn-default" data-click="panel-expand"><i
                                 class="fa fa-expand"></i></a>
                 </div>
-                <h4 class="panel-title">网站文章列表</h4>
+                <h4 class="panel-title">文档评论列表</h4>
             </div>
             <!-- end panel-heading -->
 
@@ -35,22 +35,8 @@
                         <div class="dt-buttons btn-group p-b-15">
                             <a class="btn btn-default buttons-html5 btn-sm" tabindex="0"
                                aria-controls="data-table-buttons"
-                               href="#!content/article/edit?method=add"
-                            ><span>录入新文章</span></a>
-                            <a class="btn btn-default buttons-html5 btn-sm" tabindex="0"
-                               aria-controls="data-table-buttons"
                                href="javascript:FreeCms.batchDeleteRows();"><span>批量删除</span></a>
                         </div>
-                    </div>
-                    <div class="col-sm-2">
-                        <select  class="form-control"  name="typeid" id="selTypeid">
-                            <option value="0">请选择所属栏目...</option>
-                            {foreach from=$res.arctypes item=vo}
-                                <option value="{$vo.id}" {if $vo.id eq $res.search.typeid}selected="selected"{/if}>
-                                    {$vo.spacer}{$vo.typename}
-                                </option>
-                            {/foreach}
-                        </select>
                     </div>
                     <div class="col-sm-2">
                         <input type="search"
@@ -78,11 +64,11 @@
                                 <input type="checkbox" id="chkAll"/>
                             </th>
                             <th class="text-nowrap ">文章标题</th>
-                            <th width="15%" class="text-nowrap ">栏目</th>
-                            <th width="15%" class="text-nowrap ">发布时间</th>
-                            <th width="10%" class="text-nowrap ">浏览/好评/差评</th>
-                            <th width="10%" class="text-nowrap ">评论</th>
-                            <th width="20%" class="text-nowrap ">操作</th>
+                            <th class="text-nowrap ">评论内容</th>
+                            <th width="10%" class="text-nowrap ">状态</th>
+                            <th width="15%" class="text-nowrap ">评论人</th>
+                            <th width="15%" class="text-nowrap ">评论时间</th>
+                            <th width="10%" class="text-nowrap ">操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -95,30 +81,29 @@
                                     <input type="checkbox" id="chkId{$vo.id}" class="chkid" name="arcid[]"
                                            value="{$vo.id}">
                                 </td>
-                                <td class="myf-td-left">
-                                    {$vo.title|escape:'html'} &nbsp; <span class="text-red">{$vo.flagname}</span>
-                                </td>
-                                <td><a href="{$myf_path}/admin#!content/article?typeid={$vo.typeid}"
-                                       title="查看该栏目下的文章">{$vo.arctype.typename|escape:'html'}</a></td>
                                 <td>
-                                    {$vo.dtime|date_format:"%Y-%m-%d"}
+                                    <a href="{$myf_path}/archives/{$vo.arcEnId}.html" target="_blank"
+                                       title="预览文章内容">{$vo.atitle|escape:'html'}</a>
                                 </td>
                                 <td>
-                                    {$vo.click}/{$vo.goodpost}/{$vo.badpost}
+                                    {$vo.content|escape:'html'}
                                 </td>
                                 <td>
-                                    <a href="{$myf_path}/admin#!site/feedback?aid={$vo.id}">{$vo.feedbackcount}</a>
+                                    {if $vo.ischeck eq 1}
+                                        <span class="text-green">显示</span>
+                                    {else}
+                                        <span class="text-red">隐藏</span>
+                                    {/if}
                                 </td>
+                                <td>
+                                    {$vo.muserid|escape:'html'}{if !empty($vo.uname)}({$vo.uname}){/if}<br/>
+                                    IP:<a title="查询IP地址" href="https://www.ip.cn/index.php?ip={$vo.ip}" target="_blank">{$vo.ip}</a>
+                                </td>
+                                <td>
+                                    {$vo.dtime}
+                                </td>
+
                                 <td class="">
-                                    <a title="预览" target="_blank" data-toggle="tooltip" href="{$myf_path}/archives/{$vo.enId}.html"
-                                       class="btn btn-green btn-icon btn-circle btn-sm">
-                                        <i class="fab fa-html5"></i>
-                                    </a>
-                                    <a title="编辑" data-toggle="tooltip"
-                                       href="{$myf_path}/admin#!content/article/edit?method=update&id={$vo.id}"
-                                       class="btn btn-warning btn-icon btn-circle btn-sm">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a>
                                     <a title="删除" data-toggle="tooltip" href="javascript:FreeCms.deleteRow({$vo.id});"
                                        class="btn btn-danger btn-icon btn-circle btn-sm"><i class="fa fa-times"></i></a>
                                 </td>
@@ -140,15 +125,14 @@
 </div>
 
 <!-- end row -->
-<input type="hidden" id="deleteUrl" value="{$myf_path}/admin/content/article/save">
-<input type="hidden" id="saveUrl" value="{$myf_path}/admin/content/article/save">
+<input type="hidden" id="deleteUrl" value="{$myf_path}/admin/site/feedback/save">
+<input type="hidden" id="saveUrl" value="{$myf_path}/admin/site/feedback/save">
 <script type="text/javascript">
     $(function () {
 
         $("#search-btn").click(function () {
-            var typeid = $("#selTypeid").val();
             var title = $("#searchTitle").val();
-            var hash = '#!content/article?typeid='+typeid+"&title="+title;
+            var hash = '#!site/feedback?&title='+title;
             window.location.hash = hash;
         });
 

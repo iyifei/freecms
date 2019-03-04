@@ -22,7 +22,7 @@ return [
             //文档详情页
             ['method' => 'GET', 'route' => '/archives/{hash}.html', 'handler' => \FreeCMS\Www\Pages\Index\ArchivesPage::class],
             //文档属性获取
-            ['method' => 'GET', 'route' => '/archives/{type}/{hash}', 'handler' => \FreeCMS\Www\Pages\Index\ArchiveAjax::class],
+            ['method' => ['GET','POST'], 'route' => '/archives/{type}/{hash}', 'handler' => \FreeCMS\Www\Pages\Index\ArchiveAjax::class],
             //发布评论
             ['method' => 'POST', 'route' => '/archives/feedback/{arcid}','handler' => \FreeCMS\Www\Pages\Index\FeedbackAjax::class],
             //列表页
@@ -43,6 +43,9 @@ return [
             ['method' => 'GET', 'route' => '/site/arctype', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypePage::class],
             ['method' => 'GET', 'route' => '/site/arctype/edit', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditPage::class],
             ['method' => 'POST', 'route' => '/site/arctype/save', 'handler' => \FreeCMS\Admin\Pages\Site\ArcTypeEditAjax::class],
+            //评论管理
+            ['method' => 'GET', 'route' => '/site/feedback', 'handler' => \FreeCMS\Admin\Pages\Site\FeedbackPage::class],
+            ['method' => 'POST', 'route' => '/site/feedback/save', 'handler' => \FreeCMS\Admin\Pages\Site\FeedbackEditAjax::class],
 
             //菜单管理
             ['method' => 'GET', 'route' => '/system/menu', 'handler' => \FreeCMS\Admin\Pages\System\MenuPage::class],

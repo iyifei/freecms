@@ -26,17 +26,27 @@ class ArchiveAjax extends BaseWwwPage
         $hash = $vars['hash'];
         $type = $vars['type'];
         $id = IdHash::decode($hash,0);
-        if($type=='click'){
-            $click = 0;
-            $model = new CmsArchivesModel();
-            $arc = $model->findById($id);
-            if($arc){
-                $click = $arc['click']+1;
+        $model = new CmsArchivesModel();
+        $arc = $model->findById($id);
+        $sd = 0;
+        if($arc){
+            if($type=='click'){
+                $sd = $click = $arc['click']+1;
                 $data = ['click'=>$click];
-                $model->updateById($id,$data);
+            }elseif($type == 'good'){
+                $sd = $goodpost = $arc['goodpost']+1;
+                $data = ['goodpost'=>$goodpost];
+            }elseif($type=='bad'){
+                $sd = $badpost = $arc['badpost']+1;
+                $data = ['badpost'=>$badpost];
             }
-            echo "document.write($click)";
+            $model->updateById($id,$data);
+        }
+        if($type=='click'){
+            echo "document.write($sd)";
             exit;
+        }else{
+            $this->successJson($sd);
         }
     }
 }

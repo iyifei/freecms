@@ -81,7 +81,8 @@
                             <th class="text-nowrap ">文章标题</th>
                             <th width="15%" class="text-nowrap ">栏目</th>
                             <th width="15%" class="text-nowrap ">发布时间</th>
-                            <th width="10%" class="text-nowrap ">浏览</th>
+                            <th width="10%" class="text-nowrap ">浏览/好评/差评</th>
+                            <th width="10%" class="text-nowrap ">评论</th>
                             <th width="20%" class="text-nowrap ">操作</th>
                         </tr>
                         </thead>
@@ -107,7 +108,10 @@
                                     {$vo.dtime|date_format:"%Y-%m-%d"}
                                 </td>
                                 <td>
-                                    {$vo.click}
+                                    {$vo.click}/{$vo.goodpost}/{$vo.badpost}
+                                </td>
+                                <td>
+                                    <a href="{$myf_path}/admin#!site/feedback?aid={$vo.id}">{$vo.feedbackcount}</a>
                                 </td>
                                 <td class="">
                                     <a title="预览" target="_blank" data-toggle="tooltip" href="{$myf_path}/archives/{$vo.enId}.html"

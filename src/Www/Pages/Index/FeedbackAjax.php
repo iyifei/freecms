@@ -56,10 +56,11 @@ class FeedbackAjax extends BaseWwwPage
             $fmodel = new CmsFeedbackModel();
             $fmodel->add($data);
             //更新文章评论数
-            if($data['ischeck']==1){
-                $sql = 'update cms_archives set feedbackcount=feedbackcount+1 where id='.$aid;
-                $arcModel->updateBySql($sql);
-            }
+            $count = $fmodel->where('aid=:aid',['aid'=>$aid])->count();
+            $ud  = [
+                'feedbackcount'=>$count
+            ];
+            $arcModel->updateById($aid,$ud);
             session('captcha',null);
             $this->successJson('ok');
         }else{

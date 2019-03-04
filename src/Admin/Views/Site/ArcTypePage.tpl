@@ -83,10 +83,10 @@
                                 {/if}
                             </td>
                             <td class="">
-                                <a title="栏目下文章" data-toggle="tooltip"  href="#" class="btn btn-info btn-icon btn-circle btn-sm">
+                                <a title="栏目下文章" data-toggle="tooltip"  href="{$myf_path}/admin#!content/article?typeid={$vo.id}" class="btn btn-info btn-icon btn-circle btn-sm">
                                     <i class="fas fa-th-list"></i>
                                 </a>
-                                <a title="预览" data-toggle="tooltip"  href="#" class="btn btn-green btn-icon btn-circle btn-sm">
+                                <a title="预览" data-toggle="tooltip"  target="_blank" href="{$myf_path}/list/{$vo.typedir}" class="btn btn-green btn-icon btn-circle btn-sm">
                                     <i class="fab fa-html5"></i>
                                 </a>
                                 <a title="添加子栏目" data-toggle="tooltip"  href="#!site/arctype/edit?method=add&pid={$vo.id}"  class="btn btn-primary btn-icon btn-circle btn-sm">

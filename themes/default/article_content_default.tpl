@@ -61,6 +61,11 @@
     </div>
 </div>
 <div>
+    <input type="hidden" id="hideGdUrl" value="{$myf_path}/archives/#type#/{$freecms.enId}">
+    好评数：<a href="javascript:gbpost(1)" id="aGood">{$freecms.goodpost}</a><br/>
+    差评数：<a href="javascript:gbpost(0)" id="aBad">{$freecms.badpost}</a><br/>
+</div>
+<div>
     <form id="feedbackForm" autocomplete="off">
         <input type="hidden" id="feedbackUrl" value="{$myf_path}/archives/feedback/{$freecms.enId}">
         <p><textarea style="width:300px;" name="feedback" rows="5" id="txtFeedback"></textarea></p>
@@ -85,6 +90,26 @@
             }
         }, 'json');
     })
+
+    function gbpost(type) {
+        var url = $("#hideGdUrl").val();
+        var btnId ;
+        if(type==1){
+            url = url.replace('#type#','good');
+            btnId = 'aGood';
+        }else{
+            url = url.replace('#type#','bad');
+            btnId = 'aBad';
+        }
+        $.post(url,function (result) {
+            //成功
+            if (result.status == 0) {
+                $("#"+btnId).html(result.data);
+            } else {
+                alert(result.errmsg);
+            }
+        }, 'json');
+    }
 
     function serializeObject(form) {
         var o = {
