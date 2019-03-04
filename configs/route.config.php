@@ -88,6 +88,11 @@ return [
             ['method' => 'POST', 'route' => '/template/theme/save', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeEditAjax::class],
             ['method' => 'POST', 'route' => '/template/theme/operate', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeOperateAjax::class],
             ['method' => 'GET', 'route' => '/template/theme/export', 'handler' =>  \FreeCMS\Admin\Pages\Template\ThemeExportPage::class],
+
+            //会员管理
+            ['method' => 'GET', 'route' => '/member/member', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberPage::class],
+            ['method' => 'GET', 'route' => '/member/member/edit', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberEditPage::class],
+            ['method' => 'POST', 'route' => '/member/member/save', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberEditAjax::class],
         ],
         //**********************云存储*********************//
         'cloud'=>[
