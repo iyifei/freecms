@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>{global name="cfg_webname"}</title>
-    <meta name="description" content="{global name='cfg_description'}"/>
-    <meta name="keywords" content="{global name='cfg_keywords'}"/>
+    <title>{global name="sys_cfg_webname"}</title>
+    <meta name="description" content="{global name='sys_cfg_description'}"/>
+    <meta name="keywords" content="{global name='sys_cfg_keywords'}"/>
     <link rel="shortcut icon" href="/favicon.ico"/>
 </head>
 
