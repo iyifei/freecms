@@ -15,14 +15,45 @@ class Captcha
     private $verifyLen;     //字符数
     private $verifyCode;    //验证码
     private $verifyImg;     //验证图像
+    private $verifyType; //字符类型；blend-混合，number-数字，english-英文字母
+    private $number;
+    private $string;
 
     public function __construct()
     {
         $this->fontPath = SYS_PATH.'/statics/fonts/texb.ttf';
         $this->verifyLen = 4;
-        $this->verifyStr = '0123456789' . 'abcdefghijkmnpqrstuvwxyz';
-
+        $this->number = '0123456789';
+        $this->string = 'abcdefghijkmnpqrstuvwxyz';
+        $this->verifyStr = $this->number.$this->string;
+        $this->verifyType = 'blend';
     }
+
+
+    /**
+     * Function:setVerifyType
+     * 描述
+     *
+     * @param $verifyType
+     *
+     * @return $this
+     */
+    public function setVerifyType($verifyType)
+    {
+        switch ($verifyType){
+            case 'blend':
+                $this->verifyStr = $this->number.$this->string;
+                break;
+            case 'number':
+                $this->verifyStr = $this->number;
+                break;
+            case 'english':
+                $this->verifyStr = $this->string;
+                break;
+        }
+        return $this;
+    }
+
 
     /**
      * 设置验证码所包含的字符
@@ -35,13 +66,17 @@ class Captcha
     }
 
     /**
+     * Function:setLength
      * 设置验证码字符串长度
      *
      * @param $num
+     *
+     * @return $this
      */
     public function setLength($num)
     {
         $this->verifyLen = $num;
+        return $this;
     }
 
     /**

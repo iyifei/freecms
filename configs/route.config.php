@@ -9,6 +9,8 @@ return [
     'routes' => [
         //***********************默认路由*********************//
         'default'=>[
+            //测试
+            ['method' => 'GET', 'route' => '/test','handler' => \FreeCMS\Www\Pages\Index\TestPage::class],
             //程序安装页面
             ['method' => 'GET', 'route' => '/install','handler' => \FreeCMS\Admin\Pages\Install\StepPage::class],
             //验证码

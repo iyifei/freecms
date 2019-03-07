@@ -1,6 +1,7 @@
 <?php
 namespace FreeCMS\Storage\Pages;
 
+use FreeCMS\Common\Model\CmsSysConfigModel;
 use FreeCMS\Storage\BaseCloudPage;
 use FreeCMS\Storage\GEnum\ExtensionType;
 use FreeCMS\Storage\Libs\AdapterManager;
@@ -50,6 +51,23 @@ class IndexAjax extends BaseCloudPage
                         $thumbParam[$k]=intval($v);
                     }
                 }
+            }
+
+            //是否添加水印,水印配置参考系统
+            $water = get('water');
+            $waterParam = [];
+            if($water=='1'){
+                $configModel = new CmsSysConfigModel();
+                $configMap = $configModel->getCacheConfigs();
+                $waterParam['type']=$configMap['sys_cfg_water_type']['value'];
+                list($ww,$wh)=explode(',',$configMap['sys_cfg_water_size']['value']);
+                $waterParam['minWidth']=$ww;
+                $waterParam['minHeight']=$wh;
+                $waterParam['word']=$configMap['sys_cfg_water_word']['value'];
+                list($wf,$wc)=explode(',',$configMap['sys_cfg_water_font']['value']);
+                $waterParam['fontsize']=$wf;
+                $waterParam['color']=$wc;
+                $waterParam['position']=$configMap['sys_cfg_water_pos']['value'];
             }
 
             //获取Filesystem实例

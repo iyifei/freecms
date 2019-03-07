@@ -38,6 +38,12 @@ class FreeCmsException extends \RuntimeException
     }
 
 
+    public static function throwExpMsg( $msg = '')
+    {
+        throw new self($msg, ErrorCode::FAIL);
+    }
+
+
     /**
      * 抛出参数错误异常
      *

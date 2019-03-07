@@ -50,14 +50,14 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">网站描述</label>
                         <div class="col-md-9">
-                            <textarea rows="5" class="form-control value" did="{$config.sys_cfg_description.id}" tabindex="3" maxlength="250" name="sys_cfg_description" id="sys_cfg_description">{$config.sys_cfg_description.value}</textarea>
+                            <textarea rows="4" class="form-control value" did="{$config.sys_cfg_description.id}" tabindex="3" maxlength="250" name="sys_cfg_description" id="sys_cfg_description">{$config.sys_cfg_description.value}</textarea>
                             <small class="f-s-12 text-grey-darker">变量名：【sys_cfg_description】描述不能超过250字</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">网站版权</label>
                         <div class="col-md-9">
-                            <textarea rows="5" class="form-control value" did="{$config.sys_cfg_copyright.id}" tabindex="4"  name="sys_cfg_copyright" id="sys_cfg_copyright">{$config.sys_cfg_copyright.value}</textarea>
+                            <textarea rows="4" class="form-control value" did="{$config.sys_cfg_copyright.id}" tabindex="4"  name="sys_cfg_copyright" id="sys_cfg_copyright">{$config.sys_cfg_copyright.value}</textarea>
                             <small class="f-s-12 text-grey-darker">变量名：【sys_cfg_copyright】版权信息支持html和script语法</small>
                         </div>
                     </div>
@@ -116,20 +116,6 @@
                             <label>
                                 <input type="radio" name="vcodeType" value="blend" {if $config.sys_cfg_vcode_type.value eq 'blend'}checked="checked"{/if}>
                                 混合
-                            </label>
-                        </div>
-                    </div>
-                    <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 text-right">验证码生成文件类型</label>
-                        <div class="col-md-9">
-                            <input type="hidden"  id="vcodeExt" class="value" name="sys_cfg_vcode_ext" did="{$config.sys_cfg_vcode_ext.id}" value="{$config.sys_cfg_vcode_ext.value}">
-                            <label>
-                                <input type="radio"  name="vcodeExt" value="jpg" {if $config.sys_cfg_vcode_ext.value eq 'jpg'}checked="checked"{/if}>
-                                jpg
-                            </label>
-                            <label>
-                                <input type="radio" name="vcodeExt" value="png" {if $config.sys_cfg_vcode_ext.value eq 'png'}checked="checked"{/if}>
-                                png
                             </label>
                         </div>
                     </div>
@@ -200,12 +186,12 @@
                         <div class="col-md-9">
                             <input type="hidden"  id="waterType" class="value" name="sys_cfg_water" did="{$config.sys_cfg_water_type.id}" value="{$config.sys_cfg_water_type.value}">
                             <label>
-                                <input type="checkbox" name="waterType" id="waterTypeJpg" value="jpg">
-                                jpg
+                                <input type="radio" name="waterType" value="image" {if $config.sys_cfg_water_type.value eq 'image'}checked="checked"{/if}>
+                                图片
                             </label>
                             <label>
-                                <input type="checkbox" name="waterType" id="waterTypePng" value="png" >
-                                png
+                                <input type="radio" name="waterType"  value="word"  {if $config.sys_cfg_water_type.value eq 'word'}checked="checked"{/if}>
+                                文字
                             </label>
                         </div>
                     </div>
@@ -218,7 +204,13 @@
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
-                        <label class="col-form-label col-md-3 text-right">水印图片的字体大小及颜色</label>
+                        <label class="col-form-label col-md-3 text-right">水印图片文字</label>
+                        <div class="col-md-9">
+                            <input class="form-control value"  did="{$config.sys_cfg_water_word.id}" name="sys_cfg_water_word" tabindex="2" maxlength="30" id="sys_cfg_water_word" size="15" value="{$config.sys_cfg_water_word.value}" />
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                        <label class="col-form-label col-md-3 text-right">水印图片文字的字体大小及颜色</label>
                         <div class="col-md-9">
                             <input type="hidden"  id="waterFont" class="value" name="sys_cfg_water_font" did="{$config.sys_cfg_water_font.id}" value="{$config.sys_cfg_water_font.value}">
                             字体大小(px)：<input class="form-control" tabindex="2" maxlength="2" name="waterFont" id="waterFontSize" size="15" value="" />
@@ -228,12 +220,10 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3 text-right">水印图片文件</label>
                         <div class="col-md-9">
-                            <input type="hidden" class="value" did="{$config.sys_cfg_water_pic.id}"  id="txtLitpic" name="sys_cfg_water_pic" value="{$config.sys_cfg_water_pic.value}" />
-                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传图片">
-                            <img src="{if !empty($config.sys_cfg_water_pic.value)}{$myf_path}/cloud/{$config.sys_cfg_water_pic.value}?thumbnail=h-90{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($config.sys_cfg_water_pic.value)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
-                            <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($config.sys_cfg_water_pic.value)} style="display: none"{/if}>删除图片</a>
-                            <br/>
-                            <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、png格式，且大小不能超过1M</small>
+                            <div>
+                                /statics/water/water.png
+                            </div>
+                            <small class="f-s-12 text-grey-darker">需要手动上传覆盖该文件,缩略图仅支持jpg、png格式，且大小不能超过1M</small>
                         </div>
                     </div>
                     <div class="form-group row m-b-15">
@@ -248,19 +238,19 @@
                             <input type="hidden"  id="waterPos" class="value" name="sys_cfg_water_pos" did="{$config.sys_cfg_water_pos.id}" value="{$config.sys_cfg_water_pos.value}">
                             <table class="table table-bordered waterPos">
                                 <tr>
-                                    <td><label><input type="radio" value="left_top" {if $config.sys_cfg_water_pos.value eq 'left_top'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居左</label></td>
-                                    <td><label><input type="radio" value="top_center" {if $config.sys_cfg_water_pos.value eq 'top_center'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居中</label></td>
-                                    <td><label><input type="radio" value="top_right" {if $config.sys_cfg_water_pos.value eq 'top_right'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居右</label></td>
+                                    <td><label><input type="radio" value="top-left" {if $config.sys_cfg_water_pos.value eq 'top-left'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居左</label></td>
+                                    <td><label><input type="radio" value="top-center" {if $config.sys_cfg_water_pos.value eq 'top-center'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居中</label></td>
+                                    <td><label><input type="radio" value="top-right" {if $config.sys_cfg_water_pos.value eq 'top-right'}checked="checked"{/if} name="sys_cfg_water_pos">顶部居右</label></td>
                                 </tr>
                                 <tr>
-                                    <td><label><input type="radio" value="left_center" {if $config.sys_cfg_water_pos.value eq 'left_center'}checked="checked"{/if} name="sys_cfg_water_pos">左边居中</label></td>
+                                    <td><label><input type="radio" value="center-left" {if $config.sys_cfg_water_pos.value eq 'center-left'}checked="checked"{/if} name="sys_cfg_water_pos">左边居中</label></td>
                                     <td><label><input type="radio" value="center" {if $config.sys_cfg_water_pos.value eq 'center'}checked="checked"{/if} name="sys_cfg_water_pos">图片中心</label></td>
-                                    <td><label><input type="radio" value="right_center" {if $config.sys_cfg_water_pos.value eq 'right_center'}checked="checked"{/if} name="sys_cfg_water_pos">右边居中</label></td>
+                                    <td><label><input type="radio" value="center-right" {if $config.sys_cfg_water_pos.value eq 'center-right'}checked="checked"{/if} name="sys_cfg_water_pos">右边居中</label></td>
                                 </tr>
                                 <tr>
-                                    <td><label><input type="radio" value="left_bottom" {if $config.sys_cfg_water_pos.value eq 'left_bottom'}checked="checked"{/if} name="sys_cfg_water_pos">底部居左</label></td>
-                                    <td><label><input type="radio" value="bottom_center" {if $config.sys_cfg_water_pos.value eq 'bottom_center'}checked="checked"{/if} name="sys_cfg_water_pos">底部局中</label></td>
-                                    <td><label><input type="radio" value="bottom_right" {if $config.sys_cfg_water_pos.value eq 'bottom_right'}checked="checked"{/if} name="sys_cfg_water_pos">底部居右</label></td>
+                                    <td><label><input type="radio" value="bottom-left" {if $config.sys_cfg_water_pos.value eq 'bottom-left'}checked="checked"{/if} name="sys_cfg_water_pos">底部居左</label></td>
+                                    <td><label><input type="radio" value="bottom-center" {if $config.sys_cfg_water_pos.value eq 'bottom-center'}checked="checked"{/if} name="sys_cfg_water_pos">底部局中</label></td>
+                                    <td><label><input type="radio" value="bottom-right" {if $config.sys_cfg_water_pos.value eq 'bottom-right'}checked="checked"{/if} name="sys_cfg_water_pos">底部居右</label></td>
                                 </tr>
                             </table>
                         </div>
@@ -352,11 +342,7 @@
             $("#water").val($(this).val());
         })
         $("input[name='waterType']").click(function () {
-            var vals = [];
-             $("input[name='waterType']").each(function (index, item) {
-                 vals.push($(this).val());
-             });
-            $("#waterType").val(vals.join(','));
+            $("#waterType").val($(this).val());
         })
         $("input[name='vcodeSize']").blur(function () {
             var size = $("#vcodeSizeWidth").val() +","+ $("#vcodeSizeHeight").val()+","+$("#vcodeSizeFontsize").val();

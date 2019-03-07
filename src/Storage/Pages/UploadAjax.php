@@ -2,9 +2,11 @@
 namespace FreeCMS\Storage\Pages;
 
 use FreeCMS\Common\Exception\FreeCmsException;
+use FreeCMS\Common\Model\CmsSysConfigModel;
 use FreeCMS\Storage\BaseCloudPage;
 use FreeCMS\Storage\GEnum\ErrorCode;
 use FreeCMS\Storage\Libs\AdapterManager;
+use FreeCMS\Storage\Libs\WaterMask;
 use Overtrue\Flysystem\Qiniu\Plugins\FileUrl;
 
 /**
@@ -47,7 +49,26 @@ class UploadAjax extends BaseCloudPage
                 $key = $_FILES[$uploadName]['name'];
             }
             $fileSystem = AdapterManager::getFilesystem();
-            $stream = fopen($_FILES[$uploadName]['tmp_name'],'r+');
+            $tmpFile = $_FILES[$uploadName]['tmp_name'];
+
+            //水印配置
+            $wc = config('water');
+            //启用水印
+            if($wc['enable']){
+                try{
+                    $water = new WaterMask($tmpFile);
+                    $water->waterType=$wc['type'];
+                    $water->waterStr = $wc['word'];
+                    $water->pos = $wc['position'];
+                    $water->fontColor = $wc['fontColor'];
+                    $water->fontSize = $wc['fontSize'];
+                    $water->transparent = $wc['transparent'];
+                    $water->save($tmpFile);
+                }catch (\Exception $e){};
+            }
+
+
+            $stream = fopen($tmpFile,'r+');
             $res = $fileSystem->putStream($key,$stream);
 
             if(is_resource($stream)){
