@@ -2,7 +2,7 @@
 <ol class="breadcrumb pull-right">
     <li class="breadcrumb-item">后台</li>
     <li class="breadcrumb-item">站点</li>
-    <li class="breadcrumb-item">栏目管理</li>
+    <li class="breadcrumb-item">系统管理</li>
     <li class="breadcrumb-item active">
         基本参数
     </li>
@@ -223,6 +223,7 @@
                             <div>
                                 /statics/water/water.png
                             </div>
+                            <img src="{$myf_path}/statics/water/water.png" style="height:50px;"><br/>
                             <small class="f-s-12 text-grey-darker">需要手动上传覆盖该文件,缩略图仅支持jpg、png格式，且大小不能超过1M</small>
                         </div>
                     </div>

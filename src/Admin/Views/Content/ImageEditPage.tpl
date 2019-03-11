@@ -279,16 +279,10 @@
 <input type="hidden" id="submitUrl" value="{$myf_path}/admin/content/image/save">
 
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.config.js"></script>
-<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.js"> </script>
+<script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/ueditor.all.min.js"> </script>
 <script type="text/javascript" charset="utf-8" src="{$myf_path}/statics/admin/plugins/ueditor/lang/zh-cn/zh-cn.js"></script>
 <script type="text/javascript">
     var ue = UE.getEditor('editor');
-
-    var insertImageBtnId ;
-    ue.ready(function () {
-        insertImageBtnId = $(".edui-for-insertfreecmsimage").attr("id");
-        FreeCms.initUploader(insertImageBtnId);
-    });
 
     FreeCms.initUploader('uploadFile');
 
@@ -296,16 +290,11 @@
         FreeCms.callbackEditSaveSuccess();
     }
 
-    function uploadCallback(data,btnId) {
-        if(btnId == insertImageBtnId){
-            var img = "<img src='"+ data.url +"' />";
-            ue.setContent(img,true);
-        }else {
-            var src = data.url + "?thumbnail=h-90";
-            $("#txtLitpic").val(data.key);
-            $("#imgFile").attr('src', src).show();
-            $("#delete_attach").show();
-        }
+    function uploadCallback(data) {
+        var src = data.url + "?thumbnail=h-90";
+        $("#txtLitpic").val(data.key);
+        $("#imgFile").attr('src', src).show();
+        $("#delete_attach").show();
     }
 
     function uploadFilesCallback(data) {

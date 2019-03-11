@@ -9,10 +9,8 @@
 namespace FreeCMS\Storage\Pages;
 
 
+use FreeCMS\Common\Exception\FreeCmsException;
 use FreeCMS\Storage\BaseCloudPage;
-use FreeCMS\Storage\Common\Exception\FreeCmsException;
-use FreeCMS\Storage\Common\Libs\Page;
-use FreeCMS\Storage\GEnum\OssType;
 use FreeCMS\Storage\Libs\AdapterManager;
 use Overtrue\Flysystem\Qiniu\Plugins\FileUrl;
 
@@ -37,9 +35,9 @@ class TestAjax extends BaseCloudPage
         $domain = requestNotEmpty('domain');
         $adapter = null;
         switch ($type){
-            case OssType::Qiniu:
+            case 'Qiniu':
                 $adapter = [
-                    'class'=>\FreeCMS\Adapter\QiniuAdapter::class,
+                    'class'=>\FreeCMS\Storage\Adapter\QiniuAdapter::class,
                     'param' => [
                         'accessKey'=>$id,
                         'secretKey'=>$secret,
@@ -48,9 +46,9 @@ class TestAjax extends BaseCloudPage
                     ],
                 ];
                 break;
-            case OssType::Aliyun:
+            case 'Aliyun':
                 $adapter = [
-                    'class'=>\FreeCMS\Adapter\AliyunAdapter::class,
+                    'class'=>\FreeCMS\Storage\Adapter\AliyunAdapter::class,
                     'param' => [
                         'access_id'     => $id,
                         'access_secret' => $secret,
@@ -62,8 +60,8 @@ class TestAjax extends BaseCloudPage
         }
         if(isset($adapter)){
             $fileSystem = AdapterManager::getFilesystem($adapter);
-            $testFile = APP_PATH.'/oss/test.png';
-            $key = 'test.png';
+            $testFile = SYS_PATH.'/statics/oss/test.png';
+            $key = 'freecms_test.png';
             $stream = fopen($testFile,'r+');
             $res = $fileSystem->putStream($key,$stream);
             if(is_resource($stream)){

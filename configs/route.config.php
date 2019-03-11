@@ -55,8 +55,10 @@ return [
             ['method' => 'POST', 'route' => '/system/menu/save', 'handler' => \FreeCMS\Admin\Pages\System\MenuEditAjax::class],
             //配置
             ['method' => 'GET', 'route' => '/system/config', 'handler' => \FreeCMS\Admin\Pages\System\ConfigPage::class],
+            ['method' => 'GET', 'route' => '/system/oss', 'handler' => \FreeCMS\Admin\Pages\System\OssPage::class],
             ['method' => 'GET', 'route' => '/system/config/edit', 'handler' => \FreeCMS\Admin\Pages\System\ConfigEditPage::class],
             ['method' => 'POST', 'route' => '/system/config/save', 'handler' => \FreeCMS\Admin\Pages\System\ConfigEditAjax::class],
+            ['method' => 'POST', 'route' => '/system/oss/save', 'handler' => \FreeCMS\Admin\Pages\System\ConfigEditAjax::class],
 
             //单页管理
             ['method' => 'GET', 'route' => '/site/page', 'handler' => \FreeCMS\Admin\Pages\Site\SinglePage::class],
@@ -115,6 +117,8 @@ return [
                 ['method' => 'GET', 'route' => '/uploadFile', 'handler' => \FreeCMS\Storage\Pages\UploadFilePage::class],
                 //批量上传图片
                 ['method' => 'GET', 'route' => '/uploadFiles', 'handler' => \FreeCMS\Storage\Pages\UploadFilesPage::class],
+                //ueditor上传文件
+                ['method' => ['GET','POST'], 'route' => '/ueditor/upload', 'handler' => \FreeCMS\Storage\Pages\UEditorAjax::class],
         ],
         //**********************会员中心*********************//
         'member'=>[

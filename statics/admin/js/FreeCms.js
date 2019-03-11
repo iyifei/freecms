@@ -41,6 +41,12 @@ FreeCms.doEditSubmit=function () {
 
 //批量更新
 FreeCms.batchSave = function (key) {
+
+    //前置函数
+    if(typeof beforeBatchSubmitFun === 'function'){
+        beforeBatchSubmitFun();
+    }
+
     var list = [];
     $("."+key).each(function () {
         var id = $(this).attr("did");
