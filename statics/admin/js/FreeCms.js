@@ -295,13 +295,6 @@ FreeCms.initUploader = function(btnId){
             'FilesAdded':function () {
                 FreeCms._uploaders[btnId].start();
             },
-            'BeforeUpload': function (up, file) {
-                //重置key
-                var newName = "media/file/" + file.name;
-                var params = up.settings.multipart_params;
-                params.key = newName;
-
-            },
             'FileUploaded': function (up, file, info) {
                 var res = $.parseJSON(info.response);
                 var data = res.data;

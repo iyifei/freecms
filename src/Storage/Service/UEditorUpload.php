@@ -138,7 +138,7 @@ class UEditorUpload
         }
 
 
-        $key = $this->getFileName();
+        $key = $this->getFullName();
         $stream = fopen($tmpFile,'r+');
         $res = $fileSystem->putStream($key,$stream);
 

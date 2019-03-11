@@ -42,14 +42,15 @@ class UploadAjax extends BaseCloudPage
             if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
                 exit; // finish preflight CORS requests here
             }
-            //oss存储的key
-            $key = request('key');
-            //如果没有指定key，则用文件名作为key
-            if(empty($key)){
-                $key = $_FILES[$uploadName]['name'];
-            }
-            $fileSystem = AdapterManager::getFilesystem();
             $tmpFile = $_FILES[$uploadName]['tmp_name'];
+            //oss存储的key
+            //$key = request('key');
+            //如果没有指定key，则用文件名作为key
+            $filename = $_FILES[$uploadName]['name'];
+            $exts = explode('.',$filename);
+            $ext  = $exts[count($exts)-1];
+            $key = 'media/'.date("Ymd").'/'.substr(md5($tmpFile),-15).'.'.$ext;
+            $fileSystem = AdapterManager::getFilesystem();
 
             //水印配置
             $wc = config('water');
