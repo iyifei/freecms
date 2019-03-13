@@ -63,6 +63,9 @@
                             <select  class="form-control" name="channel" id="selChannel" onchange="changeChannel()">
                                 <option {if $channel eq 'article'}selected="selected"{/if} value="article" >普通文章|article</option>
                                 <option {if $channel eq 'image'}selected="selected"{/if} value="image"  >图片集|image</option>
+                                <option {if $channel eq 'audio'}selected="selected"{/if} value="audio"  >音频文章|audio</option>
+                                <option {if $channel eq 'video'}selected="selected"{/if} value="video"  >视频文章|video</option>
+                                <option {if $channel eq 'office'}selected="selected"{/if} value="office"  >Office文档|office</option>
                             </select>
                         </div>
                     </div>
@@ -280,7 +283,7 @@
                     listsel.options.add(option);
                 }
             }
-            var archives = template['archive'];
+            var archives = template['content'];
             var archivesel = document.getElementById("selArchive");
             archivesel.options.length = 0;
             if(archives!=undefined){

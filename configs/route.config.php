@@ -83,6 +83,12 @@ return [
             ['method' => 'GET', 'route' => '/content/article/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ArticleEditPage::class],
             ['method' => 'GET', 'route' => '/content/image', 'handler' => \FreeCMS\Admin\Pages\Content\ImagePage::class],
             ['method' => 'GET', 'route' => '/content/image/edit', 'handler' => \FreeCMS\Admin\Pages\Content\ImageEditPage::class],
+            ['method' => 'GET', 'route' => '/content/audio', 'handler' => \FreeCMS\Admin\Pages\Content\AudioPage::class],
+            ['method' => 'GET', 'route' => '/content/audio/edit', 'handler' => \FreeCMS\Admin\Pages\Content\AudioEditPage::class],
+            ['method' => 'GET', 'route' => '/content/video', 'handler' => \FreeCMS\Admin\Pages\Content\VideoPage::class],
+            ['method' => 'GET', 'route' => '/content/video/edit', 'handler' => \FreeCMS\Admin\Pages\Content\VideoEditPage::class],
+            ['method' => 'GET', 'route' => '/content/office', 'handler' => \FreeCMS\Admin\Pages\Content\OfficePage::class],
+            ['method' => 'GET', 'route' => '/content/office/edit', 'handler' => \FreeCMS\Admin\Pages\Content\OfficeEditPage::class],
 
             //管理员管理
             ['method' => 'GET', 'route' => '/system/admin', 'handler' => \FreeCMS\Admin\Pages\System\AdminPage::class],

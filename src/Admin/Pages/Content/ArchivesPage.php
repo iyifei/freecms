@@ -170,6 +170,7 @@ abstract class ArchivesPage extends BaseAdminPage
                     break;
                 case ChannelType::Video:
                 case ChannelType::Audio:
+                case ChannelType::Office:
                     $mediaModel = new CmsAddOnMediaModel();
                     $arc = $mediaModel->findById($id);
                     $archive['addOnMedia']=$arc;

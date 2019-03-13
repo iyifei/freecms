@@ -13,6 +13,7 @@ use FreeCMS\Admin\BaseAdminPage;
 use FreeCMS\Common\Enum\ChannelType;
 use FreeCMS\Common\Enum\EditType;
 use FreeCMS\Common\Exception\FreeCmsException;
+use FreeCMS\Common\Libs\StorageClient;
 use FreeCMS\Common\Model\CmsAddOnArticleModel;
 use FreeCMS\Common\Model\CmsAddOnImagesModel;
 use FreeCMS\Common\Model\CmsAddOnMediaModel;
@@ -54,6 +55,7 @@ class ArchivesEditAjax extends BaseAdminPage
                     break;
                 case ChannelType::Audio:
                 case ChannelType::Video:
+                case ChannelType::Office:
                     $mediaModel->deleteByIds($ids);
                     break;
             }
@@ -71,6 +73,7 @@ class ArchivesEditAjax extends BaseAdminPage
                     break;
                 case ChannelType::Audio:
                 case ChannelType::Video:
+                case ChannelType::Office:
                     $mediaModel->deleteById($id);
                     break;
             }
@@ -140,11 +143,13 @@ class ArchivesEditAjax extends BaseAdminPage
                 //媒体地址
                 $url = post('url');
                 $bodyData['url']=$url;
-                //$info = ICloudClient::info($url);
-                $arcData['extinfo']=json_encode($info);
+                if(in_array($mediatype,[ChannelType::Video,ChannelType::Audio])){
+                    $info = StorageClient::info($url);
+                    $arcData['extinfo']=json_encode($info);
 
-                if($mediatype=='video'){
-                    $arcData['litpic']=$url;
+                    if($mediatype=='video'){
+                        $arcData['litpic']=$url;
+                    }
                 }
             }
 
@@ -161,6 +166,7 @@ class ArchivesEditAjax extends BaseAdminPage
                         break;
                     case ChannelType::Audio:
                     case ChannelType::Video:
+                    case ChannelType::Office:
                         $mediaModel->updateById($id,$bodyData);
                         break;
                 }
@@ -177,6 +183,7 @@ class ArchivesEditAjax extends BaseAdminPage
                         break;
                     case ChannelType::Audio:
                     case ChannelType::Video:
+                    case ChannelType::Office:
                         $mediaModel->add($bodyData);
                         break;
                 }

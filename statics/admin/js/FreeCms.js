@@ -289,7 +289,7 @@ FreeCms.initUploader = function(btnId){
         flash_swf_url: '/statics/admin/plugins/plupload/Moxie.swf',
         silverlight_xap_url: '/statics/admin/plugins/plupload/Moxie.xap',
         filters: {
-            max_file_size: '2mb'
+            max_file_size: '20mb'
         },
         init: {
             'FilesAdded':function () {

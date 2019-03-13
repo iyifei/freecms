@@ -18,5 +18,7 @@ class ChannelType
     const Video = 'video';
     //音频
     const Audio = 'audio';
+    //文档
+    const Office = 'office';
 
 }
