@@ -798,3 +798,37 @@ function hex2rgb($hexColor) {
     }
     return $rgb;
 }
+
+function byte_format($size, $dec = 3)
+{
+    $a = array("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB");
+    $pos = 0;
+    while ($size >= 1024) {
+        $size /= 1024;
+        $pos++;
+    }
+    return round($size, $dec) . " " . $a[$pos];
+}
+
+function directorySize($directory){
+    $directorySize = 0;
+    //打开目录读取其内容
+    if($dh = @opendir($directory)){
+        //迭代处理每个目录项
+        while(($filename=readdir($dh))){
+            //过滤掉一些目录项
+            if($filename !="." && $filename !=".."){
+                //文件确定大小并添加总大小
+                if(is_file($directory."/".$filename)){
+                    $directorySize+=filesize($directory."/".$filename);
+                }
+                //新目录，开始递归
+                if(is_dir($directory."/".$filename)){
+                    $directorySize += directorySize($directory."/".$filename);
+                }
+            }
+        }
+    }
+    @closedir($dh);
+    return $directorySize;
+}

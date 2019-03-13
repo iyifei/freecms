@@ -48,4 +48,9 @@ class CmsMenuModel extends Model
     public function findAllMenu(){
         return $this->orderBy($this->_orderBy)->findAll();
     }
+
+    public function findShowMenu(){
+        $where  = 'ishide=0';
+        return $this->where($where)->orderBy($this->_orderBy)->findAll();
+    }
 }

@@ -116,7 +116,7 @@
                     <div class="text-right">
                         <input type="hidden" class="form-control value"  did="{$config.sys_cfg_aliyun_check.id}" name="sys_cfg_aliyun_check" id="sys_cfg_aliyun_check" value="{$config.sys_cfg_aliyun_check.value}" />
                         <label class="m-r-10" id="labelAliyun">状态：{if $config.sys_cfg_aliyun_check.value eq 1}可用{else}不可用{/if}</label>
-                        <input type="button" id="btnAliyunTest" class="btn btn-danger" value="检测阿里云存储参数配置是否正确">
+                        <input type="button" id="btnAliyunTest" class="btn btn-info" value="检测阿里云存储参数配置是否正确">
                     </div>
                 </form>
             </div>

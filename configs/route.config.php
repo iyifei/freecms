@@ -11,6 +11,8 @@ return [
         'default'=>[
             //测试
             ['method' => 'GET', 'route' => '/test','handler' => \FreeCMS\Www\Pages\Index\TestPage::class],
+            //广告位
+            ['method' => 'GET', 'route' => '/adjs','handler' => \FreeCMS\Www\Pages\Index\AdAjax::class],
             //程序安装页面
             ['method' => 'GET', 'route' => '/install','handler' => \FreeCMS\Admin\Pages\Install\StepPage::class],
             //验证码
@@ -64,6 +66,11 @@ return [
             ['method' => 'GET', 'route' => '/site/page', 'handler' => \FreeCMS\Admin\Pages\Site\SinglePage::class],
             ['method' => 'GET', 'route' => '/site/page/edit', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditPage::class],
             ['method' => 'POST', 'route' => '/site/page/save', 'handler' => \FreeCMS\Admin\Pages\Site\SingleEditAjax::class],
+            //广告位管理
+            ['method' => 'GET', 'route' => '/site/ad', 'handler' => \FreeCMS\Admin\Pages\Site\AdPage::class],
+            ['method' => 'GET', 'route' => '/site/ad/view', 'handler' => \FreeCMS\Admin\Pages\Site\AdViewPage::class],
+            ['method' => 'GET', 'route' => '/site/ad/edit', 'handler' => \FreeCMS\Admin\Pages\Site\AdEditPage::class],
+            ['method' => 'POST', 'route' => '/site/ad/save', 'handler' => \FreeCMS\Admin\Pages\Site\AdEditAjax::class],
 
             //友情链接
             ['method' => 'GET', 'route' => '/site/flink', 'handler' => \FreeCMS\Admin\Pages\Site\FlinkPage::class],

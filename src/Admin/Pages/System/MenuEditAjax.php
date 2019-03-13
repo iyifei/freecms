@@ -59,7 +59,7 @@ class MenuEditAjax extends BaseAdminPage
             //排序
             $sortrank = getInteger('sortrank',50);
             //是否隐藏
-            $ishide = getInteger('ishide');
+            $ishide = getInteger('ishide',0);
             //图标
             $icon = post('icon');
 
