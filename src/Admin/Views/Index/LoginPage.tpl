@@ -41,17 +41,17 @@
             <!-- end login-header -->
             <!-- begin login-content -->
             <div class="login-content">
-                <form autocomplete="off" method="GET" class="margin-bottom-0">
+                <form autocomplete="off" class="margin-bottom-0">
                     <div class="form-group m-b-15">
-                        <input type="text" class="form-control form-control-lg" placeholder="用户名" required />
+                        <input name="userid" type="text" class="form-control form-control-lg" placeholder="用户名" required />
                     </div>
                     <div class="form-group m-b-15">
-                        <input type="password" class="form-control form-control-lg" placeholder="密码" required />
+                        <input name="pwd" type="password" class="form-control form-control-lg" placeholder="密码" required />
                     </div>
                     <div class="form-group m-b-15">
                         <div class="row">
                             <div class="col-6 col-sm-6">
-                                <input type="text" maxlength="4" class="form-control form-control-lg" placeholder="验证码" required />
+                                <input id="vdcode" name="vcode" type="text" maxlength="4" class="form-control form-control-lg" placeholder="验证码" required />
                             </div>
                             <div class="col-6 col-sm-6">
                                 <img id="vdimgck" onclick="changeAuthCode()" style="cursor: pointer;border:1px solid #d3d8de" alt="验证码"
@@ -66,10 +66,10 @@
                         </label>
                     </div>
                     <div class="login-buttons">
-                        <button type="submit" class="btn btn-success btn-block btn-lg">登录</button>
+                        <button type="button" id="btnSubmit" onclick="FreeCms.doEditSubmit();" class="btn btn-success btn-block btn-lg">登录</button>
                     </div>
                     <div class="m-t-20 m-b-40 p-b-40 text-inverse">
-                        忘记密码?  <a href="register_v3.html" class="text-success">找回密码教程</a> .
+                        忘记密码?  <a href="http://www.freecms.com.cn/" class="text-success">找回密码教程</a> .
                     </div>
                     <hr />
                     <p class="text-center text-grey-darker">
@@ -88,15 +88,26 @@
 <!-- end page container -->
 
 {include file="../Common/BaseJs.tpl"}
-
+<input type="hidden" id="submitUrl" value="{$myf_path}/admin/login">
 <script>
     $(document).ready(function() {
         App.init();
+        
+        $(".form-control").keyup(function (event) {
+            if(event.keyCode ==13){
+                $("#btnSubmit").trigger("click");
+            }
+        })
     });
+
+    function callbackSaveSuccess() {
+        window.location.href='{$myf_path}/admin';
+    }
 
     function changeAuthCode() {
         var picsrc = $("#vdimgck").attr("src");
         $("#vdimgck").attr("src", picsrc);
+        $("#vdcode").val('');
     }
 </script>
 </body>

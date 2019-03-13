@@ -13,6 +13,8 @@ use FreeCMS\Admin\BaseAdminPage;
 class LoginPage extends BaseAdminPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *

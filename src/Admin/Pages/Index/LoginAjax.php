@@ -6,14 +6,14 @@
  * date 2018/11/23
  */
 
-namespace Admin\Pages\Index;
+namespace FreeCMS\Admin\Pages\Index;
 
 
-use Admin\Pages\BasePage;
-use Common\Exception\MyfException;
-use Common\Model\CmsAdminModel;
+use FreeCMS\Admin\BaseAdminPage;
+use FreeCMS\Common\Exception\FreeCmsException;
+use FreeCMS\Common\Model\CmsAdminModel;
 
-class LoginAjax extends BasePage
+class LoginAjax extends BaseAdminPage
 {
 
     protected $declareNeedLogin = false;
@@ -31,7 +31,7 @@ class LoginAjax extends BasePage
         //校验验证码
         $scode = session('captcha');
         if($scode!=$vcode){
-            MyfException::throwParamExp('图片验证码错误');
+            FreeCmsException::throwParamExp('图片验证码错误');
         }
         $model = new CmsAdminModel();
         $row = $model->link('role')->find('userid',$userid);
@@ -42,7 +42,7 @@ class LoginAjax extends BasePage
             //查询角色及权限信息
             $this->successJson('ok');
         }else{
-            MyfException::throwParamExp('账号或密码错误');
+            FreeCmsException::throwParamExp('账号或密码错误');
         }
     }
 }

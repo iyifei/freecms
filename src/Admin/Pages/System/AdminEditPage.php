@@ -36,6 +36,7 @@ class AdminEditPage extends BaseAdminPage
             $model = new CmsAdminModel();
             $row = $model->findById($id);
             $this->assign('data',$row);
+            $this->assign('NoEditAdminRole',session('NoEditAdminRole'));
         }
         $this->display();
     }

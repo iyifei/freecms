@@ -36,6 +36,9 @@ return [
         'admin'=>[
             //登录
             ['method' => 'GET', 'route' => '/login','handler' => \FreeCMS\Admin\Pages\Index\LoginPage::class],
+            ['method' => 'POST', 'route' => '/login','handler' => \FreeCMS\Admin\Pages\Index\LoginAjax::class],
+            //退出系统
+            ['method' => 'GET', 'route' => '/quit','handler' => \FreeCMS\Admin\Pages\Index\QuitAjax::class],
             //框架主页
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Admin\Pages\Index\MainPage::class],
             //主页

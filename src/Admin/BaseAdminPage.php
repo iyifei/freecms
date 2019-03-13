@@ -63,28 +63,75 @@ abstract class BaseAdminPage extends Page
         //登录校验
         $admin = session('admin');
         if(empty($admin)){
-            //jumpUrl(getBaseURL().'/');
+            jumpUrl(getBaseURL().'/admin/login');
         }
 
-        //获取系统菜单信息
-        $m = new CmsMenuModel();
-        $menus  = $m->findShowMenu();
+        $menuIds = explode(',',$admin['role']['menuids']);
+        //欢迎菜单
+        $roleId = $admin['role']['id'];
+        //roleId==1代表超级管理员
+        $urls = session("urls");
+        $menus = session('menus');
+        if(empty($urls) || empty($menuTree)){
+            $urls=[];
+            //顶部菜单、
+            $menuModel = new CmsMenuModel();
+            $menus = $menuModel->findShowMenu();
+            $menus = array_column($menus,null,'id');
+            if($roleId!=1) {
+                $treeMenu = Utils::childTree($menus);
+                $treeMenu = array_column($treeMenu, null, 'url');
+                foreach ($treeMenu as $key => $tMenu) {
+                    if (in_array($tMenu['id'], $menuIds)) {
+                        foreach ($tMenu['childs'] as $childMenu) {
+                            $mid = $childMenu['id'];
+                            if (in_array($mid, $menuIds) || $roleId == 1) {
+                                $urls[] = $childMenu['url'];
+                            }
+                        }
+                    } else {
+                        unset($menus[$tMenu['id']]);
+                    }
+                }
+            }
+            session("menus",$menus);
+            //可访问的url地址集合
+            session('urls',$urls);
+        }
         $menuTree = easyuitree($menus);
         $this->assign('menuTree',$menuTree);
-        $this->assign('menuJson',json_encode($menus));
+        $this->assign('menuJson',json_encode(array_values($menus)));
+        $route = $this->getRoute();
+        if($roleId!=1 &&!empty($route['url']) && !in_array('home',[$route['first']])){
+            $url = sprintf("%s/%s",$route['first'],$route['second']);
+            if(isset($route['second']) && !in_array($url,$urls)){
+                $fullUrl = sprintf("%s/%s/%s",$route['first'],$route['second'],$route['third']);
+                $selfEdit = $fullUrl=='system/admin/edit' && getInteger('id',0)==$admin['id'] && get('method')=='update';
+                $selfEdit = $selfEdit || $fullUrl=='system/admin/save' && getInteger('id',0)==$admin['id'] && request('method')=='update';
+                if($selfEdit){
+                    session("NoEditAdminRole",1);
+                }else{
+                    //没有权限访问
+                    http_response_code(404);
+                    exit;
+                }
+            }
+        }
+        $this->assign('admin',$admin);
     }
 
     //获取路由
     protected function getRoute(){
         $s = request('_s');
-        $s = trim($s,'/');
+        $s = ltrim($s,'/admin');
+        $s = ltrim($s,'/');
         list($firstRoute,$secondRoute,$threeRoute) = explode('/',$s);
         $urls = array_unique([$firstRoute,$secondRoute]) ;
 
         $route = [
             'first'=>$firstRoute,
             'second'=>$secondRoute,
-            'three'=>$threeRoute,
+            'third'=>$threeRoute,
             'url'=>join('/',$urls),
         ];
         return $route;

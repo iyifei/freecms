@@ -19,7 +19,7 @@
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3"><span class="text-red">*</span>登录名</label>
                         <div class="col-md-9">
-                            <input class="form-control" maxlength="30" id="userid" name="userid" type="text" value="{$data.userid}">
+                            <input class="form-control" {if !empty($NoEditAdminRole)}readonly="readonly"{/if} maxlength="30" id="userid" name="userid" type="text" value="{$data.userid}">
                             <small class="f-s-12 text-grey-darker">建议5~30位字符串</small>
                         </div>
                     </div>
@@ -32,6 +32,7 @@
                             </small>
                         </div>
                     </div>
+                    {if empty($NoEditAdminRole)}
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3"><span class="text-red">*</span>授权角色</label>
                         <div class="col-md-9">
@@ -43,6 +44,7 @@
                             </select>
                         </div>
                     </div>
+                    {/if}
                     <div class="form-group row m-b-15">
                         <label class="col-form-label col-md-3">真实姓名</label>
                         <div class="col-md-9">
@@ -53,6 +55,17 @@
                         <label class="col-form-label col-md-3">邮箱</label>
                         <div class="col-md-9">
                             <input class="form-control" maxlength="30" id="email" name="email" type="text" value="{$data.email}">
+                        </div>
+                    </div>
+                    <div class="form-group row m-b-15">
+                        <label class="col-form-label col-md-3">头像</label>
+                        <div class="col-md-9">
+                            <input type="hidden" id="txtLitpic" name="avatar" value="{$data.avatar}" />
+                            <input class="btn btn-default btn-sm" type="button" id="uploadFile" value="上传头像">
+                            <img src="{if !empty($data.avatar)}{$myf_path}/cloud/{$data.avatar}?thumbnail=h-90{/if}" id="imgFile" alt="缩略图预览" title="缩略图预览" style="{if empty($data.avatar)}display:none;{/if}height:50px;margin-right:10px;border:1px solid #ccc;padding:1px;" />
+                            <a id="delete_attach" href="javascript:deleteLitpic()"  class="btn btn-danger btn-sm" {if empty($data.avatar)} style="display: none"{/if}>删除头像</a>
+                            <br/>
+                            <small class="f-s-12 text-grey-darker">缩略图仅支持jpg、gif、png、bmp格式，且大小不能超过1M</small>
                         </div>
                     </div>
                 </form>
@@ -79,6 +92,21 @@
         function iconChange() {
             var fa = $("#icon").val();
             $("#iconContainer").addClass(fa);
+        }
+
+        FreeCms.initUploader('uploadFile');
+
+        function uploadCallback(data,btnId) {
+            var src = data.url+"?thumbnail=h-90";
+            $("#txtLitpic").val(data.key);
+            $("#imgFile").attr('src',src).show();
+            $("#delete_attach").show();
+        }
+
+        function deleteLitpic() {
+            $("#txtLitpic").val('');
+            $("#imgFile").attr('src','').hide();
+            $("#delete_attach").hide();
         }
     </script>
 </body>

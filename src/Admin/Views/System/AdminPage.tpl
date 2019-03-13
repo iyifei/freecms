@@ -46,6 +46,7 @@
                     <thead>
                         <tr>
                             <th width="2%" data-orderable="false">ID</th>
+                            <th width="10%" class="text-nowrap ">头像</th>
                             <th class="text-nowrap ">登录名</th>
                             <th class="text-nowrap ">真实姓名</th>
                             <th class="text-nowrap ">邮箱</th>
@@ -58,6 +59,9 @@
                     {foreach from=$datas key=k item=vo}
                         <tr>
                             <td width="1%">{$vo.id}</td>
+                            <td>
+                                <img src="{$myf_path}/cloud/{if !empty($vo.avatar)}{$vo.avatar}{else}images/default_avatar.png{/if}?thumbnail=h-90" style="height:50px;">
+                            </td>
                             <td>
                                 {$vo.userid|escape:'html'}
                             </td>

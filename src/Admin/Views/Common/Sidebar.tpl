@@ -8,12 +8,14 @@
                 <a href="javascript:;" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
+                        <img src="{$myf_path}/cloud/{if !empty($admin.avatar)}{$admin.avatar}{else}images/default_avatar.png{/if}?thumbnail=h-90/w-90">
+
                         <img src="{$myf_path}/statics/admin/img/user/user-13.jpg" alt="" />
                     </div>
                     <div class="info">
                         <b class="caret pull-right"></b>
-                        admin
-                        <small>系统管理员</small>
+                        {$admin.uname|default:$admin.userid}
+                        <small>{$admin.role.name}</small>
                     </div>
                 </a>
             </li>

@@ -39,16 +39,21 @@ class AdminEditAjax extends BaseAdminPage
             $pwd = post('pwd');
             $rname = post('rname');
             $email = post('email');
-            $roleid = getInteger('roleid',0);
-            if($roleid<1){
-                FreeCmsException::throwParamExp('请选择正确的角色');
-            }
+            $avatar = post('avatar');
             $data = [
-                'userid'=>$userid,
                 'rname'=>$rname,
                 'email'=>$email,
-                'roleid'=>$roleid,
+                'avatar'=>$avatar,
             ];
+            if(empty(session('NoEditAdminRole'))){
+                $roleid = getInteger('roleid',0);
+                if($roleid<1){
+                    FreeCmsException::throwParamExp('请选择正确的角色');
+                }
+                $data['roleid']=$roleid;
+                $data['userid']=$userid;
+            }
+
             if(!empty($pwd)){
                 $data['pwd']=encodePassword($pwd,$userid);
             }

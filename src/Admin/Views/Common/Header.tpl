@@ -12,27 +12,22 @@
     <!-- end navbar-header -->
 
     <!-- begin header-nav -->
-    <ul class="navbar-nav navbar-right">
-        <li>
-            <form class="navbar-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Enter keyword" />
-                    <button type="submit" class="btn btn-search"><i class="fa fa-search"></i></button>
-                </div>
-            </form>
-        </li>
+    <ul class="navbar-nav navbar-right m-r-20">
         <li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="{$myf_path}/statics/admin/img/user/user-13.jpg" alt="" />
-                <span class="d-none d-md-inline">Adam Schwartz</span> <b class="caret"></b>
+                <img src="{$myf_path}/cloud/{if !empty($admin.avatar)}{$admin.avatar}{else}images/default_avatar.png{/if}?thumbnail=h-90/w-90">
+                <span class="d-none d-md-inline">{$admin.uname|default:$admin.userid}</span> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:;" class="dropdown-item">Edit Profile</a>
-                <a href="javascript:;" class="dropdown-item"><span class="badge badge-danger pull-right">2</span> Inbox</a>
-                <a href="javascript:;" class="dropdown-item">Calendar</a>
-                <a href="javascript:;" class="dropdown-item">Setting</a>
+                <a class="dropdown-item"
+                   data-href="{$myf_path}/admin/system/admin/edit?method=update&id={$admin.id}"
+                   href="javascript:openModel('btnEdit_Profile_{$admin.id}')"
+                   data-title="个人设置"
+                   id="btnEdit_Profile_{$admin.id}"
+                >个人设置</a>
+                <a href="javascript:;" data-click="theme-panel-expand" class="dropdown-item">系统样式</a>
                 <div class="dropdown-divider"></div>
-                <a href="javascript:;" class="dropdown-item">Log Out</a>
+                <a href="{$myf_path}/admin/quit" class="dropdown-item">退出</a>
             </div>
         </li>
     </ul>
