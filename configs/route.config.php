@@ -120,6 +120,11 @@ return [
             ['method' => 'GET', 'route' => '/member/member', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberPage::class],
             ['method' => 'GET', 'route' => '/member/member/edit', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberEditPage::class],
             ['method' => 'POST', 'route' => '/member/member/save', 'handler' =>  \FreeCMS\Admin\Pages\Member\MemberEditAjax::class],
+
+            //论坛栏目
+            ['method' => 'GET', 'route' => '/forum/column', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnPage::class],
+            ['method' => 'GET', 'route' => '/forum/column/edit', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnEditPage::class],
+            ['method' => 'POST', 'route' => '/forum/column/save', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnEditAjax::class],
         ],
         //**********************云存储*********************//
         'cloud'=>[
@@ -148,6 +153,14 @@ return [
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Member\Pages\Index\MainPage::class],
             //主页
             ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Member\Pages\Index\HomePage::class],
+        ],
+        //**********************论坛*********************//
+        'forum'=>[
+            ['method' => 'GET', 'route' => '/', 'handler' =>  FreeCMS\Forum\Pages\Index\IndexPage::class],
+            ['method' => 'GET', 'route' => '/category/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\CategoryPage::class],
+            ['method' => 'GET', 'route' => '/posts/{senid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsPage::class],
+            ['method' => 'GET', 'route' => '/posts/new/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsNewPage::class],
+            ['method' => 'POST', 'route' => '/posts/new/{cenid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
         ],
     ],
     'notFound'=>[

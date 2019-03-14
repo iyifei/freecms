@@ -832,3 +832,112 @@ function directorySize($directory){
     @closedir($dh);
     return $directorySize;
 }
+
+
+/**
+ * XSS 清除处理
+ */
+function xssClean($data, $htmlentities = 0)
+{
+    $htmlentities && $data = htmlentities($data, ENT_QUOTES, 'utf-8');
+    // Fix &entity\n;
+    $data = str_replace(array('&amp;','&lt;','&gt;'), array('&amp;amp;','&amp;lt;','&amp;gt;'), $data);
+    $data = preg_replace('/(&#*\w+)[\x00-\x20]+;/u', '$1;', $data);
+    $data = preg_replace('/(&#x*[0-9A-F]+);*/iu', '$1;', $data);
+    $data = html_entity_decode($data, ENT_COMPAT, 'UTF-8');
+
+    // Remove any attribute starting with "on" or xmlns
+    $data = preg_replace('#(<[^>]+?[\x00-\x20"\'])(?:on|xmlns)[^>]*+>#iu', '$1>', $data);
+
+    // Remove javascript: and vbscript: protocols
+    $data = preg_replace('#([a-z]*)[\x00-\x20]*=[\x00-\x20]*([`\'"\\\\]*)[\x00-\x20]*j[\x00-\x20]*a[\x00-\x20]*v[\x00-\x20]*a[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2nojavascript...', $data);
+    $data = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"\\\\]*)[\x00-\x20]*v[\x00-\x20]*b[\x00-\x20]*s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:#iu', '$1=$2novbscript...', $data);
+    $data = preg_replace('#([a-z]*)[\x00-\x20]*=([\'"\\\\]*)[\x00-\x20]*-moz-binding[\x00-\x20]*:#u', '$1=$2nomozbinding...', $data);
+
+    // Only works in IE: <span style="width: expression(alert('Ping!'));"></span>
+    $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"\\\\]*.*?expression[\x00-\x20]*\([^>]*+>#i', '$1>', $data);
+    $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"\\\\]*.*?behaviour[\x00-\x20]*\([^>]*+>#i', '$1>', $data);
+    $data = preg_replace('#(<[^>]+?)style[\x00-\x20]*=[\x00-\x20]*[`\'"\\\\]*.*?s[\x00-\x20]*c[\x00-\x20]*r[\x00-\x20]*i[\x00-\x20]*p[\x00-\x20]*t[\x00-\x20]*:*[^>]*+>#iu', '$1>', $data);
+
+    // Remove namespaced elements (we do not need them)
+    $data = preg_replace('#</*\w+:\w[^>]*+>#i', '', $data);
+
+    do
+    {
+        // Remove really unwanted tags
+        $old_data = $data;
+        $data = preg_replace('#</*(?:applet|b(?:ase|gsound|link)|embed|frame(?:set)?|i(?:frame|layer)|l(?:ayer|ink)|meta|object|s(?:cript|tyle)|title|xml)[^>]*+>#i', '', $data);
+    }
+    while ($old_data !== $data);
+
+    // we are done...
+    $data = filter_remote_img_type($data, FALSE);
+    return $data;
+}
+
+/**
+ * 过滤内容中有问题网络图片
+ * @author phpseyo<phpseyo@qq.com>
+ * @param string $text 过滤文本
+ * @param boolean $bbcode 是否为BBCODE类型
+ * @return string
+ */
+function filter_remote_img_type($text, $bbcode = TRUE)
+{
+    $pattern = $bbcode ? "/\[img[^\]]*\]\s*(.*?)+\s*\[\/img\]/is" : "/<img[^>]+src=[\'|\"]([^\'|\"]+)[\'|\"][^>]*[\/]?>/is";
+    preg_match_all($pattern, $text, $matches);
+    foreach ($matches[1] as $k => $src) {
+        $data = get_headers($src);
+        $header_str = implode('', $data);
+        if (FALSE === strpos($header_str, 'Content-Type: image') || FALSE !== strpos($header_str, 'HTTP/1.1 401') || FALSE !== strpos($header_str, 'HTTP/1.1 404')) {
+            $text = str_replace($matches[0][$k], '', $text);
+        }
+    }
+    return $text;
+}
+
+/**
+ * Function:mdate
+ * 时间转换
+ *
+ * @param null $time
+ *
+ * @return false|string
+ */
+function mdate($time = NULL) {
+    if(is_string($time)){
+        $time = strtotime($time);
+    }
+    $text = '';
+    $time = $time === NULL || $time > time() ? time() : intval($time);
+    $t = time() - $time; //时间差 （秒）
+    $y = date('Y', $time)-date('Y', time());//是否跨年
+    switch($t){
+        case $t == 0:
+            $text = '刚刚';
+            break;
+        case $t < 60:
+            $text = $t . '秒前'; // 一分钟内
+            break;
+        case $t < 60 * 60:
+            $text = floor($t / 60) . '分钟前'; //一小时内
+            break;
+        case $t < 60 * 60 * 24:
+            $text = floor($t / (60 * 60)) . '小时前'; // 一天内
+            break;
+        case $t < 60 * 60 * 24 * 3:
+            $text = floor($time/(60*60*24)) ==1 ?'昨天 ' . date('H:i', $time) : '前天 ' . date('H:i', $time) ; //昨天和前天
+            break;
+        case $t < 60 * 60 * 24 * 30:
+            $text = date('m月d日 H:i', $time); //一个月内
+            break;
+        case $t < 60 * 60 * 24 * 365&&$y==0:
+            $text = date('m月d日', $time); //一年内
+            break;
+        default:
+            $text = date('Y年m月d日', $time); //一年以前
+            break;
+    }
+
+    return $text;
+}
