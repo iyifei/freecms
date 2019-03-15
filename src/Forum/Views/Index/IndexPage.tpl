@@ -75,8 +75,8 @@
                             <span class="total-post">{$vo.subjectCount}</span> <span class="divider">/</span> <span class="total-comment">{$vo.totalPosts}</span>
                         </div>
                         <div class="latest-post">
-                            <h4 class="title"><a href="category_list.html">Migrate from jQuery 1.8.x to jQuery 2.0.x</a></h4>
-                            <p class="time">Yesterday 10:49pm <a href="category_list.html" class="user">admin</a></p>
+                            <h4 class="title"><a href="{$vo.lastSubject.linkurl}">{$vo.lastSubject.title}</a></h4>
+                            <p class="time">{$vo.lastSubject.createTime} <a href="{$vo.lastSubject.createMember.profileurl}">{$vo.lastSubject.createMember.uname}</a> </p>
                         </div>
                     </div>
                     <!-- end info-container -->

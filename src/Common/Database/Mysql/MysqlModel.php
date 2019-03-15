@@ -85,6 +85,7 @@ abstract class MysqlModel extends MysqlDatabase
         return $this->find('id',$id);
     }
 
+
     /**
      * @param int $id
      * @return mixed
@@ -109,6 +110,22 @@ abstract class MysqlModel extends MysqlDatabase
         }
         $where = sprintf("id in(%s)",$ids);
         return $this->where($where)->delete();
+    }
+
+    /**
+     * Function:findByIds
+     * 查询
+     *
+     * @param array $ids
+     *
+     * @return array|bool
+     */
+    public function findByIds($ids){
+        if(is_array($ids)){
+            $ids = join(',',$ids);
+        }
+        $where = sprintf("id in(%s)",$ids);
+        return $this->where($where)->findAll();
     }
 
 

@@ -31,12 +31,7 @@ abstract class BaseForumPage extends Page
      * 可继承重写登陆与签名状态
      */
     protected function declarations(){
-//        $token = session(self::CLOUD_TOKEN_KEY);
-//        if(empty($token)){
-//            $token = Utils::getUUID();
-//            session(self::CLOUD_TOKEN_KEY,$token);
-//        }
-//        $this->assign('uploadFileUrl',getLocalOssDomain().'/upload?token='.$token);
+        $this->assign('forum',config('forum'));
     }
 
 
@@ -44,6 +39,8 @@ abstract class BaseForumPage extends Page
     public function beforeExecute() {
 
         parent::beforeExecute();
+
+        $this->smarty->addPluginsDir(APP_PATH.'/SmartyPlugins');
 
         //执行重置状态
         $this->declarations();
@@ -71,5 +68,25 @@ abstract class BaseForumPage extends Page
     public function getCurrentMemberId(){
         $mem = $this->getCurrentMember();
         return $mem['id'];
+    }
+
+
+    /**
+     * Function:getPosition
+     * 获取位置信息
+     *
+     * @param $list
+     *
+     * @return string
+     */
+    protected function getPosition($list){
+        $ul = '<ul class="breadcrumb">';
+        $ul.=sprintf('<li><a href="%s">%s</a>',getBaseURL().'/forum','论坛首页');
+        foreach ($list as $item){
+            $ul.= sprintf('<li><a href="%s">%s</a>',$item['url'],$item['name']);
+        }
+        $ul.='<li class="active">&nbsp;</li>';
+        $ul.='</ul>';
+        return $ul;
     }
 }

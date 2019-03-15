@@ -29,21 +29,15 @@ class CategoryPage extends BaseForumPage
         $data  = $model->link('parentColumn')->findById($id);
         if(!empty($data)){
             $data['cenid']=$vars['cenid'];
-            $this->assign('data',$data);
-
-            //该栏目下的主题帖子
-            $sModel = new CmsForumSubjectModel();
-            $rows = $sModel->link(['createMember','lastMember'])->orderBy('lasttime desc')->findAll();
-            foreach ($rows as $k=>$row){
-                $row['lastTime']=mdate($row['lasttime']);
-                $row['createTime']=mdate($row['createtime']);
-                $row['senid']=IdHash::encode($row['id']);
-                $rows[$k] = $row;
-            }
-            $res = [
-                'rows'=>$rows,
+            $data['pagetype']='subject';
+            $data['title']=$data['name'];
+            $data['page']=$vars['p'];
+            $pos = [
+                ['name'=>$data['parentColumn']['name'],'url'=>'javascript:;'],
             ];
-            $this->assign('res',$res);
+            $data['position']=$this->getPosition($pos);
+            $data['newsubjecturl']=sprintf('%s/forum/posts/new/%s.html',getBaseURL(),$vars['cenid']);
+            $this->assign('freecms',$data);
             $this->display();
         }
     }

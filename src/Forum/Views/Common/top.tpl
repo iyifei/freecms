@@ -12,7 +12,7 @@
             <a href="index.html" class="navbar-brand">
                 <span class="navbar-logo"></span>
                 <span class="brand-text">
-                        Support Forum
+                        {$forum.title}
                     </span>
             </a>
         </div>

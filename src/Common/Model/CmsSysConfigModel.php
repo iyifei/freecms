@@ -120,6 +120,14 @@ class CmsSysConfigModel extends Model
         }
         File::writeArray(SYS_PATH . '/configs/oss.config.php', $ossConfig);
 
+        //更新论坛配置
+        $forum = [
+            'title'=>$data['sys_cfg_forum_title']['value'],
+            'description'=>$data['sys_cfg_forum_description']['value'],
+            'keywords'=>$data['sys_cfg_forum_keywords']['value'],
+        ];
+        File::writeArray(SYS_PATH . '/configs/forum.config.php', $forum);
+
         return $data;
     }
 

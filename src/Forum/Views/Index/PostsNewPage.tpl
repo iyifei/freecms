@@ -44,7 +44,11 @@
 
                 <!-- begin comment-section -->
                 <div class="comment-banner-msg">
-                    只能登录账户才能发帖，请先<a href="">登录</a>或<a href="">注册</a>账户
+                    {if empty($CurrentMember)}
+                        只能登录账户才能发帖，请先<a href="{$myf_path}/member/login?goback=1">登录</a>或<a href="{$myf_path}/member/register?goback=1">注册</a>账户
+                    {else}
+                        <span class="text-danger">请遵守文明社区公约言论规则，不得违反国家法律法规</span>
+                    {/if}
                 </div>
                 <div class="panel panel-forum">
                     <div class="panel-heading">
@@ -57,9 +61,7 @@
                                 <input type="text" name="title" id="txtTitle" class="form-control" maxlength="200" placeholder="输入主题标题,必填">
                             </div>
                             <div class="m-t-10">
-                                <script type="text/plain" id="myEditor" style="width:100%;height:240px;">
-                                    <p>这里我可以写一些输入提示</p>
-                                </script>
+                                <script type="text/plain" id="myEditor" style="width:100%;height:240px;"></script>
                             </div>
                             <div class="m-t-10">
                                 <div class="row">
@@ -130,7 +132,7 @@ $(function () {
             if(res.status==0){
                 FreeCms.success('帖子发布成功',function () {
                     window.location.href = '{$myf_path}/forum/posts/'+res.data.senid+".html";
-                })
+                },600)
             }else{
                 FreeCms.error(res.errmsg);
                 changeAuthCode();

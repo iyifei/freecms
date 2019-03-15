@@ -31,9 +31,10 @@ class PostsAjax extends BaseForumPage
             FreeCmsException::throwParamExp('验证码错误');
         }
         session('captcha',null);
-        $cid = IdHash::decode($vars['cenid']);
-        $mid = $this->getCurrentMemberId();
         $type = requestNotEmpty('type');
+
+
+        $mid = $this->getCurrentMemberId();
         $body = xssClean(post('body'));
         $now = getCurrentTime();
         $sModel = new CmsForumSubjectModel();
@@ -42,6 +43,7 @@ class PostsAjax extends BaseForumPage
         $cdata = [];
         //新建主题
         if($type=='new'){
+            $cid = IdHash::decode($vars['cenid']);
             $title  = requestNotEmpty('title');
             $subject  = [
                 'cid'=>$cid,
@@ -62,16 +64,17 @@ class PostsAjax extends BaseForumPage
         }else{
             //回帖
             $ptype = 2;
-            $sid = IdHash::decode(requestNotEmpty('senid'),0);
+            $sid = IdHash::decode($vars['senid'],0);
             $srow = $sModel->findById($sid);
             if(empty($srow)){
                 FreeCmsException::throwParamExp('主题错误');
             }else{
+                $cid = $srow['cid'];
                 $replies = $pModel->where('sid='.$sid)->count();
                 $su = [
                     'replies'=>$replies+1
                 ];
-                $sModel->updateById($su,$sid);
+                $sModel->updateById($sid,$su);
             }
         }
         //帖子

@@ -99,6 +99,37 @@ class Pagination
         return $html;
     }
 
+
+    public function showBootstrap(){
+        $html = "";
+        $html .= sprintf("<li><span>第%d/%d页</span></li>", $this->currentPage, $this->totalPageCount);
+        if ($this->currentPage > 1) {
+            $firstPageUrl = sprintf($this->pageLink, 1);
+            $html .= sprintf("<li><a href='%s'>首页</a></li>", $firstPageUrl);
+        } else {
+            $html .= "<li class='disabled'><a>首页</a></li>";
+        }
+
+        $ca = $this->calculateCurrentPageNum();
+        for ($i = 0; $i < count($ca); $i++) {
+            $page = $ca[$i];
+            if ($page == $this->currentPage) {
+                $html .= sprintf("<li class='active'><a>%d</a></li>", $page);
+            } else {
+                $url = sprintf($this->pageLink, $page);
+                $html .= sprintf("<li><a href='%s'>%d</a></li>", $url, $page);
+            }
+        }
+
+        if ($this->currentPage < $this->totalPageCount) {
+            $lastPageUrl = sprintf($this->pageLink, $this->totalPageCount);
+            $html .= sprintf("<li><a href='%s'>末页</a></li>", $lastPageUrl);
+        } else {
+            $html .= "<li class='disabled'><a>末页</a></li>";
+        }
+        return $html;
+    }
+
     /**
      * 计算当前显示的页面
      * @return array

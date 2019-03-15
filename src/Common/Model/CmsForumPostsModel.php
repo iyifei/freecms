@@ -23,4 +23,16 @@ class CmsForumPostsModel extends Model
         ],
     ];
 
+    public function formatRows($rows,$start){
+        $mem = new CmsMemberModel();
+        foreach ($rows as $key=>$row){
+            $row['index']=$key+$start;
+            $row['createTime']=mdate($row['createtime']);
+            if(isset($row['member'])){
+                $row['member']=$mem->formatMember($row['member']);
+            }
+            $rows[$key]=$row;
+        }
+        return $rows;
+    }
 }

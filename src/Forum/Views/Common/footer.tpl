@@ -9,11 +9,9 @@
             <div class="col-md-4">
                 <!-- begin section-container -->
                 <div class="section-container">
-                    <h4>关于FreeCMS论坛</h4>
+                    <h4>关于{$forum.title}</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce ultrices ipsum in elementum porttitor.
-                        Cras porttitor fermentum nisl non elementum. Nulla in placerat libero. Nulla pharetra purus eget diam dictum
-                        ullamcorper nec et eros. Suspendisse consectetur nulla ut volutpat aliquam.
+                      {$forum.description}
                     </p>
                 </div>
                 <!-- end section-container -->
@@ -23,20 +21,14 @@
             <div class="col-md-4">
                 <!-- begin section-container -->
                 <div class="section-container">
-                    <h4>Latest Post</h4>
+                    <h4>最新回帖</h4>
                     <ul class="latest-post">
+                        {subject id="arc" limit="3"}
                         <li>
-                            <h4 class="title"><a href="#">Consectetur adipiscing elit ultrices</a></h4>
-                            <p class="time">yesterday 10:42am</p>
+                            <h4 class="title"><a href="{$arc.linkurl}">{$arc.title}</a></h4>
+                            <p class="time">{$arc.lastTime}</p>
                         </li>
-                        <li>
-                            <h4 class="title"><a href="#">Fusce ultrices ipsum porttitor</a></h4>
-                            <p class="time">10/04/2015</p>
-                        </li>
-                        <li>
-                            <h4 class="title"><a href="#">Cras porttitor fermentum adipiscing</a></h4>
-                            <p class="time">02/04/2015</p>
-                        </li>
+                        {/subject}
                     </ul>
                 </div>
                 <!-- end section-container -->
@@ -46,17 +38,11 @@
             <div class="col-md-4">
                 <!-- begin section-container -->
                 <div class="section-container">
-                    <h4>New Users</h4>
+                    <h4>新注册会员</h4>
                     <ul class="new-user">
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-1.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-2.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-3.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-4.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-5.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-6.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-7.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-8.jpg" alt="" /></a></li>
-                        <li><a href="#"><img src="{$myf_path}/statics/public/img/user/user-9.jpg" alt="" /></a></li>
+                        {member id="mem" limit="9"}
+                        <li><a href="{$mem.profileurl}"><img src="{$mem.avatarThumbUrl}" alt="" /></a></li>
+                        {/member}
                     </ul>
                 </div>
                 <!-- end section-container -->

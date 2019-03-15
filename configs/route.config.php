@@ -125,6 +125,8 @@ return [
             ['method' => 'GET', 'route' => '/forum/column', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnPage::class],
             ['method' => 'GET', 'route' => '/forum/column/edit', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnEditPage::class],
             ['method' => 'POST', 'route' => '/forum/column/save', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ColumnEditAjax::class],
+            ['method' => 'GET', 'route' => '/forum/config', 'handler' =>  \FreeCMS\Admin\Pages\Forum\ConfigPage::class],
+            ['method' => 'POST', 'route' => '/forum/config/save', 'handler' =>  \FreeCMS\Admin\Pages\System\ConfigEditAjax::class],
         ],
         //**********************云存储*********************//
         'cloud'=>[
@@ -158,7 +160,10 @@ return [
         'forum'=>[
             ['method' => 'GET', 'route' => '/', 'handler' =>  FreeCMS\Forum\Pages\Index\IndexPage::class],
             ['method' => 'GET', 'route' => '/category/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\CategoryPage::class],
+            ['method' => 'GET', 'route' => '/category/{cenid}/{p:\d+}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\CategoryPage::class],
             ['method' => 'GET', 'route' => '/posts/{senid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsPage::class],
+            ['method' => 'GET', 'route' => '/posts/{senid}/{p:\d+}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsPage::class],
+            ['method' => 'POST', 'route' => '/posts/{senid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
             ['method' => 'GET', 'route' => '/posts/new/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsNewPage::class],
             ['method' => 'POST', 'route' => '/posts/new/{cenid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
         ],
