@@ -153,6 +153,8 @@ return [
             ['method' => 'POST', 'route' => '/register','handler' => \FreeCMS\Member\Pages\Index\RegisterAjax::class],
             //框架主页
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Member\Pages\Index\MainPage::class],
+            ['method' => 'GET', 'route' => '/profile','handler' => \FreeCMS\Member\Pages\Index\ProfilePage::class],
+            ['method' => 'POST', 'route' => '/profile/save','handler' => \FreeCMS\Member\Pages\Index\ProfileEditAjax::class],
             //主页
             ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Member\Pages\Index\HomePage::class],
             //退出
@@ -169,6 +171,10 @@ return [
             ['method' => 'GET', 'route' => '/posts/new/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsNewPage::class],
             ['method' => 'POST', 'route' => '/posts/new/{cenid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
             ['method' => 'GET', 'route' => '/search', 'handler' =>  FreeCMS\Forum\Pages\Index\SearchPage::class],
+            ['method' => 'GET', 'route' => '/user/subject/{menid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\UserSubjectPage::class],
+            ['method' => 'GET', 'route' => '/user/subject/{menid}/{p:\d+}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\UserSubjectPage::class],
+            ['method' => 'GET', 'route' => '/user/posts/{menid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\UserPostsPage::class],
+            ['method' => 'GET', 'route' => '/user/posts/{menid}/{p:\d+}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\UserPostsPage::class],
             ['method' => 'POST', 'route' => '/delete', 'handler' =>  FreeCMS\Forum\Pages\Index\DeleteAjax::class],
         ],
     ],

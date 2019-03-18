@@ -43,6 +43,21 @@ function smarty_function_page($params, &$smarty) {
         $bind = ['title'=>"%{$params['keyword']}%"];
         $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
         $total = $model->where($where,$bind)->count();
+    }elseif($arctype['pagetype']=='usersubject'){
+        $params['mid']=$arctype['id'];
+        $menid = $arctype['menid'];
+        $where = 'createMemberId=:mid';
+        $bind = ['mid'=>$params['mid']];
+        $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
+        $total = $model->where($where,$bind)->count();
+        $link = getBaseURL()."/forum/user/subject/{$menid}/%d.html";
+    }elseif($arctype['pagetype']=='userposts'){
+        $params['mid']=$arctype['id'];
+        $menid = $arctype['menid'];
+        $sql = sprintf('select count(*) as Total from cms_forum_subject where id in(select sid from cms_forum_posts where mid=%d)',$params['mid']);
+        $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
+        $total = $model->countBySql($sql);
+        $link = getBaseURL()."/forum/user/posts/{$menid}/%d.html";
     }
     $pager = new \FreeCMS\Common\Libs\Pagination($pagesize,$total,$page,$link);
     return $pager->showBootstrap();

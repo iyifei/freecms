@@ -1,5 +1,5 @@
 <meta charset="utf-8" />
-<title>FreeCMS内容管理系统</title>
+<title>会员中心-FreeCMS内容管理系统</title>
 <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
 <meta content="免费内容管理系统" name="description" />
 <meta content="minyifei.cn" name="author" />

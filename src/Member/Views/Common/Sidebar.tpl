@@ -48,22 +48,12 @@
             <li class="has-sub">
                 <a href="javascript:;">
                     <b class="caret pull-right"></b>
-                    <i class="fa fa-question-circle"></i>
-                    <span>文章管理</span>
-                </a>
-                <ul class="sub-menu">
-                    <li><a id="sidebar-menu-1" href="{$myf_path}/member#!article/main">我的文章</a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="javascript:;">
-                    <b class="caret pull-right"></b>
-                    <i class="fa fa-question-circle"></i>
+                    <i class="fas fa-comments"></i>
                     <span>帖子管理</span>
                 </a>
                 <ul class="sub-menu">
-                    <li><a id="sidebar-menu-2" href="{$myf_path}/member#!forum/subject">我的主贴</a></li>
-                    <li><a id="sidebar-menu-3" href="{$myf_path}/member#!forum/posts">我的回帖</a></li>
+                    <li><a target="_blank" href="{$myf_path}/forum/user/subject/{$CurrentMember.menid}.html">我的主贴</a></li>
+                    <li><a id="sidebar-menu-3" href="{$myf_path}/forum/user/posts/{$CurrentMember.menid}.html">我的回帖</a></li>
                 </ul>
             </li>
             <li class="has-sub">

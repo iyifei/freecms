@@ -25,7 +25,12 @@
                 <span class="d-none d-md-inline">{$CurrentMember.userid}</span> <b class="caret"></b>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
-                <a href="javascript:;" class="dropdown-item">个人设置</a>
+                <a class="dropdown-item"
+                   data-href="{$myf_path}/member/profile"
+                   href="javascript:openModel('btnEdit_profile')"
+                   data-title="编辑属性"
+                   id="btnEdit_profile"
+                >个人设置</a>
                 <div class="dropdown-divider"></div>
                 <a href="{$myf_path}/member/quit" class="dropdown-item">退出</a>
             </div>

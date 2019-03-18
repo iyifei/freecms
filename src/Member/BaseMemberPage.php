@@ -69,6 +69,21 @@ abstract class BaseMemberPage extends Page
         $this->assign('CurrentMember',$member);
     }
 
+    public function getCurrentMember(){
+        return session("current_member");
+    }
+
+    public function getCurrentMemberId(){
+        $mem = $this->getCurrentMember();
+        if(!empty($mem)){
+            $mid = $mem['id'];
+        }else{
+            $mid = 0;
+        }
+        return $mid;
+    }
+
+
 
     //获取路由
     protected function getRoute(){

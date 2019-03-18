@@ -32,22 +32,36 @@ function smarty_block_subjectlist($params,$content,&$smarty,&$repeat){
         $orderWay = 'desc';
     }
     //所属栏目id
-    $colunmId = $arctype['id'];
+    $id = $arctype['id'];
     $params['pagesize']=intval(getParamsValue($params,'pagesize',20));
 
     $dataIndex = md5(__FUNCTION__ . md5(serialize($params)));
     $data = $smarty->getBlockData($dataIndex);
     if(!isset($data)){
+        $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
         $bind = [];
-        $where='cid=:cid';
-        $bind['cid']=$colunmId;
+        if($arctype['pagetype']=='usersubject'){
+            $where='createMemberId=:mid';
+            $bind['mid']=$id;
+        }elseif($arctype['pagetype']=='userposts'){
+            $sql  = 'select sid from cms_forum_posts where mid=:mid';
+            $prows = $model->findAllBySql($sql,['mid'=>$id]);
+            $sids = array_column($prows,'sid');
+            if(empty($sids)){
+               $sids=[0];
+            }
+            $where = 'id in('.join(',',$sids).')';
+        }else{
+            $where='cid=:cid';
+            $bind['cid']=$id;
+        }
         //读取第几页
         $page = $params["page"];
         if ($page <= 1) {
             $page = 1;
         }
         $start = ($page - 1) * $params['pagesize'];
-        $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
+
         $rows =$model->link(['createMember','lastMember','column'])
                      ->where($where,$bind)
                      ->orderBy(sprintf("%s %s", $orderBy, $orderWay))
