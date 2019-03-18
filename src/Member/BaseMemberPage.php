@@ -61,17 +61,12 @@ abstract class BaseMemberPage extends Page
     //登录处理
     protected function declareLogin(){
         //登录校验
-        $admin = session('admin');
-        if(empty($admin)){
-            //jumpUrl(getBaseURL().'/');
+        $member = session('current_member');
+        if(empty($member)){
+            jumpUrl(getBaseURL().'/member/login');
         }
 
-        //获取系统菜单信息
-        $m = new CmsMenuModel();
-        $menus  = $m->findAllMenu();
-        $menuTree = easyuitree($menus);
-        $this->assign('menuTree',$menuTree);
-        $this->assign('menuJson',json_encode($menus));
+        $this->assign('CurrentMember',$member);
     }
 
 

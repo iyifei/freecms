@@ -17,6 +17,8 @@ use FreeCMS\Forum\BaseForumPage;
 class CategoryPage extends BaseForumPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *

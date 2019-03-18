@@ -8,12 +8,12 @@
                 <a href="javascript:;" data-toggle="nav-profile">
                     <div class="cover with-shadow"></div>
                     <div class="image">
-                        <img src="{$myf_path}/statics/admin/img/user/user-13.jpg" alt="" />
+                        <img src="{$CurrentMember.avatarThumbUrl}" alt="" />
                     </div>
                     <div class="info">
                         <b class="caret pull-right"></b>
-                        test-abc
-                        <small>撩妹高手</small>
+                        {$CurrentMember.userid}
+                        <small>{$CurrentMember.uname}</small>
                     </div>
                 </a>
             </li>
@@ -44,6 +44,27 @@
                     <i class="fa fa-home"></i>
                     <span>主页</span>
                 </a>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    <i class="fa fa-question-circle"></i>
+                    <span>文章管理</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a id="sidebar-menu-1" href="{$myf_path}/member#!article/main">我的文章</a></li>
+                </ul>
+            </li>
+            <li class="has-sub">
+                <a href="javascript:;">
+                    <b class="caret pull-right"></b>
+                    <i class="fa fa-question-circle"></i>
+                    <span>帖子管理</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a id="sidebar-menu-2" href="{$myf_path}/member#!forum/subject">我的主贴</a></li>
+                    <li><a id="sidebar-menu-3" href="{$myf_path}/member#!forum/posts">我的回帖</a></li>
+                </ul>
             </li>
             <li class="has-sub">
                 <a href="javascript:;">

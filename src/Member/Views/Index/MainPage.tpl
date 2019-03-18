@@ -89,14 +89,17 @@
         $('#sidebar-menu-'+menuId).parents('li').addClass('active');
     }
 
+    {literal}
     //网站路由
     var freeCmsRouter;
     $(document).ready(function () {
-        var menus = eval('(' + $("#sidebar-json-data").val() + ')');
+        var menus = [
+            {id:'0',url:'home'},
+            {id:'1',url:'article/main'},
+            {id:'2',url:'forum/subject'},
+            {id:'3',url:'forum/posts'}
+        ];
         freeCmsRouter = new Router();
-        freeCmsRouter.add('home', '0',function(hash,id) {
-            loadPage(hash,id);
-        });
         for(var i=0;i<menus.length;i++){
             var menu = menus[i];
             freeCmsRouter.add(menu['url'], menu['id'],function(hash,id) {
@@ -105,6 +108,7 @@
         }
         freeCmsRouter.start();
     })
+    {/literal}
 
     //打开弹出框
     var modelState = false;

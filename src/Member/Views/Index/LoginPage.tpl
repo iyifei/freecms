@@ -56,7 +56,7 @@
                     <button type="button" id="btnSubmit" class="btn btn-success btn-block btn-lg">立即登录</button>
                 </div>
                 <div class="m-t-20">
-                    还没有会员账号? 立即 <a href="{$myf_path}/member/register">注册</a>.
+                    还没有会员账号? 立即 <a href="{$myf_path}/member/register">注册</a>，返回 <a href="{$myf_path}/">网站</a>,<a href="{$myf_path}/forum">论坛</a>
                 </div>
             </form>
         </div>
@@ -64,6 +64,7 @@
     </div>
     <!-- end login -->
     <input type="hidden" id="submitUrl" value="{$myf_path}/member/login">
+    <input type="hidden" id="goUrl" value="{$go}">
 
     <ul class="login-bg-list clearfix">
         <li class="active"><a href="javascript:;" data-click="change-bg" data-img="{$myf_path}/statics/admin/img/login-bg/login-bg-17.jpg" style="background-image: url({$myf_path}/statics/admin/img/login-bg/login-bg-17.jpg)"></a></li>
@@ -124,8 +125,9 @@
     function callbackSaveSuccess() {
 
         FreeCms.success('登录成功,跳转中~',function () {
-            window.location.href = '{$myf_path}/member';
-        });
+            var goUrl = $("#goUrl").val();
+            window.location.href = goUrl;
+        },600);
     }
 
     function callbackSaveFail() {

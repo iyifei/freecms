@@ -17,6 +17,8 @@ use FreeCMS\Member\BaseMemberPage;
 class LoginAjax extends BaseMemberPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *
@@ -34,6 +36,7 @@ class LoginAjax extends BaseMemberPage
         $member = $model->where('userid=:userId',['userId'=>$userId])->findFirst();
         if($member && $member['pwd']==encodePassword($pwd)){
             session('captcha',null);
+            $member = $model->formatMember($member);
             session('current_member',$member);
             $this->successJson('ok');
         }else{

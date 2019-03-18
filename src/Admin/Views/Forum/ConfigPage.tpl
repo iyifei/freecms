@@ -10,7 +10,7 @@
 <!-- end breadcrumb -->
 <!-- begin page-header -->
 <h1 class="page-header">
-    基本参数
+    论坛基本参数配置
 </h1>
 
 

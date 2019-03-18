@@ -32,6 +32,8 @@ abstract class BaseForumPage extends Page
      */
     protected function declarations(){
         $this->assign('forum',config('forum'));
+        $member = $this->getCurrentMember();
+        $this->assign('CurrentMember',$member);
     }
 
 
@@ -56,9 +58,10 @@ abstract class BaseForumPage extends Page
         //登录校验
         $member = session('current_member');
         if(empty($member)){
-            jumpUrl(getBaseURL().'/member/login');
+            $go = $_SERVER['REQUEST_URI'];
+            jumpUrl(getBaseURL().'/member/login?go='.$go);
         }
-        $this->assign('CurrentMember',$member);
+
     }
 
     public function getCurrentMember(){
@@ -67,9 +70,23 @@ abstract class BaseForumPage extends Page
 
     public function getCurrentMemberId(){
         $mem = $this->getCurrentMember();
-        return $mem['id'];
+        if(!empty($mem)){
+            $mid = $mem['id'];
+        }else{
+            $mid = 0;
+        }
+        return $mid;
     }
 
+    public function getAdminRoleId(){
+        $admin = session('admin');
+        if(!empty($admin)){
+            $roleId = $admin['roleid'];
+        }else{
+            $roleId = 0;
+        }
+        return $roleId;
+    }
 
     /**
      * Function:getPosition

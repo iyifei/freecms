@@ -17,6 +17,8 @@ use FreeCMS\Forum\BaseForumPage;
 class PostsPage extends BaseForumPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *
@@ -38,6 +40,7 @@ class PostsPage extends BaseForumPage
         $subject['position']=$this->getPosition($pos);
         $subject['page']=$vars['p'];
         $subject['pagetype']='posts';
+        $subject['currUrl']=$_SERVER['REQUEST_URI'];
         $this->assign('freecms',$subject);
         $this->display();
     }

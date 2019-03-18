@@ -155,6 +155,8 @@ return [
             ['method' => 'GET', 'route' => '/','handler' => \FreeCMS\Member\Pages\Index\MainPage::class],
             //主页
             ['method' => 'GET', 'route' => '/home','handler' => \FreeCMS\Member\Pages\Index\HomePage::class],
+            //退出
+            ['method' => 'GET', 'route' => '/quit','handler' => \FreeCMS\Member\Pages\Index\QuitAjax::class],
         ],
         //**********************论坛*********************//
         'forum'=>[
@@ -166,6 +168,8 @@ return [
             ['method' => 'POST', 'route' => '/posts/{senid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
             ['method' => 'GET', 'route' => '/posts/new/{cenid}.html', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsNewPage::class],
             ['method' => 'POST', 'route' => '/posts/new/{cenid}', 'handler' =>  FreeCMS\Forum\Pages\Index\PostsAjax::class],
+            ['method' => 'GET', 'route' => '/search', 'handler' =>  FreeCMS\Forum\Pages\Index\SearchPage::class],
+            ['method' => 'POST', 'route' => '/delete', 'handler' =>  FreeCMS\Forum\Pages\Index\DeleteAjax::class],
         ],
     ],
     'notFound'=>[

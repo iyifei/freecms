@@ -13,6 +13,12 @@
 
     <!-- begin header-nav -->
     <ul class="navbar-nav navbar-right m-r-20">
+        <li>
+            <a href="{$myf_path}/" target="_blank">网站首页</a>
+        </li>
+        <li>
+            <a href="{$myf_path}/forum" target="_blank">论坛首页</a>
+        </li>
         <li class="dropdown navbar-user">
             <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="{$myf_path}/cloud/{if !empty($admin.avatar)}{$admin.avatar}{else}images/default_avatar.png{/if}?thumbnail=h-90/w-90">

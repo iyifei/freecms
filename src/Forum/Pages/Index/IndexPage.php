@@ -16,6 +16,8 @@ use FreeCMS\Forum\BaseForumPage;
 class IndexPage extends BaseForumPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *
@@ -30,6 +32,7 @@ class IndexPage extends BaseForumPage
         //总主题数
         $totalSubject = (new CmsForumSubjectModel())->count();
         $this->assign('totalSubject',$totalSubject);
+        //
         $this->display();
     }
 }

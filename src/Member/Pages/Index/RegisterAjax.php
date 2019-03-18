@@ -16,6 +16,8 @@ use FreeCMS\Member\BaseMemberPage;
 class RegisterAjax extends BaseMemberPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *

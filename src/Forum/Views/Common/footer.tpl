@@ -82,6 +82,7 @@
 <script src="{$myf_path}/statics/public/plugins/jquery/jquery-3.2.1.min.js"></script>
 <script src="{$myf_path}/statics/public/plugins/bootstrap3/js/bootstrap.min.js"></script>
 <script src="{$myf_path}/statics/public/plugins/jquery-toast/jquery.toast.min.js"></script>
+<script src="{$myf_path}/statics/admin/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 <!--[if lt IE 9]>
 <script src="{$myf_path}/statics/public/crossbrowserjs/html5shiv.js"></script>
 <script src="{$myf_path}/statics/public/crossbrowserjs/respond.min.js"></script>
@@ -95,5 +96,37 @@
 <script>
     $(document).ready(function() {
         App.init();
+
+        $(".search").keyup(function (event) {
+            if(event.which==13){
+                var value = $(this).val();
+                if(value!=''){
+                    window.location.href ='{$myf_path}/forum/search?keyword='+value;
+                }
+            }
+        })
     });
+
+    function search(txtId) {
+        var value = $("#"+txtId).val();
+        if(value!=''){
+            window.location.href ='{$myf_path}/forum/search?keyword='+value;
+        }
+    }
+
+    function deleteRow(id,type) {
+        FreeCms.confirm('确定要删除吗？',function () {
+            var data = {
+                type:type,
+                enid:id
+            };
+            $.post("{$myf_path}/forum/delete",data,function (res) {
+                if(res.status==0 && res.data=='ok'){
+                    FreeCms.success('操作成功',function () {
+                        window.location.reload();
+                    },600)
+                }
+            })
+        })
+    }
 </script>

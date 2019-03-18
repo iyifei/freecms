@@ -36,6 +36,13 @@ function smarty_function_page($params, &$smarty) {
         $total = $model->where($where,$bind)->count();
         $senid = $arctype['senid'];
         $link = getBaseURL()."/forum/posts/{$senid}/%d.html";
+    }elseif($arctype['pagetype']=='search'){
+        //读取所属栏目分类
+        $params['keyword']=$arctype['keyword'];
+        $where = 'title like :title';
+        $bind = ['title'=>"%{$params['keyword']}%"];
+        $model = new \FreeCMS\Common\Model\CmsForumSubjectModel();
+        $total = $model->where($where,$bind)->count();
     }
     $pager = new \FreeCMS\Common\Libs\Pagination($pagesize,$total,$page,$link);
     return $pager->showBootstrap();

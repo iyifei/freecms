@@ -62,7 +62,7 @@
                     <button type="button" id="btnSubmit" class="btn btn-success btn-block btn-lg">立即注册</button>
                 </div>
                 <div class="m-t-20">
-                    有会员账号? 直接 <a href="javascript:;">登录</a>.
+                    有会员账号? 直接 <a href="javascript:;">登录</a>.返回 <a href="{$myf_path}/">网站</a>,<a href="{$myf_path}/forum">论坛</a>
                 </div>
             </form>
         </div>
@@ -70,6 +70,7 @@
     </div>
     <!-- end login -->
     <input type="hidden" id="submitUrl" value="{$myf_path}/member/register">
+    <input type="hidden" id="goUrl" value="{$go}">
 
     <ul class="login-bg-list clearfix">
         <li class="active"><a href="javascript:;" data-click="change-bg" data-img="{$myf_path}/statics/admin/img/login-bg/login-bg-17.jpg" style="background-image: url({$myf_path}/statics/admin/img/login-bg/login-bg-17.jpg)"></a></li>
@@ -133,7 +134,8 @@
     function callbackSaveSuccess() {
 
         FreeCms.success('注册成功,跳转中~',function () {
-            window.location.href = '{$myf_path}/member';
+            var goUrl = $("#goUrl").val();
+            window.location.href = goUrl;
         });
     }
 

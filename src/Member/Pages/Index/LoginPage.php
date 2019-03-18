@@ -14,6 +14,8 @@ use FreeCMS\Member\BaseMemberPage;
 class LoginPage extends BaseMemberPage
 {
 
+    protected $declareNeedLogin = false;
+
     /**
      * 执行入口
      *
@@ -21,6 +23,8 @@ class LoginPage extends BaseMemberPage
      */
     function execute($vars = [])
     {
+        $go = get('go',getBaseURL().'/member');
+        $this->assign('go',$go);
         $this->display();
     }
 }

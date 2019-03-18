@@ -21,21 +21,11 @@
     <div class="container">
         <h1>{$totalSubject}个讨论主题</h1>
         <div class="input-group m-b-20">
-            <input type="text" class="form-control input-lg" placeholder="论坛搜索" />
+            <input type="text" id="indexSearchBox" class="form-control input-lg search" placeholder="论坛搜索" />
             <span class="input-group-btn">
-                    <button type="submit" class="btn btn-lg"><i class="fa fa-search"></i></button>
+                    <button type="button" onclick="search('indexSearchBox')" class="btn btn-lg"><i class="fa fa-search"></i></button>
                 </span>
         </div>
-        <h5>热门讨论栏目</h5>
-        <ul class="popular-tags">
-            <li><a href="#"><i class="fa fa-circle text-danger"></i> CSS</a></li>
-            <li><a href="#"><i class="fa fa-circle text-primary"></i> Bootstrap</a></li>
-            <li><a href="#"><i class="fa fa-circle text-warning"></i> Javascript</a></li>
-            <li><a href="#"><i class="fa fa-circle"></i> jQuery</a></li>
-            <li><a href="#"><i class="fa fa-circle text-success"></i> Android</a></li>
-            <li><a href="#"><i class="fa fa-circle text-muted"></i> iOS</a></li>
-            <li><a href="#"><i class="fa fa-circle text-purple"></i> Template</a></li>
-        </ul>
     </div>
     <!-- end container -->
 </div>

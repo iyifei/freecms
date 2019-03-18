@@ -1,9 +1,9 @@
 <?php
 /**
- * Class [RegisterPage]
- * 注册页面
+ * Class [QuitAjax]
+ * 请描述类的功能
  * author minyifei
- * date 2019/3/3
+ * date 2019/3/17
  */
 
 namespace FreeCMS\Member\Pages\Index;
@@ -11,7 +11,7 @@ namespace FreeCMS\Member\Pages\Index;
 
 use FreeCMS\Member\BaseMemberPage;
 
-class RegisterPage extends BaseMemberPage
+class QuitAjax extends BaseMemberPage
 {
 
     protected $declareNeedLogin = false;
@@ -23,8 +23,7 @@ class RegisterPage extends BaseMemberPage
      */
     function execute($vars = [])
     {
-        $go = get('go',getBaseURL().'/member');
-        $this->assign('go',$go);
-        $this->display();
+        session('current_member',null);
+        jumpUrl(getBaseURL().'/member/login');
     }
 }

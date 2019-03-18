@@ -10,6 +10,7 @@ namespace FreeCMS\Common\Model;
 
 
 use FreeCMS\Common\Database\Enum\MappingType;
+use FreeCMS\Common\Libs\IdHash;
 
 class CmsForumPostsModel extends Model
 {
@@ -27,6 +28,7 @@ class CmsForumPostsModel extends Model
         $mem = new CmsMemberModel();
         foreach ($rows as $key=>$row){
             $row['index']=$key+$start;
+            $row['enid']=IdHash::encode($row['id']);
             $row['createTime']=mdate($row['createtime']);
             if(isset($row['member'])){
                 $row['member']=$mem->formatMember($row['member']);

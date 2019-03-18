@@ -10,23 +10,26 @@
 
 {include file="../Common/top.tpl"}
 
-<!-- begin page-title -->
-<div class="page-title has-bg">
+<!-- begin search-banner -->
+<div class="search-banner has-bg">
     <!-- begin bg-cover -->
     <div class="bg-cover">
-        <img src="{$myf_path}/statics/public/img/cover/cover-2.jpg" alt="" />
+        <img src="{$myf_path}/statics/public/img/cover/cover-1.jpg" alt="" />
     </div>
     <!-- end bg-cover -->
     <!-- begin container -->
     <div class="container">
-        <!-- begin breadcrumb -->
-        {$freecms.position}
-        <!-- end breadcrumb -->
-        <h1>{$freecms.title}</h1>
+        <h1>搜索</h1>
+        <div class="input-group m-b-20">
+            <input type="text" id="indexSearchBox" value="{$freecms.title}" class="form-control input-lg search" placeholder="论坛搜索" />
+            <span class="input-group-btn">
+                    <button type="button" onclick="search('indexSearchBox')" class="btn btn-lg"><i class="fa fa-search"></i></button>
+                </span>
+        </div>
     </div>
     <!-- end container -->
 </div>
-<!-- end page-title -->
+<!-- end search-banner -->
 
 <!-- begin content -->
 <div class="content">
@@ -58,7 +61,7 @@
                 <div class="panel panel-forum">
                     <!-- begin forum-list -->
                     <ul class="forum-list forum-topic-list">
-                        {subjectlist pagesize="2" id="vo"}
+                        {search pagesize="2" id="vo"}
                         <li>
                             <!-- begin media -->
                             <div class="media">
@@ -72,11 +75,6 @@
                                     <ul class="info-start-end">
                                         <li>帖主： <a href="detail.html">{$vo.createMember.uname|escape:'html'}</a></li>
                                         <li>最新回帖：<a href="detail.html">{$vo.lastMember.uname|escape:'html'}</a></li>
-                                        {if $vo.createMemberId eq $CurrentMember.id || $CurrentAdmin.roleid eq 1}
-                                        <li>
-                                            <a class="btn btn-sm btn-danger" href="javascript:deleteRow('{$vo.senid}','subject');">删除</a>
-                                        </li>
-                                        {/if}
                                     </ul>
                                 </div>
                                 <div class="date-replies">
@@ -91,7 +89,7 @@
                             </div>
                             <!-- end info-container -->
                         </li>
-                        {/subjectlist}
+                        {/search}
                     </ul>
                     <!-- end forum-list -->
                 </div>

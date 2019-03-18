@@ -85,6 +85,11 @@
                                 {$vo.body}
                             </div>
                             <div class="post-time">{$vo.createTime}</div>
+                            {if $vo.mid eq $CurrentMember.id || $CurrentAdmin.roleid eq 1}
+                            <div style="margin-top:10px;">
+                                <a class="btn btn-sm btn-danger" href="javascript:deleteRow('{$vo.enid}','posts');">删除</a>
+                            </div>
+                            {/if}
                         </div>
                         <!-- end info-container -->
                     </li>
@@ -103,11 +108,12 @@
                 <!-- begin comment-section -->
                 <div class="comment-banner-msg">
                     {if empty($CurrentMember)}
-                        只能登录账户才能发帖，请先<a href="{$myf_path}/member/login?goback=1">登录</a>或<a href="{$myf_path}/member/register?goback=1">注册</a>账户
+                        只能登录账户才能发帖，请先<a href="{$myf_path}/member/login?go={$freecms.currUrl}">登录</a>或<a href="{$myf_path}/member/register?go={$freecms.currUrl}">注册</a>账户
                     {else}
                         <span class="text-danger">请遵守文明社区公约言论规则，不得违反国家法律法规</span>
                     {/if}
                 </div>
+                {if !empty($CurrentMember)}
                 <div class="panel panel-forum">
                     <div class="panel-heading">
                         <h4 class="panel-title">回帖</h4>
@@ -137,6 +143,7 @@
                         </form>
                     </div>
                 </div>
+                                {/if}
                 <!-- end comment-section -->
             </div>
             <!-- end col-9 -->
